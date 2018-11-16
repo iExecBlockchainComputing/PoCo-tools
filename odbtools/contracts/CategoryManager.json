@@ -1,0 +1,2164 @@
+{
+  "contractName": "CategoryManager",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "m_owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "catid",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "workClockTimeRef",
+          "type": "uint256"
+        }
+      ],
+      "name": "CreateCategory",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_catid",
+          "type": "uint256"
+        }
+      ],
+      "name": "viewCategory",
+      "outputs": [
+        {
+          "components": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "name": "workClockTimeRef",
+              "type": "uint256"
+            }
+          ],
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "countCategory",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "workClockTimeRef",
+          "type": "uint256"
+        }
+      ],
+      "name": "createCategory",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b5060008054600160a060020a03191633179055610820806100326000396000f30060806040526004361061006c5763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663298503d981146100715780634f5f44ec146100a7578063c140996f146100d4578063deff41c1146100e9578063f2fde38b1461010b575b600080fd5b34801561007d57600080fd5b5061009161008c36600461058c565b61012d565b60405161009e91906106e7565b60405180910390f35b3480156100b357600080fd5b506100c76100c2366004610608565b61021a565b60405161009e91906106d6565b3480156100e057600080fd5b5061009161038f565b3480156100f557600080fd5b506100fe610396565b60405161009e91906106c2565b34801561011757600080fd5b5061012b610126366004610566565b6103a5565b005b600080548190600160a060020a0316331461014757600080fd5b6040805160608101825286815260208082018790529181018590526001805480820180835560009290925282518051929460039092027fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf601926101ad9284920190610439565b5060208281015180516101c69260018501920190610439565b5060408201518160020155505090507f62bf08360c9d561749c54eaf4f8bf8cb6c8b6f4f40607bcec39a8172e714d25c8186868660405161020a94939291906106f5565b60405180910390a1949350505050565b6102226104b7565b600180548390811061023057fe5b600091825260209182902060408051600393909302909101805460026001821615610100026000190190911604601f81018590049094028301608090810190925260608301848152929390928492909184918401828280156102d35780601f106102a8576101008083540402835291602001916102d3565b820191906000526020600020905b8154815290600101906020018083116102b657829003601f168201915b50505050508152602001600182018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156103755780601f1061034a57610100808354040283529160200191610375565b820191906000526020600020905b81548152906001019060200180831161035857829003601f168201915b505050505081526020016002820154815250509050919050565b6001545b90565b600054600160a060020a031681565b600054600160a060020a031633146103bc57600080fd5b600160a060020a03811615156103d157600080fd5b60008054604051600160a060020a03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a36000805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0392909216919091179055565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061047a57805160ff19168380011785556104a7565b828001600101855582156104a7579182015b828111156104a757825182559160200191906001019061048c565b506104b39291506104d9565b5090565b6060604051908101604052806060815260200160608152602001600081525090565b61039391905b808211156104b357600081556001016104df565b60006104ff8235610794565b9392505050565b6000601f8201831361051757600080fd5b813561052a61052582610768565b610741565b9150808252602083016020830185838301111561054657600080fd5b6105518382846107a0565b50505092915050565b60006104ff8235610393565b60006020828403121561057857600080fd5b600061058484846104f3565b949350505050565b6000806000606084860312156105a157600080fd5b833567ffffffffffffffff8111156105b857600080fd5b6105c486828701610506565b935050602084013567ffffffffffffffff8111156105e157600080fd5b6105ed86828701610506565b92505060406105fe8682870161055a565b9150509250925092565b60006020828403121561061a57600080fd5b6000610584848461055a565b61062f81610794565b82525050565b600061064082610790565b8084526106548160208601602086016107ac565b61065d816107dc565b9093016020019392505050565b80516060808452600091908401906106828282610635565b9150506020830151848203602086015261069c8282610635565b91505060408301516106b160408601826106b9565b509392505050565b61062f81610393565b602081016106d08284610626565b92915050565b602080825281016104ff818461066a565b602081016106d082846106b9565b6080810161070382876106b9565b81810360208301526107158186610635565b905081810360408301526107298185610635565b905061073860608301846106b9565b95945050505050565b60405181810167ffffffffffffffff8111828210171561076057600080fd5b604052919050565b600067ffffffffffffffff82111561077f57600080fd5b506020601f91909101601f19160190565b5190565b600160a060020a031690565b82818337506000910152565b60005b838110156107c75781810151838201526020016107af565b838111156107d6576000848401525b50505050565b601f01601f1916905600a265627a7a723058205ab3808358f2949d01f9744046d3ccf67988b0fa86cacc3362b22b398bf1d0886c6578706572696d656e74616cf50037",
+  "deployedBytecode": "0x60806040526004361061006c5763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663298503d981146100715780634f5f44ec146100a7578063c140996f146100d4578063deff41c1146100e9578063f2fde38b1461010b575b600080fd5b34801561007d57600080fd5b5061009161008c36600461058c565b61012d565b60405161009e91906106e7565b60405180910390f35b3480156100b357600080fd5b506100c76100c2366004610608565b61021a565b60405161009e91906106d6565b3480156100e057600080fd5b5061009161038f565b3480156100f557600080fd5b506100fe610396565b60405161009e91906106c2565b34801561011757600080fd5b5061012b610126366004610566565b6103a5565b005b600080548190600160a060020a0316331461014757600080fd5b6040805160608101825286815260208082018790529181018590526001805480820180835560009290925282518051929460039092027fb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf601926101ad9284920190610439565b5060208281015180516101c69260018501920190610439565b5060408201518160020155505090507f62bf08360c9d561749c54eaf4f8bf8cb6c8b6f4f40607bcec39a8172e714d25c8186868660405161020a94939291906106f5565b60405180910390a1949350505050565b6102226104b7565b600180548390811061023057fe5b600091825260209182902060408051600393909302909101805460026001821615610100026000190190911604601f81018590049094028301608090810190925260608301848152929390928492909184918401828280156102d35780601f106102a8576101008083540402835291602001916102d3565b820191906000526020600020905b8154815290600101906020018083116102b657829003601f168201915b50505050508152602001600182018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156103755780601f1061034a57610100808354040283529160200191610375565b820191906000526020600020905b81548152906001019060200180831161035857829003601f168201915b505050505081526020016002820154815250509050919050565b6001545b90565b600054600160a060020a031681565b600054600160a060020a031633146103bc57600080fd5b600160a060020a03811615156103d157600080fd5b60008054604051600160a060020a03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a36000805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0392909216919091179055565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061047a57805160ff19168380011785556104a7565b828001600101855582156104a7579182015b828111156104a757825182559160200191906001019061048c565b506104b39291506104d9565b5090565b6060604051908101604052806060815260200160608152602001600081525090565b61039391905b808211156104b357600081556001016104df565b60006104ff8235610794565b9392505050565b6000601f8201831361051757600080fd5b813561052a61052582610768565b610741565b9150808252602083016020830185838301111561054657600080fd5b6105518382846107a0565b50505092915050565b60006104ff8235610393565b60006020828403121561057857600080fd5b600061058484846104f3565b949350505050565b6000806000606084860312156105a157600080fd5b833567ffffffffffffffff8111156105b857600080fd5b6105c486828701610506565b935050602084013567ffffffffffffffff8111156105e157600080fd5b6105ed86828701610506565b92505060406105fe8682870161055a565b9150509250925092565b60006020828403121561061a57600080fd5b6000610584848461055a565b61062f81610794565b82525050565b600061064082610790565b8084526106548160208601602086016107ac565b61065d816107dc565b9093016020019392505050565b80516060808452600091908401906106828282610635565b9150506020830151848203602086015261069c8282610635565b91505060408301516106b160408601826106b9565b509392505050565b61062f81610393565b602081016106d08284610626565b92915050565b602080825281016104ff818461066a565b602081016106d082846106b9565b6080810161070382876106b9565b81810360208301526107158186610635565b905081810360408301526107298185610635565b905061073860608301846106b9565b95945050505050565b60405181810167ffffffffffffffff8111828210171561076057600080fd5b604052919050565b600067ffffffffffffffff82111561077f57600080fd5b506020601f91909101601f19160190565b5190565b600160a060020a031690565b82818337506000910152565b60005b838110156107c75781810151838201526020016107af565b838111156107d6576000848401525b50505050565b601f01601f1916905600a265627a7a723058205ab3808358f2949d01f9744046d3ccf67988b0fa86cacc3362b22b398bf1d0886c6578706572696d656e74616cf50037",
+  "sourceMap": "128:1246:1:-;;;394:27;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;374:7:26;:16;;-1:-1:-1;;;;;;374:16:26;683:10;374:16;;;128:1246:1;;;;;;",
+  "deployedSourceMap": "128:1246:1:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;689:345;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;689:345:1;;;;;;;;;;;;;;;;;;;;;;;;;448:122;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;448:122:1;;;;;;;;;;;;;;;;;573:91;;8:9:-1;5:2;;;30:1;27;20:12;5:2;573:91:1;;;;55:22:26;;8:9:-1;5:2;;;30:1;27;20:12;5:2;55:22:26;;;;;;;;;;;;857:177;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;857:177:26;;;;;;;;;;;689:345:1;808:7;202::26;;808::1;;-1:-1:-1;;;;;202:7:26;188:10;:21;180:30;;;;;;856:74:1;;;;;;;;;;;;;;;;;;;;;;;;838:12;27:10:-1;;23:18;;;45:23;;;-1:-1;838:93:1;;;;;;;;23:18:-1;;838:93:1;;;;;;;;;;;;;;:::i;:::-;-1:-1:-1;838:93:1;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;822:109;;940:74;959:5;969:4;978:11;994:16;940:74;;;;;;;;;;;;;;;;;;1025:5;689:345;-1:-1:-1;;;;689:345:1:o;448:122::-;508:24;;:::i;:::-;546:12;:20;;559:6;;546:20;;;;;;;;;;;;;;;539:27;;;546:20;;;;;;;;539:27;;;;;;;;;-1:-1:-1;;539:27:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;546:20;;539:27;;;;546:20;;539:27;;546:20;539:27;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;448:122;;;:::o;573:91::-;641:12;:19;573:91;;:::o;55:22:26:-;;;-1:-1:-1;;;;;55:22:26;;:::o;857:177::-;202:7;;-1:-1:-1;;;;;202:7:26;188:10;:21;180:30;;;;;;-1:-1:-1;;;;;934:23:26;;;;926:32;;;;;;988:7;;;967:40;;-1:-1:-1;;;;;967:40:26;;;;988:7;;;967:40;;;1011:7;:19;;-1:-1:-1;;1011:19:26;-1:-1:-1;;;;;1011:19:26;;;;;;;;;;857:177::o;128:1246:1:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;128:1246:1;;;-1:-1:-1;128:1246:1;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;5:118:-1;;72:46;110:6;97:20;72:46;;;63:55;57:66;-1:-1;;;57:66;131:442;;226:4;214:17;;210:27;-1:-1;200:2;;251:1;248;241:12;200:2;288:6;275:20;310:65;325:49;367:6;325:49;;;310:65;;;301:74;;395:6;388:5;381:21;431:4;423:6;419:17;464:4;457:5;453:16;499:3;490:6;485:3;481:16;478:25;475:2;;;516:1;513;506:12;475:2;526:41;560:6;555:3;550;526:41;;;193:380;;;;;;;;581:118;;648:46;686:6;673:20;648:46;;706:241;;810:2;798:9;789:7;785:23;781:32;778:2;;;826:1;823;816:12;778:2;861:1;878:53;923:7;903:9;878:53;;;868:63;772:175;-1:-1;;;;772:175;954:703;;;;1112:2;1100:9;1091:7;1087:23;1083:32;1080:2;;;1128:1;1125;1118:12;1080:2;1163:31;;1214:18;1203:30;;1200:2;;;1246:1;1243;1236:12;1200:2;1266:63;1321:7;1312:6;1301:9;1297:22;1266:63;;;1256:73;;1142:193;1394:2;1383:9;1379:18;1366:32;1418:18;1410:6;1407:30;1404:2;;;1450:1;1447;1440:12;1404:2;1470:63;1525:7;1516:6;1505:9;1501:22;1470:63;;;1460:73;;1345:194;1570:2;1588:53;1633:7;1624:6;1613:9;1609:22;1588:53;;;1578:63;;1549:98;1074:583;;;;;;1664:241;;1768:2;1756:9;1747:7;1743:23;1739:32;1736:2;;;1784:1;1781;1774:12;1736:2;1819:1;1836:53;1881:7;1861:9;1836:53;;1912:110;1985:31;2010:5;1985:31;;;1980:3;1973:44;1967:55;;;2029:300;;2131:39;2164:5;2131:39;;;2187:6;2182:3;2175:19;2199:63;2255:6;2248:4;2243:3;2239:14;2232:4;2225:5;2221:16;2199:63;;;2294:29;2316:6;2294:29;;;2274:50;;;2287:4;2274:50;;2111:218;-1:-1;;;2111:218;2708:818;2920:22;;2851:4;2954:37;;;2708:818;;2842:14;;;;3006:68;2842:14;2920:22;3006:68;;;2998:76;;2871:215;3169:4;3162:5;3158:16;3152:23;3220:3;3214:4;3210:14;3203:4;3198:3;3194:14;3187:38;3240:68;3303:4;3290:11;3240:68;;;3232:76;;3096:224;3408:4;3401:5;3397:16;3391:23;3426:62;3482:4;3477:3;3473:14;3460:11;3426:62;;;-1:-1;3517:4;2824:702;-1:-1;;;2824:702;3533:110;3606:31;3631:5;3606:31;;3650:193;3758:2;3743:18;;3772:61;3747:9;3806:6;3772:61;;;3729:114;;;;;3850:345;4010:2;4024:47;;;3995:18;;4085:100;3995:18;4171:6;4085:100;;4202:193;4310:2;4295:18;;4324:61;4299:9;4358:6;4324:61;;4402:673;4634:3;4619:19;;4649:61;4623:9;4683:6;4649:61;;;4758:9;4752:4;4748:20;4743:2;4732:9;4728:18;4721:48;4783:68;4846:4;4837:6;4783:68;;;4775:76;;4899:9;4893:4;4889:20;4884:2;4873:9;4869:18;4862:48;4924:68;4987:4;4978:6;4924:68;;;4916:76;;5003:62;5061:2;5050:9;5046:18;5037:6;5003:62;;;4605:470;;;;;;;;5082:256;5144:2;5138:9;5170:17;;;5245:18;5230:34;;5266:22;;;5227:62;5224:2;;;5302:1;5299;5292:12;5224:2;5318;5311:22;5122:216;;-1:-1;5122:216;5345:259;;5489:18;5481:6;5478:30;5475:2;;;5521:1;5518;5511:12;5475:2;-1:-1;5594:4;5565;5542:17;;;;-1:-1;;5538:33;5584:15;;5412:192;5611:88;5682:12;;5666:33;5805:128;-1:-1;;;;;5874:54;;5857:76;6248:145;6329:6;6324:3;6319;6306:30;-1:-1;6385:1;6367:16;;6360:27;6299:94;6402:268;6467:1;6474:101;6488:6;6485:1;6482:13;6474:101;;;6555:11;;;6549:18;6536:11;;;6529:39;6510:2;6503:10;6474:101;;;6590:6;6587:1;6584:13;6581:2;;;6655:1;6646:6;6641:3;6637:16;6630:27;6581:2;6451:219;;;;;6678:97;6766:2;6746:14;-1:-1;;6742:28;;6726:49",
+  "source": "pragma solidity ^0.4.25;\npragma experimental ABIEncoderV2;\n\nimport \"./libs/IexecODBLibCore.sol\";\nimport \"./tools/Ownable.sol\";\n\ncontract CategoryManager is OwnableMutable\n{\n\t/**\n\t * Content\n\t */\n\tIexecODBLibCore.Category[] m_categories;\n\n\t/**\n\t * Event\n\t */\n\tevent CreateCategory(\n\t\tuint256 catid,\n\t\tstring  name,\n\t\tstring  description,\n\t\tuint256 workClockTimeRef);\n\n\t/**\n\t * Constructor\n\t */\n\tconstructor()\n\tpublic\n\t{\n\t}\n\n\t/**\n\t * Accessors\n\t */\n\tfunction viewCategory(uint256 _catid)\n\tpublic view returns (IexecODBLibCore.Category)\n\t{\n\t\treturn m_categories[_catid];\n\t}\n\n\tfunction countCategory()\n\tpublic view returns (uint256)\n\t{\n\t\treturn m_categories.length;\n\t}\n\n\t/**\n\t * Methods\n\t */\n\tfunction createCategory(\n\t\tstring  name,\n\t\tstring  description,\n\t\tuint256 workClockTimeRef)\n\tpublic onlyOwner returns (uint256)\n\t{\n\t\tuint256 catid = m_categories.push(IexecODBLibCore.Category(\n\t\t\tname,\n\t\t\tdescription,\n\t\t\tworkClockTimeRef\n\t\t));\n\t\temit CreateCategory(\n\t\t\tcatid,\n\t\t\tname,\n\t\t\tdescription,\n\t\t\tworkClockTimeRef\n\t\t);\n\t\treturn catid;\n\t}\n\t/**\n\t * TODO: move to struct based initialization ?\n\t *\n\tfunction createCategory(IexecODBLib.Category _category)\n\tpublic onlyOwner returns (uint256)\n\t{\n\t\tuint256 catid = m_categories.push(_category);\n\t\temit CreateCategory(\n\t\t\tcatid,\n\t\t\t_category.name,\n\t\t\t_category.description,\n\t\t\t_category.workClockTimeRef\n\t\t);\n\t\treturn catid;\n\t}\n\t*/\n\n}\n",
+  "sourcePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/CategoryManager.sol",
+  "ast": {
+    "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/CategoryManager.sol",
+    "exportedSymbols": {
+      "CategoryManager": [
+        384
+      ]
+    },
+    "id": 385,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 305,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".25"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:1"
+      },
+      {
+        "id": 306,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "25:33:1"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/libs/IexecODBLibCore.sol",
+        "file": "./libs/IexecODBLibCore.sol",
+        "id": 307,
+        "nodeType": "ImportDirective",
+        "scope": 385,
+        "sourceUnit": 4354,
+        "src": "60:36:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/tools/Ownable.sol",
+        "file": "./tools/Ownable.sol",
+        "id": 308,
+        "nodeType": "ImportDirective",
+        "scope": 385,
+        "sourceUnit": 5753,
+        "src": "97:29:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 309,
+              "name": "OwnableMutable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 5752,
+              "src": "156:14:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_OwnableMutable_$5752",
+                "typeString": "contract OwnableMutable"
+              }
+            },
+            "id": 310,
+            "nodeType": "InheritanceSpecifier",
+            "src": "156:14:1"
+          }
+        ],
+        "contractDependencies": [
+          5710,
+          5752
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 384,
+        "linearizedBaseContracts": [
+          384,
+          5752,
+          5710
+        ],
+        "name": "CategoryManager",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 313,
+            "name": "m_categories",
+            "nodeType": "VariableDeclaration",
+            "scope": 384,
+            "src": "196:39:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_struct$_Category_$4267_storage_$dyn_storage",
+              "typeString": "struct IexecODBLibCore.Category[]"
+            },
+            "typeName": {
+              "baseType": {
+                "contractScope": null,
+                "id": 311,
+                "name": "IexecODBLibCore.Category",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 4267,
+                "src": "196:24:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Category_$4267_storage_ptr",
+                  "typeString": "struct IexecODBLibCore.Category"
+                }
+              },
+              "id": 312,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "196:26:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_struct$_Category_$4267_storage_$dyn_storage_ptr",
+                "typeString": "struct IexecODBLibCore.Category[]"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "anonymous": false,
+            "documentation": "Event",
+            "id": 323,
+            "name": "CreateCategory",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 322,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 315,
+                  "indexed": false,
+                  "name": "catid",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 323,
+                  "src": "283:13:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 314,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "283:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 317,
+                  "indexed": false,
+                  "name": "name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 323,
+                  "src": "300:12:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 316,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "300:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 319,
+                  "indexed": false,
+                  "name": "description",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 323,
+                  "src": "316:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 318,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "316:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 321,
+                  "indexed": false,
+                  "name": "workClockTimeRef",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 323,
+                  "src": "339:24:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 320,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "339:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "279:85:1"
+            },
+            "src": "259:106:1"
+          },
+          {
+            "body": {
+              "id": 326,
+              "nodeType": "Block",
+              "src": "417:4:1",
+              "statements": []
+            },
+            "documentation": "Constructor",
+            "id": 327,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 324,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "405:2:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 325,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "417:0:1"
+            },
+            "scope": 384,
+            "src": "394:27:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 338,
+              "nodeType": "Block",
+              "src": "535:35:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "baseExpression": {
+                      "argumentTypes": null,
+                      "id": 334,
+                      "name": "m_categories",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 313,
+                      "src": "546:12:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_struct$_Category_$4267_storage_$dyn_storage",
+                        "typeString": "struct IexecODBLibCore.Category storage ref[] storage ref"
+                      }
+                    },
+                    "id": 336,
+                    "indexExpression": {
+                      "argumentTypes": null,
+                      "id": 335,
+                      "name": "_catid",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 329,
+                      "src": "559:6:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "546:20:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Category_$4267_storage",
+                      "typeString": "struct IexecODBLibCore.Category storage ref"
+                    }
+                  },
+                  "functionReturnParameters": 333,
+                  "id": 337,
+                  "nodeType": "Return",
+                  "src": "539:27:1"
+                }
+              ]
+            },
+            "documentation": "Accessors",
+            "id": 339,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "viewCategory",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 330,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 329,
+                  "name": "_catid",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 339,
+                  "src": "470:14:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 328,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "470:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "469:16:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 333,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 332,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 339,
+                  "src": "508:24:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Category_$4267_memory_ptr",
+                    "typeString": "struct IexecODBLibCore.Category"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 331,
+                    "name": "IexecODBLibCore.Category",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4267,
+                    "src": "508:24:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Category_$4267_storage_ptr",
+                      "typeString": "struct IexecODBLibCore.Category"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "507:26:1"
+            },
+            "scope": 384,
+            "src": "448:122:1",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 347,
+              "nodeType": "Block",
+              "src": "630:34:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 344,
+                      "name": "m_categories",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 313,
+                      "src": "641:12:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_struct$_Category_$4267_storage_$dyn_storage",
+                        "typeString": "struct IexecODBLibCore.Category storage ref[] storage ref"
+                      }
+                    },
+                    "id": 345,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "length",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "641:19:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 343,
+                  "id": 346,
+                  "nodeType": "Return",
+                  "src": "634:26:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 348,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "countCategory",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 340,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "595:2:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 343,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 342,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 348,
+                  "src": "620:7:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 341,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "620:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "619:9:1"
+            },
+            "scope": 384,
+            "src": "573:91:1",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 382,
+              "nodeType": "Block",
+              "src": "818:216:1",
+              "statements": [
+                {
+                  "assignments": [
+                    362
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 362,
+                      "name": "catid",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 383,
+                      "src": "822:13:1",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 361,
+                        "name": "uint256",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "822:7:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 372,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 367,
+                            "name": "name",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 350,
+                            "src": "885:4:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 368,
+                            "name": "description",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 352,
+                            "src": "894:11:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 369,
+                            "name": "workClockTimeRef",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 354,
+                            "src": "910:16:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            },
+                            {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            },
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 365,
+                            "name": "IexecODBLibCore",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4353,
+                            "src": "856:15:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_contract$_IexecODBLibCore_$4353_$",
+                              "typeString": "type(library IexecODBLibCore)"
+                            }
+                          },
+                          "id": 366,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "Category",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 4267,
+                          "src": "856:24:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_struct$_Category_$4267_storage_ptr_$",
+                            "typeString": "type(struct IexecODBLibCore.Category storage pointer)"
+                          }
+                        },
+                        "id": 370,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "structConstructorCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "856:74:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Category_$4267_memory",
+                          "typeString": "struct IexecODBLibCore.Category memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Category_$4267_memory",
+                          "typeString": "struct IexecODBLibCore.Category memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 363,
+                        "name": "m_categories",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 313,
+                        "src": "838:12:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_Category_$4267_storage_$dyn_storage",
+                          "typeString": "struct IexecODBLibCore.Category storage ref[] storage ref"
+                        }
+                      },
+                      "id": 364,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "838:17:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_struct$_Category_$4267_storage_$returns$_t_uint256_$",
+                        "typeString": "function (struct IexecODBLibCore.Category storage ref) returns (uint256)"
+                      }
+                    },
+                    "id": 371,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "838:93:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "822:109:1"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 374,
+                        "name": "catid",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 362,
+                        "src": "959:5:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 375,
+                        "name": "name",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 350,
+                        "src": "969:4:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 376,
+                        "name": "description",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 352,
+                        "src": "978:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 377,
+                        "name": "workClockTimeRef",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 354,
+                        "src": "994:16:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 373,
+                      "name": "CreateCategory",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 323,
+                      "src": "940:14:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256,string memory,string memory,uint256)"
+                      }
+                    },
+                    "id": 378,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "940:74:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 379,
+                  "nodeType": "EmitStatement",
+                  "src": "935:79:1"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 380,
+                    "name": "catid",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 362,
+                    "src": "1025:5:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 360,
+                  "id": 381,
+                  "nodeType": "Return",
+                  "src": "1018:12:1"
+                }
+              ]
+            },
+            "documentation": "Methods",
+            "id": 383,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 357,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 356,
+                  "name": "onlyOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 5699,
+                  "src": "789:9:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "789:9:1"
+              }
+            ],
+            "name": "createCategory",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 355,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 350,
+                  "name": "name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 383,
+                  "src": "716:12:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 349,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "716:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 352,
+                  "name": "description",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 383,
+                  "src": "732:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 351,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "732:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 354,
+                  "name": "workClockTimeRef",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 383,
+                  "src": "755:24:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 353,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "755:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "712:68:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 360,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 359,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 383,
+                  "src": "808:7:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 358,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "808:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "807:9:1"
+            },
+            "scope": 384,
+            "src": "689:345:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 385,
+        "src": "128:1246:1"
+      }
+    ],
+    "src": "0:1375:1"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/CategoryManager.sol",
+    "exportedSymbols": {
+      "CategoryManager": [
+        384
+      ]
+    },
+    "id": 385,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 305,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".25"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:1"
+      },
+      {
+        "id": 306,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "25:33:1"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/libs/IexecODBLibCore.sol",
+        "file": "./libs/IexecODBLibCore.sol",
+        "id": 307,
+        "nodeType": "ImportDirective",
+        "scope": 385,
+        "sourceUnit": 4354,
+        "src": "60:36:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/tools/Ownable.sol",
+        "file": "./tools/Ownable.sol",
+        "id": 308,
+        "nodeType": "ImportDirective",
+        "scope": 385,
+        "sourceUnit": 5753,
+        "src": "97:29:1",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 309,
+              "name": "OwnableMutable",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 5752,
+              "src": "156:14:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_OwnableMutable_$5752",
+                "typeString": "contract OwnableMutable"
+              }
+            },
+            "id": 310,
+            "nodeType": "InheritanceSpecifier",
+            "src": "156:14:1"
+          }
+        ],
+        "contractDependencies": [
+          5710,
+          5752
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 384,
+        "linearizedBaseContracts": [
+          384,
+          5752,
+          5710
+        ],
+        "name": "CategoryManager",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 313,
+            "name": "m_categories",
+            "nodeType": "VariableDeclaration",
+            "scope": 384,
+            "src": "196:39:1",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_struct$_Category_$4267_storage_$dyn_storage",
+              "typeString": "struct IexecODBLibCore.Category[]"
+            },
+            "typeName": {
+              "baseType": {
+                "contractScope": null,
+                "id": 311,
+                "name": "IexecODBLibCore.Category",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 4267,
+                "src": "196:24:1",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Category_$4267_storage_ptr",
+                  "typeString": "struct IexecODBLibCore.Category"
+                }
+              },
+              "id": 312,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "196:26:1",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_struct$_Category_$4267_storage_$dyn_storage_ptr",
+                "typeString": "struct IexecODBLibCore.Category[]"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "anonymous": false,
+            "documentation": "Event",
+            "id": 323,
+            "name": "CreateCategory",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 322,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 315,
+                  "indexed": false,
+                  "name": "catid",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 323,
+                  "src": "283:13:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 314,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "283:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 317,
+                  "indexed": false,
+                  "name": "name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 323,
+                  "src": "300:12:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 316,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "300:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 319,
+                  "indexed": false,
+                  "name": "description",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 323,
+                  "src": "316:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 318,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "316:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 321,
+                  "indexed": false,
+                  "name": "workClockTimeRef",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 323,
+                  "src": "339:24:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 320,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "339:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "279:85:1"
+            },
+            "src": "259:106:1"
+          },
+          {
+            "body": {
+              "id": 326,
+              "nodeType": "Block",
+              "src": "417:4:1",
+              "statements": []
+            },
+            "documentation": "Constructor",
+            "id": 327,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 324,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "405:2:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 325,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "417:0:1"
+            },
+            "scope": 384,
+            "src": "394:27:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 338,
+              "nodeType": "Block",
+              "src": "535:35:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "baseExpression": {
+                      "argumentTypes": null,
+                      "id": 334,
+                      "name": "m_categories",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 313,
+                      "src": "546:12:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_struct$_Category_$4267_storage_$dyn_storage",
+                        "typeString": "struct IexecODBLibCore.Category storage ref[] storage ref"
+                      }
+                    },
+                    "id": 336,
+                    "indexExpression": {
+                      "argumentTypes": null,
+                      "id": 335,
+                      "name": "_catid",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 329,
+                      "src": "559:6:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "IndexAccess",
+                    "src": "546:20:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Category_$4267_storage",
+                      "typeString": "struct IexecODBLibCore.Category storage ref"
+                    }
+                  },
+                  "functionReturnParameters": 333,
+                  "id": 337,
+                  "nodeType": "Return",
+                  "src": "539:27:1"
+                }
+              ]
+            },
+            "documentation": "Accessors",
+            "id": 339,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "viewCategory",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 330,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 329,
+                  "name": "_catid",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 339,
+                  "src": "470:14:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 328,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "470:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "469:16:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 333,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 332,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 339,
+                  "src": "508:24:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Category_$4267_memory_ptr",
+                    "typeString": "struct IexecODBLibCore.Category"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 331,
+                    "name": "IexecODBLibCore.Category",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 4267,
+                    "src": "508:24:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Category_$4267_storage_ptr",
+                      "typeString": "struct IexecODBLibCore.Category"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "507:26:1"
+            },
+            "scope": 384,
+            "src": "448:122:1",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 347,
+              "nodeType": "Block",
+              "src": "630:34:1",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 344,
+                      "name": "m_categories",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 313,
+                      "src": "641:12:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_array$_t_struct$_Category_$4267_storage_$dyn_storage",
+                        "typeString": "struct IexecODBLibCore.Category storage ref[] storage ref"
+                      }
+                    },
+                    "id": 345,
+                    "isConstant": false,
+                    "isLValue": true,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "length",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "641:19:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 343,
+                  "id": 346,
+                  "nodeType": "Return",
+                  "src": "634:26:1"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 348,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": true,
+            "modifiers": [],
+            "name": "countCategory",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 340,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "595:2:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 343,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 342,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 348,
+                  "src": "620:7:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 341,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "620:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "619:9:1"
+            },
+            "scope": 384,
+            "src": "573:91:1",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 382,
+              "nodeType": "Block",
+              "src": "818:216:1",
+              "statements": [
+                {
+                  "assignments": [
+                    362
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 362,
+                      "name": "catid",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 383,
+                      "src": "822:13:1",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 361,
+                        "name": "uint256",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "822:7:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 372,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 367,
+                            "name": "name",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 350,
+                            "src": "885:4:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 368,
+                            "name": "description",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 352,
+                            "src": "894:11:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 369,
+                            "name": "workClockTimeRef",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 354,
+                            "src": "910:16:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            },
+                            {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            },
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
+                            }
+                          ],
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 365,
+                            "name": "IexecODBLibCore",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 4353,
+                            "src": "856:15:1",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_type$_t_contract$_IexecODBLibCore_$4353_$",
+                              "typeString": "type(library IexecODBLibCore)"
+                            }
+                          },
+                          "id": 366,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "Category",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": 4267,
+                          "src": "856:24:1",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_struct$_Category_$4267_storage_ptr_$",
+                            "typeString": "type(struct IexecODBLibCore.Category storage pointer)"
+                          }
+                        },
+                        "id": 370,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "structConstructorCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "856:74:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Category_$4267_memory",
+                          "typeString": "struct IexecODBLibCore.Category memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Category_$4267_memory",
+                          "typeString": "struct IexecODBLibCore.Category memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 363,
+                        "name": "m_categories",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 313,
+                        "src": "838:12:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_Category_$4267_storage_$dyn_storage",
+                          "typeString": "struct IexecODBLibCore.Category storage ref[] storage ref"
+                        }
+                      },
+                      "id": 364,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "838:17:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_struct$_Category_$4267_storage_$returns$_t_uint256_$",
+                        "typeString": "function (struct IexecODBLibCore.Category storage ref) returns (uint256)"
+                      }
+                    },
+                    "id": 371,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "838:93:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "822:109:1"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 374,
+                        "name": "catid",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 362,
+                        "src": "959:5:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 375,
+                        "name": "name",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 350,
+                        "src": "969:4:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 376,
+                        "name": "description",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 352,
+                        "src": "978:11:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 377,
+                        "name": "workClockTimeRef",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 354,
+                        "src": "994:16:1",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        },
+                        {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      ],
+                      "id": 373,
+                      "name": "CreateCategory",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 323,
+                      "src": "940:14:1",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_uint256_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_uint256_$returns$__$",
+                        "typeString": "function (uint256,string memory,string memory,uint256)"
+                      }
+                    },
+                    "id": 378,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "940:74:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 379,
+                  "nodeType": "EmitStatement",
+                  "src": "935:79:1"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 380,
+                    "name": "catid",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 362,
+                    "src": "1025:5:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 360,
+                  "id": 381,
+                  "nodeType": "Return",
+                  "src": "1018:12:1"
+                }
+              ]
+            },
+            "documentation": "Methods",
+            "id": 383,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [
+              {
+                "arguments": null,
+                "id": 357,
+                "modifierName": {
+                  "argumentTypes": null,
+                  "id": 356,
+                  "name": "onlyOwner",
+                  "nodeType": "Identifier",
+                  "overloadedDeclarations": [],
+                  "referencedDeclaration": 5699,
+                  "src": "789:9:1",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_modifier$__$",
+                    "typeString": "modifier ()"
+                  }
+                },
+                "nodeType": "ModifierInvocation",
+                "src": "789:9:1"
+              }
+            ],
+            "name": "createCategory",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 355,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 350,
+                  "name": "name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 383,
+                  "src": "716:12:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 349,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "716:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 352,
+                  "name": "description",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 383,
+                  "src": "732:19:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 351,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "732:6:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 354,
+                  "name": "workClockTimeRef",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 383,
+                  "src": "755:24:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 353,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "755:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "712:68:1"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 360,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 359,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 383,
+                  "src": "808:7:1",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 358,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "808:7:1",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "807:9:1"
+            },
+            "scope": 384,
+            "src": "689:345:1",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 385,
+        "src": "128:1246:1"
+      }
+    ],
+    "src": "0:1375:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.25+commit.59dbf8f1.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.0-beta.1",
+  "updatedAt": "2018-11-16T10:52:08.632Z"
+}
