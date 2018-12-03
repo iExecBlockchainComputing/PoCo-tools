@@ -43,7 +43,7 @@ if __name__ == '__main__':
 				score[i+1] = transition(score[i], f, contribs[i])
 
 			ax1.plot(score, label="reliability {0:.2%}".format(reliability))
-			ax2.plot(f/np.maximum(score, 1))
+			ax2.plot(f/np.maximum(score, minscore))
 
 	fig.legend(loc='right', shadow=True)
 	plt.show()

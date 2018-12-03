@@ -27,50 +27,50 @@
       "type": "constructor"
     }
   ],
-  "bytecode": "0x608060405234801561001057600080fd5b506040516020806101bd833981018060405261002f919081019061007c565b600160a060020a038116151561004457600080fd5b60008054600160a060020a031916600160a060020a03929092169190911790556100ae565b600061007582516100a2565b9392505050565b60006020828403121561008e57600080fd5b600061009a8484610069565b949350505050565b600160a060020a031690565b610100806100bd6000396000f300608060405260043610603e5763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416638d52e41381146043575b600080fd5b348015604e57600080fd5b5060556069565b604051606091906092565b60405180910390f35b60005473ffffffffffffffffffffffffffffffffffffffff1681565b608c8160bd565b82525050565b60208101609e82846085565b92915050565b73ffffffffffffffffffffffffffffffffffffffff1690565b6000609e8260a45600a265627a7a72305820aa1c9af8c3b1c827dd30003b1cb32d18cc2bbc6a9e7893936cedc8ce1aa3c7346c6578706572696d656e74616cf50037",
-  "deployedBytecode": "0x608060405260043610603e5763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416638d52e41381146043575b600080fd5b348015604e57600080fd5b5060556069565b604051606091906092565b60405180910390f35b60005473ffffffffffffffffffffffffffffffffffffffff1681565b608c8160bd565b82525050565b60208101609e82846085565b92915050565b73ffffffffffffffffffffffffffffffffffffffff1690565b6000609e8260a45600a265627a7a72305820aa1c9af8c3b1c827dd30003b1cb32d18cc2bbc6a9e7893936cedc8ce1aa3c7346c6578706572696d656e74616cf50037",
-  "sourceMap": "95:273:5:-;;;242:123;8:9:-1;5:2;;;30:1;27;20:12;5:2;242:123:5;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;294:23:5;;;;286:32;;;;;;322:8;:39;;-1:-1:-1;;;;;;322:39:5;-1:-1:-1;;;;;322:39:5;;;;;;;;;;95:273;;5:122:-1;;83:39;114:6;108:13;83:39;;;74:48;68:59;-1:-1;;;68:59;134:263;;249:2;237:9;228:7;224:23;220:32;217:2;;;265:1;262;255:12;217:2;300:1;317:64;373:7;353:9;317:64;;;307:74;211:186;-1:-1;;;;211:186;404:128;-1:-1;;;;;473:54;;456:76;;95:273:5;;;;;;",
-  "deployedSourceMap": "95:273:5:-;;;;;;;;;;;;;;;;;;;;;;;124:33;;8:9:-1;5:2;;;30:1;27;20:12;5:2;124:33:5;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;5:168:-1:-;104:63;161:5;104:63;;;99:3;92:76;86:87;;;180:245;314:2;299:18;;328:87;303:9;388:6;328:87;;;285:140;;;;;432:128;512:42;501:54;;484:76;567:141;;672:31;697:5;672:31;",
-  "source": "pragma solidity ^0.4.25;\npragma experimental ABIEncoderV2;\n\nimport \"./IexecHubInterface.sol\";\n\ncontract IexecHubAccessor\n{\n\tIexecHubInterface public iexechub;\n\n\tmodifier onlyIexecHub()\n\t{\n\t\trequire(msg.sender == address(iexechub));\n\t\t_;\n\t}\n\n\tconstructor(address _iexechub)\n\tpublic\n\t{\n\t\trequire(_iexechub != address(0));\n\t\tiexechub = IexecHubInterface(_iexechub);\n\t}\n\n}\n",
+  "bytecode": "0x608060405234801561001057600080fd5b506040516020806101d3833981018060405261002f919081019061007c565b600160a060020a038116151561004457600080fd5b60008054600160a060020a031916600160a060020a03929092169190911790556100bf565b600061007582516100ae565b9392505050565b60006020828403121561008e57600080fd5b600061009a8484610069565b949350505050565b600160a060020a031690565b60006100b9826100a2565b92915050565b610105806100ce6000396000f3fe608060405260043610603e5763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416638d52e41381146043575b600080fd5b348015604e57600080fd5b5060556069565b604051606091906092565b60405180910390f35b60005473ffffffffffffffffffffffffffffffffffffffff1681565b608c8160bd565b82525050565b60208101609e82846085565b92915050565b73ffffffffffffffffffffffffffffffffffffffff1690565b6000609e826000609e8260a456fea265627a7a72305820bc5a137389c6ffa09beaa1ab7b92f27ba509252dabe7c6ccf3ec5ffee71b7a556c6578706572696d656e74616cf50037",
+  "deployedBytecode": "0x608060405260043610603e5763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416638d52e41381146043575b600080fd5b348015604e57600080fd5b5060556069565b604051606091906092565b60405180910390f35b60005473ffffffffffffffffffffffffffffffffffffffff1681565b608c8160bd565b82525050565b60208101609e82846085565b92915050565b73ffffffffffffffffffffffffffffffffffffffff1690565b6000609e826000609e8260a456fea265627a7a72305820bc5a137389c6ffa09beaa1ab7b92f27ba509252dabe7c6ccf3ec5ffee71b7a556c6578706572696d656e74616cf50037",
+  "sourceMap": "94:273:5:-;;;241:123;8:9:-1;5:2;;;30:1;27;20:12;5:2;241:123:5;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;;;293:23:5;;;;285:32;;;;;;321:8;:39;;-1:-1:-1;;;;;;321:39:5;-1:-1:-1;;;;;321:39:5;;;;;;;;;;94:273;;5:122:-1;;83:39;114:6;108:13;83:39;;;74:48;68:59;-1:-1;;;68:59;134:263;;249:2;237:9;228:7;224:23;220:32;217:2;;;265:1;262;255:12;217:2;300:1;317:64;373:7;353:9;317:64;;;307:74;211:186;-1:-1;;;;211:186;404:128;-1:-1;;;;;473:54;;456:76;539:105;;608:31;633:5;608:31;;;597:42;591:53;-1:-1;;591:53;;94:273:5;;;;;;",
+  "deployedSourceMap": "94:273:5:-;;;;;;;;;;;;;;;;;;;;;;;123:33;;8:9:-1;5:2;;;30:1;27;20:12;5:2;123:33:5;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;5:168:-1:-;104:63;161:5;104:63;;;99:3;92:76;86:87;;;180:245;314:2;299:18;;328:87;303:9;388:6;328:87;;;285:140;;;;;432:128;512:42;501:54;;484:76;567:173;;672:63;729:5;747:141;852:31;877:5;852:31;",
+  "source": "pragma solidity ^0.5.0;\npragma experimental ABIEncoderV2;\n\nimport \"./IexecHubInterface.sol\";\n\ncontract IexecHubAccessor\n{\n\tIexecHubInterface public iexechub;\n\n\tmodifier onlyIexecHub()\n\t{\n\t\trequire(msg.sender == address(iexechub));\n\t\t_;\n\t}\n\n\tconstructor(address _iexechub)\n\tpublic\n\t{\n\t\trequire(_iexechub != address(0));\n\t\tiexechub = IexecHubInterface(_iexechub);\n\t}\n\n}\n",
   "sourcePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/IexecHubAccessor.sol",
   "ast": {
     "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/IexecHubAccessor.sol",
     "exportedSymbols": {
       "IexecHubAccessor": [
-        4048
+        3928
       ]
     },
-    "id": 4049,
+    "id": 3929,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4010,
+        "id": 3890,
         "literals": [
           "solidity",
           "^",
-          "0.4",
-          ".25"
+          "0.5",
+          ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:5"
+        "src": "0:23:5"
       },
       {
-        "id": 4011,
+        "id": 3891,
         "literals": [
           "experimental",
           "ABIEncoderV2"
         ],
         "nodeType": "PragmaDirective",
-        "src": "25:33:5"
+        "src": "24:33:5"
       },
       {
         "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/IexecHubInterface.sol",
         "file": "./IexecHubInterface.sol",
-        "id": 4012,
+        "id": 3892,
         "nodeType": "ImportDirective",
-        "scope": 4049,
-        "sourceUnit": 4064,
-        "src": "60:33:5",
+        "scope": 3929,
+        "sourceUnit": 3944,
+        "src": "59:33:5",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -80,35 +80,35 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 4048,
+        "id": 3928,
         "linearizedBaseContracts": [
-          4048
+          3928
         ],
         "name": "IexecHubAccessor",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 4014,
+            "id": 3894,
             "name": "iexechub",
             "nodeType": "VariableDeclaration",
-            "scope": 4048,
-            "src": "124:33:5",
+            "scope": 3928,
+            "src": "123:33:5",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_IexecHubInterface_$4063",
+              "typeIdentifier": "t_contract$_IexecHubInterface_$3943",
               "typeString": "contract IexecHubInterface"
             },
             "typeName": {
               "contractScope": null,
-              "id": 4013,
+              "id": 3893,
               "name": "IexecHubInterface",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 4063,
-              "src": "124:17:5",
+              "referencedDeclaration": 3943,
+              "src": "123:17:5",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IexecHubInterface_$4063",
+                "typeIdentifier": "t_contract$_IexecHubInterface_$3943",
                 "typeString": "contract IexecHubInterface"
               }
             },
@@ -117,9 +117,9 @@
           },
           {
             "body": {
-              "id": 4026,
+              "id": 3906,
               "nodeType": "Block",
-              "src": "186:53:5",
+              "src": "185:53:5",
               "statements": [
                 {
                   "expression": {
@@ -131,7 +131,7 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
-                        "id": 4022,
+                        "id": 3902,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -140,18 +140,18 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 4017,
+                            "id": 3897,
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 6490,
-                            "src": "198:3:5",
+                            "referencedDeclaration": 6275,
+                            "src": "197:3:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
                               "typeString": "msg"
                             }
                           },
-                          "id": 4018,
+                          "id": 3898,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -159,10 +159,10 @@
                           "memberName": "sender",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": null,
-                          "src": "198:10:5",
+                          "src": "197:10:5",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_address",
-                            "typeString": "address"
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
                           }
                         },
                         "nodeType": "BinaryOperation",
@@ -172,14 +172,14 @@
                           "arguments": [
                             {
                               "argumentTypes": null,
-                              "id": 4020,
+                              "id": 3900,
                               "name": "iexechub",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 4014,
-                              "src": "220:8:5",
+                              "referencedDeclaration": 3894,
+                              "src": "219:8:5",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_IexecHubInterface_$4063",
+                                "typeIdentifier": "t_contract$_IexecHubInterface_$3943",
                                 "typeString": "contract IexecHubInterface"
                               }
                             }
@@ -187,24 +187,24 @@
                           "expression": {
                             "argumentTypes": [
                               {
-                                "typeIdentifier": "t_contract$_IexecHubInterface_$4063",
+                                "typeIdentifier": "t_contract$_IexecHubInterface_$3943",
                                 "typeString": "contract IexecHubInterface"
                               }
                             ],
-                            "id": 4019,
+                            "id": 3899,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
                             "lValueRequested": false,
                             "nodeType": "ElementaryTypeNameExpression",
-                            "src": "212:7:5",
+                            "src": "211:7:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_type$_t_address_$",
                               "typeString": "type(address)"
                             },
                             "typeName": "address"
                           },
-                          "id": 4021,
+                          "id": 3901,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -212,13 +212,13 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "212:17:5",
+                          "src": "211:17:5",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
                             "typeString": "address"
                           }
                         },
-                        "src": "198:31:5",
+                        "src": "197:31:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -232,21 +232,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 4016,
+                      "id": 3896,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        6493,
-                        6494
+                        6278,
+                        6279
                       ],
-                      "referencedDeclaration": 6493,
-                      "src": "190:7:5",
+                      "referencedDeclaration": 6278,
+                      "src": "189:7:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 4023,
+                    "id": 3903,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -254,41 +254,41 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "190:40:5",
+                    "src": "189:40:5",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 4024,
+                  "id": 3904,
                   "nodeType": "ExpressionStatement",
-                  "src": "190:40:5"
+                  "src": "189:40:5"
                 },
                 {
-                  "id": 4025,
+                  "id": 3905,
                   "nodeType": "PlaceholderStatement",
-                  "src": "234:1:5"
+                  "src": "233:1:5"
                 }
               ]
             },
             "documentation": null,
-            "id": 4027,
+            "id": 3907,
             "name": "onlyIexecHub",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 4015,
+              "id": 3895,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "182:2:5"
+              "src": "181:2:5"
             },
-            "src": "161:78:5",
+            "src": "160:78:5",
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 4046,
+              "id": 3926,
               "nodeType": "Block",
-              "src": "282:83:5",
+              "src": "281:83:5",
               "statements": [
                 {
                   "expression": {
@@ -300,19 +300,19 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
-                        "id": 4037,
+                        "id": 3917,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "argumentTypes": null,
-                          "id": 4033,
+                          "id": 3913,
                           "name": "_iexechub",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4029,
-                          "src": "294:9:5",
+                          "referencedDeclaration": 3909,
+                          "src": "293:9:5",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
                             "typeString": "address"
@@ -326,14 +326,14 @@
                             {
                               "argumentTypes": null,
                               "hexValue": "30",
-                              "id": 4035,
+                              "id": 3915,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
                               "kind": "number",
                               "lValueRequested": false,
                               "nodeType": "Literal",
-                              "src": "315:1:5",
+                              "src": "314:1:5",
                               "subdenomination": null,
                               "typeDescriptions": {
                                 "typeIdentifier": "t_rational_0_by_1",
@@ -349,20 +349,20 @@
                                 "typeString": "int_const 0"
                               }
                             ],
-                            "id": 4034,
+                            "id": 3914,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
                             "lValueRequested": false,
                             "nodeType": "ElementaryTypeNameExpression",
-                            "src": "307:7:5",
+                            "src": "306:7:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_type$_t_address_$",
                               "typeString": "type(address)"
                             },
                             "typeName": "address"
                           },
-                          "id": 4036,
+                          "id": 3916,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -370,13 +370,13 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "307:10:5",
+                          "src": "306:10:5",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_address",
-                            "typeString": "address"
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
                           }
                         },
-                        "src": "294:23:5",
+                        "src": "293:23:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -390,21 +390,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 4032,
+                      "id": 3912,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        6493,
-                        6494
+                        6278,
+                        6279
                       ],
-                      "referencedDeclaration": 6493,
-                      "src": "286:7:5",
+                      "referencedDeclaration": 6278,
+                      "src": "285:7:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 4038,
+                    "id": 3918,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -412,34 +412,34 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "286:32:5",
+                    "src": "285:32:5",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 4039,
+                  "id": 3919,
                   "nodeType": "ExpressionStatement",
-                  "src": "286:32:5"
+                  "src": "285:32:5"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 4044,
+                    "id": 3924,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 4040,
+                      "id": 3920,
                       "name": "iexechub",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 4014,
-                      "src": "322:8:5",
+                      "referencedDeclaration": 3894,
+                      "src": "321:8:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IexecHubInterface_$4063",
+                        "typeIdentifier": "t_contract$_IexecHubInterface_$3943",
                         "typeString": "contract IexecHubInterface"
                       }
                     },
@@ -450,12 +450,12 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "id": 4042,
+                          "id": 3922,
                           "name": "_iexechub",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4029,
-                          "src": "351:9:5",
+                          "referencedDeclaration": 3909,
+                          "src": "350:9:5",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
                             "typeString": "address"
@@ -469,18 +469,18 @@
                             "typeString": "address"
                           }
                         ],
-                        "id": 4041,
+                        "id": 3921,
                         "name": "IexecHubInterface",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 4063,
-                        "src": "333:17:5",
+                        "referencedDeclaration": 3943,
+                        "src": "332:17:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_IexecHubInterface_$4063_$",
+                          "typeIdentifier": "t_type$_t_contract$_IexecHubInterface_$3943_$",
                           "typeString": "type(contract IexecHubInterface)"
                         }
                       },
-                      "id": 4043,
+                      "id": 3923,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -488,43 +488,42 @@
                       "lValueRequested": false,
                       "names": [],
                       "nodeType": "FunctionCall",
-                      "src": "333:28:5",
+                      "src": "332:28:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IexecHubInterface_$4063",
+                        "typeIdentifier": "t_contract$_IexecHubInterface_$3943",
                         "typeString": "contract IexecHubInterface"
                       }
                     },
-                    "src": "322:39:5",
+                    "src": "321:39:5",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IexecHubInterface_$4063",
+                      "typeIdentifier": "t_contract$_IexecHubInterface_$3943",
                       "typeString": "contract IexecHubInterface"
                     }
                   },
-                  "id": 4045,
+                  "id": 3925,
                   "nodeType": "ExpressionStatement",
-                  "src": "322:39:5"
+                  "src": "321:39:5"
                 }
               ]
             },
             "documentation": null,
-            "id": 4047,
+            "id": 3927,
             "implemented": true,
-            "isConstructor": true,
-            "isDeclaredConst": false,
+            "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4030,
+              "id": 3910,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4029,
+                  "id": 3909,
                   "name": "_iexechub",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4047,
-                  "src": "254:17:5",
+                  "scope": 3927,
+                  "src": "253:17:5",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -532,10 +531,11 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 4028,
+                    "id": 3908,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "254:7:5",
+                    "src": "253:7:5",
+                    "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -545,66 +545,65 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "253:19:5"
+              "src": "252:19:5"
             },
-            "payable": false,
             "returnParameters": {
-              "id": 4031,
+              "id": 3911,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "282:0:5"
+              "src": "281:0:5"
             },
-            "scope": 4048,
-            "src": "242:123:5",
+            "scope": 3928,
+            "src": "241:123:5",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 4049,
-        "src": "95:273:5"
+        "scope": 3929,
+        "src": "94:273:5"
       }
     ],
-    "src": "0:369:5"
+    "src": "0:368:5"
   },
   "legacyAST": {
     "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/IexecHubAccessor.sol",
     "exportedSymbols": {
       "IexecHubAccessor": [
-        4048
+        3928
       ]
     },
-    "id": 4049,
+    "id": 3929,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4010,
+        "id": 3890,
         "literals": [
           "solidity",
           "^",
-          "0.4",
-          ".25"
+          "0.5",
+          ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:5"
+        "src": "0:23:5"
       },
       {
-        "id": 4011,
+        "id": 3891,
         "literals": [
           "experimental",
           "ABIEncoderV2"
         ],
         "nodeType": "PragmaDirective",
-        "src": "25:33:5"
+        "src": "24:33:5"
       },
       {
         "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/IexecHubInterface.sol",
         "file": "./IexecHubInterface.sol",
-        "id": 4012,
+        "id": 3892,
         "nodeType": "ImportDirective",
-        "scope": 4049,
-        "sourceUnit": 4064,
-        "src": "60:33:5",
+        "scope": 3929,
+        "sourceUnit": 3944,
+        "src": "59:33:5",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -614,35 +613,35 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 4048,
+        "id": 3928,
         "linearizedBaseContracts": [
-          4048
+          3928
         ],
         "name": "IexecHubAccessor",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 4014,
+            "id": 3894,
             "name": "iexechub",
             "nodeType": "VariableDeclaration",
-            "scope": 4048,
-            "src": "124:33:5",
+            "scope": 3928,
+            "src": "123:33:5",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_IexecHubInterface_$4063",
+              "typeIdentifier": "t_contract$_IexecHubInterface_$3943",
               "typeString": "contract IexecHubInterface"
             },
             "typeName": {
               "contractScope": null,
-              "id": 4013,
+              "id": 3893,
               "name": "IexecHubInterface",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 4063,
-              "src": "124:17:5",
+              "referencedDeclaration": 3943,
+              "src": "123:17:5",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_IexecHubInterface_$4063",
+                "typeIdentifier": "t_contract$_IexecHubInterface_$3943",
                 "typeString": "contract IexecHubInterface"
               }
             },
@@ -651,9 +650,9 @@
           },
           {
             "body": {
-              "id": 4026,
+              "id": 3906,
               "nodeType": "Block",
-              "src": "186:53:5",
+              "src": "185:53:5",
               "statements": [
                 {
                   "expression": {
@@ -665,7 +664,7 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
-                        "id": 4022,
+                        "id": 3902,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -674,18 +673,18 @@
                           "argumentTypes": null,
                           "expression": {
                             "argumentTypes": null,
-                            "id": 4017,
+                            "id": 3897,
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 6490,
-                            "src": "198:3:5",
+                            "referencedDeclaration": 6275,
+                            "src": "197:3:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
                               "typeString": "msg"
                             }
                           },
-                          "id": 4018,
+                          "id": 3898,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -693,10 +692,10 @@
                           "memberName": "sender",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": null,
-                          "src": "198:10:5",
+                          "src": "197:10:5",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_address",
-                            "typeString": "address"
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
                           }
                         },
                         "nodeType": "BinaryOperation",
@@ -706,14 +705,14 @@
                           "arguments": [
                             {
                               "argumentTypes": null,
-                              "id": 4020,
+                              "id": 3900,
                               "name": "iexechub",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 4014,
-                              "src": "220:8:5",
+                              "referencedDeclaration": 3894,
+                              "src": "219:8:5",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_contract$_IexecHubInterface_$4063",
+                                "typeIdentifier": "t_contract$_IexecHubInterface_$3943",
                                 "typeString": "contract IexecHubInterface"
                               }
                             }
@@ -721,24 +720,24 @@
                           "expression": {
                             "argumentTypes": [
                               {
-                                "typeIdentifier": "t_contract$_IexecHubInterface_$4063",
+                                "typeIdentifier": "t_contract$_IexecHubInterface_$3943",
                                 "typeString": "contract IexecHubInterface"
                               }
                             ],
-                            "id": 4019,
+                            "id": 3899,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
                             "lValueRequested": false,
                             "nodeType": "ElementaryTypeNameExpression",
-                            "src": "212:7:5",
+                            "src": "211:7:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_type$_t_address_$",
                               "typeString": "type(address)"
                             },
                             "typeName": "address"
                           },
-                          "id": 4021,
+                          "id": 3901,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -746,13 +745,13 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "212:17:5",
+                          "src": "211:17:5",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
                             "typeString": "address"
                           }
                         },
-                        "src": "198:31:5",
+                        "src": "197:31:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -766,21 +765,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 4016,
+                      "id": 3896,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        6493,
-                        6494
+                        6278,
+                        6279
                       ],
-                      "referencedDeclaration": 6493,
-                      "src": "190:7:5",
+                      "referencedDeclaration": 6278,
+                      "src": "189:7:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 4023,
+                    "id": 3903,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -788,41 +787,41 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "190:40:5",
+                    "src": "189:40:5",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 4024,
+                  "id": 3904,
                   "nodeType": "ExpressionStatement",
-                  "src": "190:40:5"
+                  "src": "189:40:5"
                 },
                 {
-                  "id": 4025,
+                  "id": 3905,
                   "nodeType": "PlaceholderStatement",
-                  "src": "234:1:5"
+                  "src": "233:1:5"
                 }
               ]
             },
             "documentation": null,
-            "id": 4027,
+            "id": 3907,
             "name": "onlyIexecHub",
             "nodeType": "ModifierDefinition",
             "parameters": {
-              "id": 4015,
+              "id": 3895,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "182:2:5"
+              "src": "181:2:5"
             },
-            "src": "161:78:5",
+            "src": "160:78:5",
             "visibility": "internal"
           },
           {
             "body": {
-              "id": 4046,
+              "id": 3926,
               "nodeType": "Block",
-              "src": "282:83:5",
+              "src": "281:83:5",
               "statements": [
                 {
                   "expression": {
@@ -834,19 +833,19 @@
                           "typeIdentifier": "t_address",
                           "typeString": "address"
                         },
-                        "id": 4037,
+                        "id": 3917,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "argumentTypes": null,
-                          "id": 4033,
+                          "id": 3913,
                           "name": "_iexechub",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4029,
-                          "src": "294:9:5",
+                          "referencedDeclaration": 3909,
+                          "src": "293:9:5",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
                             "typeString": "address"
@@ -860,14 +859,14 @@
                             {
                               "argumentTypes": null,
                               "hexValue": "30",
-                              "id": 4035,
+                              "id": 3915,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": true,
                               "kind": "number",
                               "lValueRequested": false,
                               "nodeType": "Literal",
-                              "src": "315:1:5",
+                              "src": "314:1:5",
                               "subdenomination": null,
                               "typeDescriptions": {
                                 "typeIdentifier": "t_rational_0_by_1",
@@ -883,20 +882,20 @@
                                 "typeString": "int_const 0"
                               }
                             ],
-                            "id": 4034,
+                            "id": 3914,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": true,
                             "lValueRequested": false,
                             "nodeType": "ElementaryTypeNameExpression",
-                            "src": "307:7:5",
+                            "src": "306:7:5",
                             "typeDescriptions": {
                               "typeIdentifier": "t_type$_t_address_$",
                               "typeString": "type(address)"
                             },
                             "typeName": "address"
                           },
-                          "id": 4036,
+                          "id": 3916,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -904,13 +903,13 @@
                           "lValueRequested": false,
                           "names": [],
                           "nodeType": "FunctionCall",
-                          "src": "307:10:5",
+                          "src": "306:10:5",
                           "typeDescriptions": {
-                            "typeIdentifier": "t_address",
-                            "typeString": "address"
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
                           }
                         },
-                        "src": "294:23:5",
+                        "src": "293:23:5",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -924,21 +923,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 4032,
+                      "id": 3912,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        6493,
-                        6494
+                        6278,
+                        6279
                       ],
-                      "referencedDeclaration": 6493,
-                      "src": "286:7:5",
+                      "referencedDeclaration": 6278,
+                      "src": "285:7:5",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 4038,
+                    "id": 3918,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -946,34 +945,34 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "286:32:5",
+                    "src": "285:32:5",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 4039,
+                  "id": 3919,
                   "nodeType": "ExpressionStatement",
-                  "src": "286:32:5"
+                  "src": "285:32:5"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 4044,
+                    "id": 3924,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 4040,
+                      "id": 3920,
                       "name": "iexechub",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 4014,
-                      "src": "322:8:5",
+                      "referencedDeclaration": 3894,
+                      "src": "321:8:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IexecHubInterface_$4063",
+                        "typeIdentifier": "t_contract$_IexecHubInterface_$3943",
                         "typeString": "contract IexecHubInterface"
                       }
                     },
@@ -984,12 +983,12 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "id": 4042,
+                          "id": 3922,
                           "name": "_iexechub",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4029,
-                          "src": "351:9:5",
+                          "referencedDeclaration": 3909,
+                          "src": "350:9:5",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
                             "typeString": "address"
@@ -1003,18 +1002,18 @@
                             "typeString": "address"
                           }
                         ],
-                        "id": 4041,
+                        "id": 3921,
                         "name": "IexecHubInterface",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 4063,
-                        "src": "333:17:5",
+                        "referencedDeclaration": 3943,
+                        "src": "332:17:5",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_IexecHubInterface_$4063_$",
+                          "typeIdentifier": "t_type$_t_contract$_IexecHubInterface_$3943_$",
                           "typeString": "type(contract IexecHubInterface)"
                         }
                       },
-                      "id": 4043,
+                      "id": 3923,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1022,43 +1021,42 @@
                       "lValueRequested": false,
                       "names": [],
                       "nodeType": "FunctionCall",
-                      "src": "333:28:5",
+                      "src": "332:28:5",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_IexecHubInterface_$4063",
+                        "typeIdentifier": "t_contract$_IexecHubInterface_$3943",
                         "typeString": "contract IexecHubInterface"
                       }
                     },
-                    "src": "322:39:5",
+                    "src": "321:39:5",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_IexecHubInterface_$4063",
+                      "typeIdentifier": "t_contract$_IexecHubInterface_$3943",
                       "typeString": "contract IexecHubInterface"
                     }
                   },
-                  "id": 4045,
+                  "id": 3925,
                   "nodeType": "ExpressionStatement",
-                  "src": "322:39:5"
+                  "src": "321:39:5"
                 }
               ]
             },
             "documentation": null,
-            "id": 4047,
+            "id": 3927,
             "implemented": true,
-            "isConstructor": true,
-            "isDeclaredConst": false,
+            "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4030,
+              "id": 3910,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4029,
+                  "id": 3909,
                   "name": "_iexechub",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4047,
-                  "src": "254:17:5",
+                  "scope": 3927,
+                  "src": "253:17:5",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1066,10 +1064,11 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 4028,
+                    "id": 3908,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "254:7:5",
+                    "src": "253:7:5",
+                    "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -1079,33 +1078,38 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "253:19:5"
+              "src": "252:19:5"
             },
-            "payable": false,
             "returnParameters": {
-              "id": 4031,
+              "id": 3911,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "282:0:5"
+              "src": "281:0:5"
             },
-            "scope": 4048,
-            "src": "242:123:5",
+            "scope": 3928,
+            "src": "241:123:5",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 4049,
-        "src": "95:273:5"
+        "scope": 3929,
+        "src": "94:273:5"
       }
     ],
-    "src": "0:369:5"
+    "src": "0:368:5"
   },
   "compiler": {
     "name": "solc",
-    "version": "0.4.25+commit.59dbf8f1.Emscripten.clang"
+    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.0-beta.1",
-  "updatedAt": "2018-11-16T10:52:08.650Z"
+  "schemaVersion": "3.0.0-beta.2",
+  "updatedAt": "2018-12-03T12:54:15.752Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
 }
