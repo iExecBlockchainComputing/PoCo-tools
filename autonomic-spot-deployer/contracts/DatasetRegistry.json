@@ -1,0 +1,2012 @@
+{
+  "contractName": "DatasetRegistry",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_owner",
+          "type": "address"
+        },
+        {
+          "name": "_index",
+          "type": "uint256"
+        }
+      ],
+      "name": "viewEntry",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_owner",
+          "type": "address"
+        }
+      ],
+      "name": "viewCount",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_entry",
+          "type": "address"
+        }
+      ],
+      "name": "isRegistered",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "datasetOwner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "dataset",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "datasetName",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "datasetParams",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "datasetHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "CreateDataset",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_datasetOwner",
+          "type": "address"
+        },
+        {
+          "name": "_datasetName",
+          "type": "string"
+        },
+        {
+          "name": "_datasetParams",
+          "type": "string"
+        },
+        {
+          "name": "_datasetHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "createDataset",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b50610be7806100206000396000f3fe608060405260043610620000665763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416634b6c7f3481146200006b57806365a2c10414620000a8578063c0a8cae214620000dc578063c3c5a5471462000110575b600080fd5b3480156200007857600080fd5b50620000906200008a366004620003b1565b62000144565b6040516200009f91906200056b565b60405180910390f35b348015620000b557600080fd5b50620000cd620000c736600462000455565b620001f8565b6040516200009f9190620004f3565b348015620000e957600080fd5b5062000101620000fb36600462000388565b62000225565b6040516200009f91906200057b565b3480156200011d57600080fd5b50620001356200012f36600462000388565b62000240565b6040516200009f91906200055b565b600080878787878787620001576200030f565b620001689695949392919062000503565b604051809103906000f08015801562000185573d6000803e3d6000fd5b5090506200019481896200025e565b1515620001a057600080fd5b87600160a060020a03167fb2f291ed0409a56d370a74ade9b8f51e18a76c06387b8515fafdb63a1e68cdc3828989898989604051620001e59695949392919062000503565b60405180910390a2979650505050505050565b600160a060020a038083166000908152600160209081526040808320858452909152902054165b92915050565b600160a060020a031660009081526002602052604090205490565b600160a060020a031660009081526020819052604090205460ff1690565b600160a060020a03811660009081526002602052604081205481906200028c90600163ffffffff620002f816565b600160a060020a03808516600090815260026020908152604080832085905560018083528184209584529482528083208054948a1673ffffffffffffffffffffffffffffffffffffffff199095168517905592825281905220805460ff19168217905591505092915050565b6000828201838110156200030857fe5b9392505050565b6040516105de80620005d083390190565b60006200030882356200058b565b60006200030882356200059d565b600080601f830184136200034f57600080fd5b50813567ffffffffffffffff8111156200036857600080fd5b6020830191508360018202830111156200038157600080fd5b9250929050565b6000602082840312156200039b57600080fd5b6000620003a9848462000320565b949350505050565b60008060008060008060808789031215620003cb57600080fd5b6000620003d9898962000320565b965050602087013567ffffffffffffffff811115620003f757600080fd5b6200040589828a016200033c565b9550955050604087013567ffffffffffffffff8111156200042557600080fd5b6200043389828a016200033c565b935093505060606200044889828a016200032e565b9150509295509295509295565b600080604083850312156200046957600080fd5b600062000477858562000320565b92505060206200048a858286016200032e565b9150509250929050565b6200049f816200058b565b82525050565b6200049f8162000598565b6200049f816200059d565b6200049f81620005ac565b6000828452602084019350620004de838584620005b9565b620004e983620005c5565b9093019392505050565b602081016200021f828462000494565b6080810162000513828962000494565b818103602083015262000528818789620004c6565b905081810360408301526200053f818587620004c6565b9050620005506060830184620004b0565b979650505050505050565b602081016200021f8284620004a5565b602081016200021f8284620004bb565b602081016200021f8284620004b0565b60006200021f82620005a0565b151590565b90565b600160a060020a031690565b60006200021f826200058b565b82818337506000910152565b601f01601f19169056fe608060405234801561001057600080fd5b506040516105de3803806105de8339810180604052610032919081019061018f565b60008054600160a060020a031916600160a060020a0386161790558251610060906001906020860190610081565b508151610074906002906020850190610081565b50600355506102b8915050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106100c257805160ff19168380011785556100ef565b828001600101855582156100ef579182015b828111156100ef5782518255916020019190600101906100d4565b506100fb9291506100ff565b5090565b61011991905b808211156100fb5760008155600101610105565b90565b60006101288251610277565b9392505050565b60006101288251610119565b6000601f8201831361014c57600080fd5b815161015f61015a82610244565b61021e565b9150808252602083016020830185838301111561017b57600080fd5b610186838284610288565b50505092915050565b600080600080608085870312156101a557600080fd5b60006101b1878761011c565b94505060208501516001604060020a038111156101cd57600080fd5b6101d98782880161013b565b93505060408501516001604060020a038111156101f557600080fd5b6102018782880161013b565b92505060606102128782880161012f565b91505092959194509250565b6040518181016001604060020a038111828210171561023c57600080fd5b604052919050565b60006001604060020a0382111561025a57600080fd5b506020601f91909101601f19160190565b600160a060020a031690565b60006102828261026b565b92915050565b60005b838110156102a357818101518382015260200161028b565b838111156102b2576000848401525b50505050565b610317806102c76000396000f3fe6080604052600436106100615763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416630847c43181146100665780639cf2701414610091578063c2880e17146100b3578063deff41c1146100c8575b600080fd5b34801561007257600080fd5b5061007b6100ea565b6040516100889190610260565b60405180910390f35b34801561009d57600080fd5b506100a6610177565b6040516100889190610252565b3480156100bf57600080fd5b5061007b61017d565b3480156100d457600080fd5b506100dd6101d5565b604051610088919061023e565b60018054604080516020600284861615610100026000190190941693909304601f8101849004840282018401909252818152929183018282801561016f5780601f106101445761010080835404028352916020019161016f565b820191906000526020600020905b81548152906001019060200180831161015257829003601f168201915b505050505081565b60035481565b6002805460408051602060018416156101000260001901909316849004601f8101849004840282018401909252818152929183018282801561016f5780601f106101445761010080835404028352916020019161016f565b60005473ffffffffffffffffffffffffffffffffffffffff1681565b6101fa8161027c565b82525050565b6101fa81610287565b600061021482610278565b8084526102288160208601602086016102a3565b610231816102d3565b9093016020019392505050565b6020810161024c82846101f1565b92915050565b6020810161024c8284610200565b602080825281016102718184610209565b9392505050565b5190565b600061024c8261028a565b90565b73ffffffffffffffffffffffffffffffffffffffff1690565b60005b838110156102be5781810151838201526020016102a6565b838111156102cd576000848401525b50505050565b601f01601f19169056fea265627a7a723058204af33a5b48e3a5a71a26e42f0ed24b8559675c22d2781b188822a15eda467b1b6c6578706572696d656e74616cf50037a265627a7a723058209ea5a124eb86241c8a582616c9f43f76d963cca6b754bf66f920847b91d52a016c6578706572696d656e74616cf50037",
+  "deployedBytecode": "0x608060405260043610620000665763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416634b6c7f3481146200006b57806365a2c10414620000a8578063c0a8cae214620000dc578063c3c5a5471462000110575b600080fd5b3480156200007857600080fd5b50620000906200008a366004620003b1565b62000144565b6040516200009f91906200056b565b60405180910390f35b348015620000b557600080fd5b50620000cd620000c736600462000455565b620001f8565b6040516200009f9190620004f3565b348015620000e957600080fd5b5062000101620000fb36600462000388565b62000225565b6040516200009f91906200057b565b3480156200011d57600080fd5b50620001356200012f36600462000388565b62000240565b6040516200009f91906200055b565b600080878787878787620001576200030f565b620001689695949392919062000503565b604051809103906000f08015801562000185573d6000803e3d6000fd5b5090506200019481896200025e565b1515620001a057600080fd5b87600160a060020a03167fb2f291ed0409a56d370a74ade9b8f51e18a76c06387b8515fafdb63a1e68cdc3828989898989604051620001e59695949392919062000503565b60405180910390a2979650505050505050565b600160a060020a038083166000908152600160209081526040808320858452909152902054165b92915050565b600160a060020a031660009081526002602052604090205490565b600160a060020a031660009081526020819052604090205460ff1690565b600160a060020a03811660009081526002602052604081205481906200028c90600163ffffffff620002f816565b600160a060020a03808516600090815260026020908152604080832085905560018083528184209584529482528083208054948a1673ffffffffffffffffffffffffffffffffffffffff199095168517905592825281905220805460ff19168217905591505092915050565b6000828201838110156200030857fe5b9392505050565b6040516105de80620005d083390190565b60006200030882356200058b565b60006200030882356200059d565b600080601f830184136200034f57600080fd5b50813567ffffffffffffffff8111156200036857600080fd5b6020830191508360018202830111156200038157600080fd5b9250929050565b6000602082840312156200039b57600080fd5b6000620003a9848462000320565b949350505050565b60008060008060008060808789031215620003cb57600080fd5b6000620003d9898962000320565b965050602087013567ffffffffffffffff811115620003f757600080fd5b6200040589828a016200033c565b9550955050604087013567ffffffffffffffff8111156200042557600080fd5b6200043389828a016200033c565b935093505060606200044889828a016200032e565b9150509295509295509295565b600080604083850312156200046957600080fd5b600062000477858562000320565b92505060206200048a858286016200032e565b9150509250929050565b6200049f816200058b565b82525050565b6200049f8162000598565b6200049f816200059d565b6200049f81620005ac565b6000828452602084019350620004de838584620005b9565b620004e983620005c5565b9093019392505050565b602081016200021f828462000494565b6080810162000513828962000494565b818103602083015262000528818789620004c6565b905081810360408301526200053f818587620004c6565b9050620005506060830184620004b0565b979650505050505050565b602081016200021f8284620004a5565b602081016200021f8284620004bb565b602081016200021f8284620004b0565b60006200021f82620005a0565b151590565b90565b600160a060020a031690565b60006200021f826200058b565b82818337506000910152565b601f01601f19169056fe608060405234801561001057600080fd5b506040516105de3803806105de8339810180604052610032919081019061018f565b60008054600160a060020a031916600160a060020a0386161790558251610060906001906020860190610081565b508151610074906002906020850190610081565b50600355506102b8915050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106100c257805160ff19168380011785556100ef565b828001600101855582156100ef579182015b828111156100ef5782518255916020019190600101906100d4565b506100fb9291506100ff565b5090565b61011991905b808211156100fb5760008155600101610105565b90565b60006101288251610277565b9392505050565b60006101288251610119565b6000601f8201831361014c57600080fd5b815161015f61015a82610244565b61021e565b9150808252602083016020830185838301111561017b57600080fd5b610186838284610288565b50505092915050565b600080600080608085870312156101a557600080fd5b60006101b1878761011c565b94505060208501516001604060020a038111156101cd57600080fd5b6101d98782880161013b565b93505060408501516001604060020a038111156101f557600080fd5b6102018782880161013b565b92505060606102128782880161012f565b91505092959194509250565b6040518181016001604060020a038111828210171561023c57600080fd5b604052919050565b60006001604060020a0382111561025a57600080fd5b506020601f91909101601f19160190565b600160a060020a031690565b60006102828261026b565b92915050565b60005b838110156102a357818101518382015260200161028b565b838111156102b2576000848401525b50505050565b610317806102c76000396000f3fe6080604052600436106100615763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416630847c43181146100665780639cf2701414610091578063c2880e17146100b3578063deff41c1146100c8575b600080fd5b34801561007257600080fd5b5061007b6100ea565b6040516100889190610260565b60405180910390f35b34801561009d57600080fd5b506100a6610177565b6040516100889190610252565b3480156100bf57600080fd5b5061007b61017d565b3480156100d457600080fd5b506100dd6101d5565b604051610088919061023e565b60018054604080516020600284861615610100026000190190941693909304601f8101849004840282018401909252818152929183018282801561016f5780601f106101445761010080835404028352916020019161016f565b820191906000526020600020905b81548152906001019060200180831161015257829003601f168201915b505050505081565b60035481565b6002805460408051602060018416156101000260001901909316849004601f8101849004840282018401909252818152929183018282801561016f5780601f106101445761010080835404028352916020019161016f565b60005473ffffffffffffffffffffffffffffffffffffffff1681565b6101fa8161027c565b82525050565b6101fa81610287565b600061021482610278565b8084526102288160208601602086016102a3565b610231816102d3565b9093016020019392505050565b6020810161024c82846101f1565b92915050565b6020810161024c8284610200565b602080825281016102718184610209565b9392505050565b5190565b600061024c8261028a565b90565b73ffffffffffffffffffffffffffffffffffffffff1690565b60005b838110156102be5781810151838201526020016102a6565b838111156102cd576000848401525b50505050565b601f01601f19169056fea265627a7a723058204af33a5b48e3a5a71a26e42f0ed24b8559675c22d2781b188822a15eda467b1b6c6578706572696d656e74616cf50037a265627a7a723058209ea5a124eb86241c8a582616c9f43f76d963cca6b754bf66f920847b91d52a016c6578706572696d656e74616cf50037",
+  "sourceMap": "113:854:21:-;;;404:27;8:9:-1;5:2;;;30:1;27;20:12;5:2;404:27:21;113:854;;;;;;",
+  "deployedSourceMap": "113:854:21:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;465:500;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;465:500:21;;;;;;;;;;;;;;;;;;;;;;;;;585:130:22;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;585:130:22;;;;;;;;;;;;;;;;;718:104;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;718:104:22;;;;;;;;;;;;;;;;;480:102;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;480:102:22;;;;;;;;;;;;;;;;;465:500:21;678:7;692:18;725:13;740:12;;754:14;;770:12;713:70;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;713:70:21;692:91;;795:42;810:10;823:13;795:6;:42::i;:::-;787:51;;;;;;;;861:13;-1:-1:-1;;;;;847:93:21;;884:10;897:12;;911:14;;927:12;847:93;;;;;;;;;;;;;;;;;;;;951:10;465:500;-1:-1:-1;;;;;;;465:500:21:o;585:130:22:-;-1:-1:-1;;;;;679:24:22;;;658:7;679:24;;;:16;:24;;;;;;;;:32;;;;;;;;;;585:130;;;;;:::o;718:104::-;-1:-1:-1;;;;;796:22:22;775:7;796:22;;;:14;:22;;;;;;;718:104::o;480:102::-;-1:-1:-1;;;;;558:20:22;540:4;558:20;;;;;;;;;;;;;;480:102::o;848:258::-;-1:-1:-1;;;;;941:22:22;;920:4;941:22;;;:14;:22;;;;;;920:4;;941:29;;968:1;941:29;:26;:29;:::i;:::-;-1:-1:-1;;;;;974:24:22;;;;;;;:14;:24;;;;;;;;:33;;;1011:16;:24;;;;;;:28;;;;;;;;;:37;;;;;-1:-1:-1;;1011:37:22;;;;;;;1052:24;;;;;;;:35;;-1:-1:-1;;1052:35:22;;;;;1011:16;-1:-1:-1;;848:258:22;;;;:::o;403:123:13:-;461:7;487:5;;;503:6;;;;496:14;;;;521:1;403:123;-1:-1:-1;;;403:123:13:o;113:854:21:-;;;;;;;;;;:::o;5:118:-1:-;;72:46;110:6;97:20;72:46;;130:118;;197:46;235:6;222:20;197:46;;270:336;;;378:4;366:17;;362:27;-1:-1;352:2;;403:1;400;393:12;352:2;-1:-1;423:20;;463:18;452:30;;449:2;;;495:1;492;485:12;449:2;529:4;521:6;517:17;505:29;;579:3;572;564:6;560:16;550:8;546:31;543:40;540:2;;;596:1;593;586:12;540:2;345:261;;;;;;739:241;;843:2;831:9;822:7;818:23;814:32;811:2;;;859:1;856;849:12;811:2;894:1;911:53;956:7;936:9;911:53;;;901:63;805:175;-1:-1;;;;805:175;987:869;;;;;;;1182:3;1170:9;1161:7;1157:23;1153:33;1150:2;;;1199:1;1196;1189:12;1150:2;1234:1;1251:53;1296:7;1276:9;1251:53;;;1241:63;;1213:97;1369:2;1358:9;1354:18;1341:32;1393:18;1385:6;1382:30;1379:2;;;1425:1;1422;1415:12;1379:2;1453:65;1510:7;1501:6;1490:9;1486:22;1453:65;;;1435:83;;;;1320:204;1583:2;1572:9;1568:18;1555:32;1607:18;1599:6;1596:30;1593:2;;;1639:1;1636;1629:12;1593:2;1667:65;1724:7;1715:6;1704:9;1700:22;1667:65;;;1649:83;;;;1534:204;1769:2;1787:53;1832:7;1823:6;1812:9;1808:22;1787:53;;;1777:63;;1748:98;1144:712;;;;;;;;;1863:366;;;1984:2;1972:9;1963:7;1959:23;1955:32;1952:2;;;2000:1;1997;1990:12;1952:2;2035:1;2052:53;2097:7;2077:9;2052:53;;;2042:63;;2014:97;2142:2;2160:53;2205:7;2196:6;2185:9;2181:22;2160:53;;;2150:63;;2121:98;1946:283;;;;;;2236:110;2309:31;2334:5;2309:31;;;2304:3;2297:44;2291:55;;;2353:101;2420:28;2442:5;2420:28;;2461:110;2534:31;2559:5;2534:31;;2578:148;2667:53;2714:5;2667:53;;2756:263;;2866:6;2861:3;2854:19;2890:4;2885:3;2881:14;2874:21;;2920:43;2956:6;2951:3;2944:5;2920:43;;;2984:29;3006:6;2984:29;;;2975:39;;;;2848:171;-1:-1;;;2848:171;3143:193;3251:2;3236:18;;3265:61;3240:9;3299:6;3265:61;;3343:713;3595:3;3580:19;;3610:61;3584:9;3644:6;3610:61;;;3719:9;3713:4;3709:20;3704:2;3693:9;3689:18;3682:48;3744:78;3817:4;3808:6;3800;3744:78;;;3736:86;;3870:9;3864:4;3860:20;3855:2;3844:9;3840:18;3833:48;3895:78;3968:4;3959:6;3951;3895:78;;;3887:86;;3984:62;4042:2;4031:9;4027:18;4018:6;3984:62;;;3566:490;;;;;;;;;;4063:181;4165:2;4150:18;;4179:55;4154:9;4207:6;4179:55;;4251:225;4375:2;4360:18;;4389:77;4364:9;4439:6;4389:77;;4483:193;4591:2;4576:18;;4605:61;4580:9;4639:6;4605:61;;4683:105;;4752:31;4777:5;4752:31;;4795:92;4868:13;4861:21;;4844:43;4894:79;4963:5;4946:27;4980:128;-1:-1;;;;;5049:54;;5032:76;5485:153;;5580:53;5627:5;5580:53;;5784:145;5865:6;5860:3;5855;5842:30;-1:-1;5921:1;5903:16;;5896:27;5835:94;5937:97;6025:2;6005:14;-1:-1;;6001:28;;5985:49",
+  "source": "pragma solidity ^0.5.0;\npragma experimental ABIEncoderV2;\n\nimport './Dataset.sol';\nimport './RegistryBase.sol';\n\ncontract DatasetRegistry is RegistryBase //, OwnableMutable // is Owned by IexecHub\n{\n\tevent CreateDataset(\n\t\taddress indexed datasetOwner,\n\t\taddress         dataset,\n\t\tstring          datasetName,\n\t\tstring          datasetParams,\n\t\tbytes32         datasetHash);\n\n\t/**\n\t * Constructor\n\t */\n\tconstructor()\n\tpublic\n\t{\n\t}\n\n\t/**\n\t * Dataset creation\n\t */\n\tfunction createDataset(\n\t\taddress          _datasetOwner,\n\t\tstring  calldata _datasetName,\n\t\tstring  calldata _datasetParams,\n\t\tbytes32          _datasetHash)\n\texternal /* onlyOwner /*owner == IexecHub*/ returns (Dataset)\n\t{\n\t\tDataset newDataset = new Dataset(_datasetOwner, _datasetName, _datasetParams, _datasetHash);\n\t\trequire(insert(address(newDataset), _datasetOwner));\n\t\temit CreateDataset(_datasetOwner, address(newDataset), _datasetName, _datasetParams, _datasetHash);\n\t\treturn newDataset;\n\t}\n}\n",
+  "sourcePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/registries/DatasetRegistry.sol",
+  "ast": {
+    "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/registries/DatasetRegistry.sol",
+    "exportedSymbols": {
+      "DatasetRegistry": [
+        5138
+      ]
+    },
+    "id": 5139,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5071,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:21"
+      },
+      {
+        "id": 5072,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "24:33:21"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/registries/Dataset.sol",
+        "file": "./Dataset.sol",
+        "id": 5073,
+        "nodeType": "ImportDirective",
+        "scope": 5139,
+        "sourceUnit": 5070,
+        "src": "59:23:21",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/registries/RegistryBase.sol",
+        "file": "./RegistryBase.sol",
+        "id": 5074,
+        "nodeType": "ImportDirective",
+        "scope": 5139,
+        "sourceUnit": 5247,
+        "src": "83:28:21",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 5075,
+              "name": "RegistryBase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 5246,
+              "src": "141:12:21",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_RegistryBase_$5246",
+                "typeString": "contract RegistryBase"
+              }
+            },
+            "id": 5076,
+            "nodeType": "InheritanceSpecifier",
+            "src": "141:12:21"
+          }
+        ],
+        "contractDependencies": [
+          5069,
+          5246
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 5138,
+        "linearizedBaseContracts": [
+          5138,
+          5246
+        ],
+        "name": "DatasetRegistry",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 5088,
+            "name": "CreateDataset",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5087,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5078,
+                  "indexed": true,
+                  "name": "datasetOwner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5088,
+                  "src": "223:28:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5077,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "223:7:21",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5080,
+                  "indexed": false,
+                  "name": "dataset",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5088,
+                  "src": "255:23:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5079,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "255:7:21",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5082,
+                  "indexed": false,
+                  "name": "datasetName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5088,
+                  "src": "282:27:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5081,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "282:6:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5084,
+                  "indexed": false,
+                  "name": "datasetParams",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5088,
+                  "src": "313:29:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5083,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "313:6:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5086,
+                  "indexed": false,
+                  "name": "datasetHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5088,
+                  "src": "346:27:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 5085,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "346:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "219:155:21"
+            },
+            "src": "200:175:21"
+          },
+          {
+            "body": {
+              "id": 5091,
+              "nodeType": "Block",
+              "src": "427:4:21",
+              "statements": []
+            },
+            "documentation": "Constructor",
+            "id": 5092,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5089,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "415:2:21"
+            },
+            "returnParameters": {
+              "id": 5090,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "427:0:21"
+            },
+            "scope": 5138,
+            "src": "404:27:21",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 5136,
+              "nodeType": "Block",
+              "src": "688:277:21",
+              "statements": [
+                {
+                  "assignments": [
+                    5106
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 5106,
+                      "name": "newDataset",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 5136,
+                      "src": "692:18:21",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Dataset_$5069",
+                        "typeString": "contract Dataset"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 5105,
+                        "name": "Dataset",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 5069,
+                        "src": "692:7:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Dataset_$5069",
+                          "typeString": "contract Dataset"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 5114,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 5109,
+                        "name": "_datasetOwner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5094,
+                        "src": "725:13:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5110,
+                        "name": "_datasetName",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5096,
+                        "src": "740:12:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5111,
+                        "name": "_datasetParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5098,
+                        "src": "754:14:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5112,
+                        "name": "_datasetHash",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5100,
+                        "src": "770:12:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        },
+                        {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "id": 5108,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "NewExpression",
+                      "src": "713:11:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_creation_nonpayable$_t_address_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_bytes32_$returns$_t_contract$_Dataset_$5069_$",
+                        "typeString": "function (address,string memory,string memory,bytes32) returns (contract Dataset)"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 5107,
+                        "name": "Dataset",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 5069,
+                        "src": "717:7:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Dataset_$5069",
+                          "typeString": "contract Dataset"
+                        }
+                      }
+                    },
+                    "id": 5113,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "713:70:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Dataset_$5069",
+                      "typeString": "contract Dataset"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "692:91:21"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 5118,
+                                "name": "newDataset",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 5106,
+                                "src": "810:10:21",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_Dataset_$5069",
+                                  "typeString": "contract Dataset"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_Dataset_$5069",
+                                  "typeString": "contract Dataset"
+                                }
+                              ],
+                              "id": 5117,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "802:7:21",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_address_$",
+                                "typeString": "type(address)"
+                              },
+                              "typeName": "address"
+                            },
+                            "id": 5119,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "802:19:21",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 5120,
+                            "name": "_datasetOwner",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5094,
+                            "src": "823:13:21",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 5116,
+                          "name": "insert",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 5245,
+                          "src": "795:6:21",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_address_$returns$_t_bool_$",
+                            "typeString": "function (address,address) returns (bool)"
+                          }
+                        },
+                        "id": 5121,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "795:42:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 5115,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        6278,
+                        6279
+                      ],
+                      "referencedDeclaration": 6278,
+                      "src": "787:7:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 5122,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "787:51:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 5123,
+                  "nodeType": "ExpressionStatement",
+                  "src": "787:51:21"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 5125,
+                        "name": "_datasetOwner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5094,
+                        "src": "861:13:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 5127,
+                            "name": "newDataset",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5106,
+                            "src": "884:10:21",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_Dataset_$5069",
+                              "typeString": "contract Dataset"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_Dataset_$5069",
+                              "typeString": "contract Dataset"
+                            }
+                          ],
+                          "id": 5126,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "876:7:21",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": "address"
+                        },
+                        "id": 5128,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "876:19:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5129,
+                        "name": "_datasetName",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5096,
+                        "src": "897:12:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5130,
+                        "name": "_datasetParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5098,
+                        "src": "911:14:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5131,
+                        "name": "_datasetHash",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5100,
+                        "src": "927:12:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        },
+                        {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "id": 5124,
+                      "name": "CreateDataset",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5088,
+                      "src": "847:13:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_bytes32_$returns$__$",
+                        "typeString": "function (address,address,string memory,string memory,bytes32)"
+                      }
+                    },
+                    "id": 5132,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "847:93:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 5133,
+                  "nodeType": "EmitStatement",
+                  "src": "842:98:21"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 5134,
+                    "name": "newDataset",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 5106,
+                    "src": "951:10:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Dataset_$5069",
+                      "typeString": "contract Dataset"
+                    }
+                  },
+                  "functionReturnParameters": 5104,
+                  "id": 5135,
+                  "nodeType": "Return",
+                  "src": "944:17:21"
+                }
+              ]
+            },
+            "documentation": "Dataset creation",
+            "id": 5137,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createDataset",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5101,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5094,
+                  "name": "_datasetOwner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5137,
+                  "src": "491:30:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5093,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "491:7:21",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5096,
+                  "name": "_datasetName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5137,
+                  "src": "525:29:21",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5095,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "525:6:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5098,
+                  "name": "_datasetParams",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5137,
+                  "src": "558:31:21",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5097,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "558:6:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5100,
+                  "name": "_datasetHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5137,
+                  "src": "593:29:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 5099,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "593:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "487:136:21"
+            },
+            "returnParameters": {
+              "id": 5104,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5103,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5137,
+                  "src": "678:7:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Dataset_$5069",
+                    "typeString": "contract Dataset"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 5102,
+                    "name": "Dataset",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 5069,
+                    "src": "678:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Dataset_$5069",
+                      "typeString": "contract Dataset"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "677:9:21"
+            },
+            "scope": 5138,
+            "src": "465:500:21",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 5139,
+        "src": "113:854:21"
+      }
+    ],
+    "src": "0:968:21"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/registries/DatasetRegistry.sol",
+    "exportedSymbols": {
+      "DatasetRegistry": [
+        5138
+      ]
+    },
+    "id": 5139,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5071,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:21"
+      },
+      {
+        "id": 5072,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "24:33:21"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/registries/Dataset.sol",
+        "file": "./Dataset.sol",
+        "id": 5073,
+        "nodeType": "ImportDirective",
+        "scope": 5139,
+        "sourceUnit": 5070,
+        "src": "59:23:21",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/registries/RegistryBase.sol",
+        "file": "./RegistryBase.sol",
+        "id": 5074,
+        "nodeType": "ImportDirective",
+        "scope": 5139,
+        "sourceUnit": 5247,
+        "src": "83:28:21",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 5075,
+              "name": "RegistryBase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 5246,
+              "src": "141:12:21",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_RegistryBase_$5246",
+                "typeString": "contract RegistryBase"
+              }
+            },
+            "id": 5076,
+            "nodeType": "InheritanceSpecifier",
+            "src": "141:12:21"
+          }
+        ],
+        "contractDependencies": [
+          5069,
+          5246
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 5138,
+        "linearizedBaseContracts": [
+          5138,
+          5246
+        ],
+        "name": "DatasetRegistry",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 5088,
+            "name": "CreateDataset",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5087,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5078,
+                  "indexed": true,
+                  "name": "datasetOwner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5088,
+                  "src": "223:28:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5077,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "223:7:21",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5080,
+                  "indexed": false,
+                  "name": "dataset",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5088,
+                  "src": "255:23:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5079,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "255:7:21",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5082,
+                  "indexed": false,
+                  "name": "datasetName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5088,
+                  "src": "282:27:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5081,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "282:6:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5084,
+                  "indexed": false,
+                  "name": "datasetParams",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5088,
+                  "src": "313:29:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5083,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "313:6:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5086,
+                  "indexed": false,
+                  "name": "datasetHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5088,
+                  "src": "346:27:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 5085,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "346:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "219:155:21"
+            },
+            "src": "200:175:21"
+          },
+          {
+            "body": {
+              "id": 5091,
+              "nodeType": "Block",
+              "src": "427:4:21",
+              "statements": []
+            },
+            "documentation": "Constructor",
+            "id": 5092,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5089,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "415:2:21"
+            },
+            "returnParameters": {
+              "id": 5090,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "427:0:21"
+            },
+            "scope": 5138,
+            "src": "404:27:21",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 5136,
+              "nodeType": "Block",
+              "src": "688:277:21",
+              "statements": [
+                {
+                  "assignments": [
+                    5106
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 5106,
+                      "name": "newDataset",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 5136,
+                      "src": "692:18:21",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Dataset_$5069",
+                        "typeString": "contract Dataset"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 5105,
+                        "name": "Dataset",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 5069,
+                        "src": "692:7:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Dataset_$5069",
+                          "typeString": "contract Dataset"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 5114,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 5109,
+                        "name": "_datasetOwner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5094,
+                        "src": "725:13:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5110,
+                        "name": "_datasetName",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5096,
+                        "src": "740:12:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5111,
+                        "name": "_datasetParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5098,
+                        "src": "754:14:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5112,
+                        "name": "_datasetHash",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5100,
+                        "src": "770:12:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        },
+                        {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "id": 5108,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "NewExpression",
+                      "src": "713:11:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_creation_nonpayable$_t_address_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_bytes32_$returns$_t_contract$_Dataset_$5069_$",
+                        "typeString": "function (address,string memory,string memory,bytes32) returns (contract Dataset)"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 5107,
+                        "name": "Dataset",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 5069,
+                        "src": "717:7:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Dataset_$5069",
+                          "typeString": "contract Dataset"
+                        }
+                      }
+                    },
+                    "id": 5113,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "713:70:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Dataset_$5069",
+                      "typeString": "contract Dataset"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "692:91:21"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 5118,
+                                "name": "newDataset",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 5106,
+                                "src": "810:10:21",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_Dataset_$5069",
+                                  "typeString": "contract Dataset"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_Dataset_$5069",
+                                  "typeString": "contract Dataset"
+                                }
+                              ],
+                              "id": 5117,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "802:7:21",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_address_$",
+                                "typeString": "type(address)"
+                              },
+                              "typeName": "address"
+                            },
+                            "id": 5119,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "802:19:21",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 5120,
+                            "name": "_datasetOwner",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5094,
+                            "src": "823:13:21",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 5116,
+                          "name": "insert",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 5245,
+                          "src": "795:6:21",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_address_$returns$_t_bool_$",
+                            "typeString": "function (address,address) returns (bool)"
+                          }
+                        },
+                        "id": 5121,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "795:42:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 5115,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        6278,
+                        6279
+                      ],
+                      "referencedDeclaration": 6278,
+                      "src": "787:7:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 5122,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "787:51:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 5123,
+                  "nodeType": "ExpressionStatement",
+                  "src": "787:51:21"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 5125,
+                        "name": "_datasetOwner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5094,
+                        "src": "861:13:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 5127,
+                            "name": "newDataset",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5106,
+                            "src": "884:10:21",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_Dataset_$5069",
+                              "typeString": "contract Dataset"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_Dataset_$5069",
+                              "typeString": "contract Dataset"
+                            }
+                          ],
+                          "id": 5126,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "876:7:21",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": "address"
+                        },
+                        "id": 5128,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "876:19:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5129,
+                        "name": "_datasetName",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5096,
+                        "src": "897:12:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5130,
+                        "name": "_datasetParams",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5098,
+                        "src": "911:14:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5131,
+                        "name": "_datasetHash",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5100,
+                        "src": "927:12:21",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        },
+                        {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        },
+                        {
+                          "typeIdentifier": "t_bytes32",
+                          "typeString": "bytes32"
+                        }
+                      ],
+                      "id": 5124,
+                      "name": "CreateDataset",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5088,
+                      "src": "847:13:21",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$_t_string_memory_ptr_$_t_string_memory_ptr_$_t_bytes32_$returns$__$",
+                        "typeString": "function (address,address,string memory,string memory,bytes32)"
+                      }
+                    },
+                    "id": 5132,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "847:93:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 5133,
+                  "nodeType": "EmitStatement",
+                  "src": "842:98:21"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 5134,
+                    "name": "newDataset",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 5106,
+                    "src": "951:10:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Dataset_$5069",
+                      "typeString": "contract Dataset"
+                    }
+                  },
+                  "functionReturnParameters": 5104,
+                  "id": 5135,
+                  "nodeType": "Return",
+                  "src": "944:17:21"
+                }
+              ]
+            },
+            "documentation": "Dataset creation",
+            "id": 5137,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createDataset",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5101,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5094,
+                  "name": "_datasetOwner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5137,
+                  "src": "491:30:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5093,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "491:7:21",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5096,
+                  "name": "_datasetName",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5137,
+                  "src": "525:29:21",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5095,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "525:6:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5098,
+                  "name": "_datasetParams",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5137,
+                  "src": "558:31:21",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5097,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "558:6:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5100,
+                  "name": "_datasetHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5137,
+                  "src": "593:29:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 5099,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "593:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "487:136:21"
+            },
+            "returnParameters": {
+              "id": 5104,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5103,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5137,
+                  "src": "678:7:21",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Dataset_$5069",
+                    "typeString": "contract Dataset"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 5102,
+                    "name": "Dataset",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 5069,
+                    "src": "678:7:21",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Dataset_$5069",
+                      "typeString": "contract Dataset"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "677:9:21"
+            },
+            "scope": 5138,
+            "src": "465:500:21",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 5139,
+        "src": "113:854:21"
+      }
+    ],
+    "src": "0:968:21"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.0-beta.2",
+  "updatedAt": "2018-12-03T12:54:15.756Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {
+      "constructor": "Constructor",
+      "createDataset(address,string,string,bytes32)": {
+        "notice": "Dataset creation"
+      },
+      "isRegistered(address)": {
+        "notice": "Accessors"
+      }
+    }
+  }
+}

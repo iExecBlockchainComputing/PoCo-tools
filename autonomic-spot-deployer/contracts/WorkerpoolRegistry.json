@@ -1,0 +1,1646 @@
+{
+  "contractName": "WorkerpoolRegistry",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_owner",
+          "type": "address"
+        },
+        {
+          "name": "_index",
+          "type": "uint256"
+        }
+      ],
+      "name": "viewEntry",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_owner",
+          "type": "address"
+        }
+      ],
+      "name": "viewCount",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_entry",
+          "type": "address"
+        }
+      ],
+      "name": "isRegistered",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "workerpoolOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "workerpool",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "workerpoolDescription",
+          "type": "string"
+        }
+      ],
+      "name": "CreateWorkerpool",
+      "type": "event"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_workerpoolOwner",
+          "type": "address"
+        },
+        {
+          "name": "_workerpoolDescription",
+          "type": "string"
+        }
+      ],
+      "name": "createWorkerpool",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b50610b9e806100206000396000f3fe6080604052600436106100615763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166365a2c1048114610066578063c0a8cae21461009c578063c3c5a547146100c9578063e40238f4146100f6575b600080fd5b34801561007257600080fd5b506100866100813660046103c7565b610123565b6040516100939190610454565b60405180910390f35b3480156100a857600080fd5b506100bc6100b736600461034b565b610150565b60405161009391906104ba565b3480156100d557600080fd5b506100e96100e436600461034b565b61016b565b604051610093919061048c565b34801561010257600080fd5b50610116610111366004610371565b610189565b604051610093919061049a565b600160a060020a038083166000908152600160209081526040808320858452909152902054165b92915050565b600160a060020a031660009081526002602052604090205490565b600160a060020a031660009081526020819052604090205460ff1690565b6000808484846101976102da565b6101a393929190610462565b604051809103906000f0801580156101bf573d6000803e3d6000fd5b5090506101cc818661022c565b15156101d757600080fd5b80600160a060020a031685600160a060020a03167fc1bcdd8228d0d7750d2a9fea671d1fe9eb0b751661857d93dee400659670e52c868660405161021c9291906104a8565b60405180910390a3949350505050565b600160a060020a038116600090815260026020526040812054819061025890600163ffffffff6102c416565b600160a060020a03808516600090815260026020908152604080832085905560018083528184209584529482528083208054948a1673ffffffffffffffffffffffffffffffffffffffff199095168517905592825281905220805460ff19168217905591505092915050565b6000828201838110156102d357fe5b9392505050565b60405161065c8061050983390190565b60006102d382356104c8565b600080601f8301841361030857600080fd5b50813567ffffffffffffffff81111561032057600080fd5b60208301915083600182028301111561033857600080fd5b9250929050565b60006102d382356104e4565b60006020828403121561035d57600080fd5b600061036984846102ea565b949350505050565b60008060006040848603121561038657600080fd5b600061039286866102ea565b935050602084013567ffffffffffffffff8111156103af57600080fd5b6103bb868287016102f6565b92509250509250925092565b600080604083850312156103da57600080fd5b60006103e685856102ea565b92505060206103f78582860161033f565b9150509250929050565b61040a816104c8565b82525050565b61040a816104d3565b61040a816104e7565b60008284526020840193506104388385846104f2565b610441836104fe565b9093019392505050565b61040a816104e4565b6020810161014a8284610401565b604081016104708286610401565b8181036020830152610483818486610422565b95945050505050565b6020810161014a8284610410565b6020810161014a8284610419565b60208082528101610369818486610422565b6020810161014a828461044b565b600061014a826104d8565b151590565b600160a060020a031690565b90565b600061014a826104c8565b82818337506000910152565b601f01601f19169056fe608060405234801561001057600080fd5b5060405161065c38038061065c83398101806040526100329190810190610174565b60008054600160a060020a031916600160a060020a0384161790558051610060906001906020840190610072565b5050601e60025550600160035561025f565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106100b357805160ff19168380011785556100e0565b828001600101855582156100e0579182015b828111156100e05782518255916020019190600101906100c5565b506100ec9291506100f0565b5090565b61010a91905b808211156100ec57600081556001016100f6565b90565b6000610119825161021e565b9392505050565b6000601f8201831361013157600080fd5b815161014461013f826101eb565b6101c5565b9150808252602083016020830185838301111561016057600080fd5b61016b83828461022f565b50505092915050565b6000806040838503121561018757600080fd5b6000610193858561010d565b92505060208301516001604060020a038111156101af57600080fd5b6101bb85828601610120565b9150509250929050565b6040518181016001604060020a03811182821017156101e357600080fd5b604052919050565b60006001604060020a0382111561020157600080fd5b506020601f91909101601f19160190565b600160a060020a031690565b600061022982610212565b92915050565b60005b8381101561024a578181015183820152602001610232565b83811115610259576000848401525b50505050565b6103ee8061026e6000396000f3fe60806040526004361061006c5763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663584feb3a811461007157806387639c681461009c578063b55e75af146100be578063deff41c1146100d3578063f199413c146100f5575b600080fd5b34801561007d57600080fd5b50610086610117565b60405161009391906102f8565b60405180910390f35b3480156100a857600080fd5b506100b16101a4565b6040516100939190610309565b3480156100ca57600080fd5b506100b16101aa565b3480156100df57600080fd5b506100e86101b0565b60405161009391906102e4565b34801561010157600080fd5b5061011561011036600461025d565b6101cc565b005b60018054604080516020600284861615610100026000190190941693909304601f8101849004840282018401909252818152929183018282801561019c5780601f106101715761010080835404028352916020019161019c565b820191906000526020600020905b81548152906001019060200180831161017f57829003601f168201915b505050505081565b60035481565b60025481565b60005473ffffffffffffffffffffffffffffffffffffffff1681565b60005473ffffffffffffffffffffffffffffffffffffffff1633146101f057600080fd5b60648111156101fe57600080fd5b7f61f37ef3a6d587ce2d6be79492e1fac570f2745787015db7ed95ad4397b05c1e60025483600354846040516102379493929190610317565b60405180910390a1600291909155600355565b60006102568235610377565b9392505050565b6000806040838503121561027057600080fd5b600061027c858561024a565b925050602061028d8582860161024a565b9150509250929050565b6102a081610359565b82525050565b60006102b182610355565b8084526102c581602086016020860161037a565b6102ce816103aa565b9093016020019392505050565b6102a081610377565b602081016102f28284610297565b92915050565b6020808252810161025681846102a6565b602081016102f282846102db565b6080810161032582876102db565b61033260208301866102db565b61033f60408301856102db565b61034c60608301846102db565b95945050505050565b5190565b600073ffffffffffffffffffffffffffffffffffffffff82166102f2565b90565b60005b8381101561039557818101518382015260200161037d565b838111156103a4576000848401525b50505050565b601f01601f19169056fea265627a7a72305820287a48d7eb42903a863a04e5b4648dae7c57dbd304f84726b62b746200401e3c6c6578706572696d656e74616cf50037a265627a7a723058201512aa57286913a3d8e636fdd0ccbcfa35bc641efa87b4b7a91373956f9d6c256c6578706572696d656e74616cf50037",
+  "deployedBytecode": "0x6080604052600436106100615763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166365a2c1048114610066578063c0a8cae21461009c578063c3c5a547146100c9578063e40238f4146100f6575b600080fd5b34801561007257600080fd5b506100866100813660046103c7565b610123565b6040516100939190610454565b60405180910390f35b3480156100a857600080fd5b506100bc6100b736600461034b565b610150565b60405161009391906104ba565b3480156100d557600080fd5b506100e96100e436600461034b565b61016b565b604051610093919061048c565b34801561010257600080fd5b50610116610111366004610371565b610189565b604051610093919061049a565b600160a060020a038083166000908152600160209081526040808320858452909152902054165b92915050565b600160a060020a031660009081526002602052604090205490565b600160a060020a031660009081526020819052604090205460ff1690565b6000808484846101976102da565b6101a393929190610462565b604051809103906000f0801580156101bf573d6000803e3d6000fd5b5090506101cc818661022c565b15156101d757600080fd5b80600160a060020a031685600160a060020a03167fc1bcdd8228d0d7750d2a9fea671d1fe9eb0b751661857d93dee400659670e52c868660405161021c9291906104a8565b60405180910390a3949350505050565b600160a060020a038116600090815260026020526040812054819061025890600163ffffffff6102c416565b600160a060020a03808516600090815260026020908152604080832085905560018083528184209584529482528083208054948a1673ffffffffffffffffffffffffffffffffffffffff199095168517905592825281905220805460ff19168217905591505092915050565b6000828201838110156102d357fe5b9392505050565b60405161065c8061050983390190565b60006102d382356104c8565b600080601f8301841361030857600080fd5b50813567ffffffffffffffff81111561032057600080fd5b60208301915083600182028301111561033857600080fd5b9250929050565b60006102d382356104e4565b60006020828403121561035d57600080fd5b600061036984846102ea565b949350505050565b60008060006040848603121561038657600080fd5b600061039286866102ea565b935050602084013567ffffffffffffffff8111156103af57600080fd5b6103bb868287016102f6565b92509250509250925092565b600080604083850312156103da57600080fd5b60006103e685856102ea565b92505060206103f78582860161033f565b9150509250929050565b61040a816104c8565b82525050565b61040a816104d3565b61040a816104e7565b60008284526020840193506104388385846104f2565b610441836104fe565b9093019392505050565b61040a816104e4565b6020810161014a8284610401565b604081016104708286610401565b8181036020830152610483818486610422565b95945050505050565b6020810161014a8284610410565b6020810161014a8284610419565b60208082528101610369818486610422565b6020810161014a828461044b565b600061014a826104d8565b151590565b600160a060020a031690565b90565b600061014a826104c8565b82818337506000910152565b601f01601f19169056fe608060405234801561001057600080fd5b5060405161065c38038061065c83398101806040526100329190810190610174565b60008054600160a060020a031916600160a060020a0384161790558051610060906001906020840190610072565b5050601e60025550600160035561025f565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106100b357805160ff19168380011785556100e0565b828001600101855582156100e0579182015b828111156100e05782518255916020019190600101906100c5565b506100ec9291506100f0565b5090565b61010a91905b808211156100ec57600081556001016100f6565b90565b6000610119825161021e565b9392505050565b6000601f8201831361013157600080fd5b815161014461013f826101eb565b6101c5565b9150808252602083016020830185838301111561016057600080fd5b61016b83828461022f565b50505092915050565b6000806040838503121561018757600080fd5b6000610193858561010d565b92505060208301516001604060020a038111156101af57600080fd5b6101bb85828601610120565b9150509250929050565b6040518181016001604060020a03811182821017156101e357600080fd5b604052919050565b60006001604060020a0382111561020157600080fd5b506020601f91909101601f19160190565b600160a060020a031690565b600061022982610212565b92915050565b60005b8381101561024a578181015183820152602001610232565b83811115610259576000848401525b50505050565b6103ee8061026e6000396000f3fe60806040526004361061006c5763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663584feb3a811461007157806387639c681461009c578063b55e75af146100be578063deff41c1146100d3578063f199413c146100f5575b600080fd5b34801561007d57600080fd5b50610086610117565b60405161009391906102f8565b60405180910390f35b3480156100a857600080fd5b506100b16101a4565b6040516100939190610309565b3480156100ca57600080fd5b506100b16101aa565b3480156100df57600080fd5b506100e86101b0565b60405161009391906102e4565b34801561010157600080fd5b5061011561011036600461025d565b6101cc565b005b60018054604080516020600284861615610100026000190190941693909304601f8101849004840282018401909252818152929183018282801561019c5780601f106101715761010080835404028352916020019161019c565b820191906000526020600020905b81548152906001019060200180831161017f57829003601f168201915b505050505081565b60035481565b60025481565b60005473ffffffffffffffffffffffffffffffffffffffff1681565b60005473ffffffffffffffffffffffffffffffffffffffff1633146101f057600080fd5b60648111156101fe57600080fd5b7f61f37ef3a6d587ce2d6be79492e1fac570f2745787015db7ed95ad4397b05c1e60025483600354846040516102379493929190610317565b60405180910390a1600291909155600355565b60006102568235610377565b9392505050565b6000806040838503121561027057600080fd5b600061027c858561024a565b925050602061028d8582860161024a565b9150509250929050565b6102a081610359565b82525050565b60006102b182610355565b8084526102c581602086016020860161037a565b6102ce816103aa565b9093016020019392505050565b6102a081610377565b602081016102f28284610297565b92915050565b6020808252810161025681846102a6565b602081016102f282846102db565b6080810161032582876102db565b61033260208301866102db565b61033f60408301856102db565b61034c60608301846102db565b95945050505050565b5190565b600073ffffffffffffffffffffffffffffffffffffffff82166102f2565b90565b60005b8381101561039557818101518382015260200161037d565b838111156103a4576000848401525b50505050565b601f01601f19169056fea265627a7a72305820287a48d7eb42903a863a04e5b4648dae7c57dbd304f84726b62b746200401e3c6c6578706572696d656e74616cf50037a265627a7a723058201512aa57286913a3d8e636fdd0ccbcfa35bc641efa87b4b7a91373956f9d6c256c6578706572696d656e74616cf50037",
+  "sourceMap": "116:744:24:-;;;349:27;8:9:-1;5:2;;;30:1;27;20:12;5:2;349:27:24;116:744;;;;;;",
+  "deployedSourceMap": "116:744:24:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;585:130:22;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;585:130:22;;;;;;;;;;;;;;;;;;;;;;;;;718:104;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;718:104:22;;;;;;;;;;;;;;;;;480:102;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;480:102:22;;;;;;;;;;;;;;;;;407:451:24;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;407:451:24;;;;;;;;;;;;;;;;;585:130:22;-1:-1:-1;;;;;679:24:22;;;658:7;679:24;;;:16;:24;;;;;;;;:32;;;;;;;;;;585:130;;;;;:::o;718:104::-;-1:-1:-1;;;;;796:22:22;775:7;796:22;;;:14;:22;;;;;;;718:104::o;480:102::-;-1:-1:-1;;;;;558:20:22;540:4;558:20;;;;;;;;;;;;;;480:102::o;407:451:24:-;568:10;585:24;631:16;652:22;;612:66;;:::i;:::-;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;612:66:24;585:93;;690:48;705:13;721:16;690:6;:48::i;:::-;682:57;;;;;;;;791:13;-1:-1:-1;;;;;748:82:24;765:16;-1:-1:-1;;;;;748:82:24;;807:22;;748:82;;;;;;;;;;;;;;;;841:13;407:451;-1:-1:-1;;;;407:451:24:o;848:258:22:-;-1:-1:-1;;;;;941:22:22;;920:4;941:22;;;:14;:22;;;;;;920:4;;941:29;;968:1;941:29;:26;:29;:::i;:::-;-1:-1:-1;;;;;974:24:22;;;;;;;:14;:24;;;;;;;;:33;;;1011:16;:24;;;;;;:28;;;;;;;;;:37;;;;;-1:-1:-1;;1011:37:22;;;;;;;1052:24;;;;;;;:35;;-1:-1:-1;;1052:35:22;;;;;1011:16;-1:-1:-1;;848:258:22;;;;:::o;403:123:13:-;461:7;487:5;;;503:6;;;;496:14;;;;521:1;403:123;-1:-1:-1;;;403:123:13:o;116:744:24:-;;;;;;;;;;:::o;5:118:-1:-;;72:46;110:6;97:20;72:46;;145:336;;;253:4;241:17;;237:27;-1:-1;227:2;;278:1;275;268:12;227:2;-1:-1;298:20;;338:18;327:30;;324:2;;;370:1;367;360:12;324:2;404:4;396:6;392:17;380:29;;454:3;447;439:6;435:16;425:8;421:31;418:40;415:2;;;471:1;468;461:12;415:2;220:261;;;;;;489:118;;556:46;594:6;581:20;556:46;;614:241;;718:2;706:9;697:7;693:23;689:32;686:2;;;734:1;731;724:12;686:2;769:1;786:53;831:7;811:9;786:53;;;776:63;680:175;-1:-1;;;;680:175;862:492;;;;1003:2;991:9;982:7;978:23;974:32;971:2;;;1019:1;1016;1009:12;971:2;1054:1;1071:53;1116:7;1096:9;1071:53;;;1061:63;;1033:97;1189:2;1178:9;1174:18;1161:32;1213:18;1205:6;1202:30;1199:2;;;1245:1;1242;1235:12;1199:2;1273:65;1330:7;1321:6;1310:9;1306:22;1273:65;;;1255:83;;;;1140:204;965:389;;;;;;1361:366;;;1482:2;1470:9;1461:7;1457:23;1453:32;1450:2;;;1498:1;1495;1488:12;1450:2;1533:1;1550:53;1595:7;1575:9;1550:53;;;1540:63;;1512:97;1640:2;1658:53;1703:7;1694:6;1683:9;1679:22;1658:53;;;1648:63;;1619:98;1444:283;;;;;;1734:110;1807:31;1832:5;1807:31;;;1802:3;1795:44;1789:55;;;1851:101;1918:28;1940:5;1918:28;;1959:154;2051:56;2101:5;2051:56;;2143:263;;2253:6;2248:3;2241:19;2277:4;2272:3;2268:14;2261:21;;2307:43;2343:6;2338:3;2331:5;2307:43;;;2371:29;2393:6;2371:29;;;2362:39;;;;2235:171;-1:-1;;;2235:171;2413:110;2486:31;2511:5;2486:31;;2530:193;2638:2;2623:18;;2652:61;2627:9;2686:6;2652:61;;2730:402;2896:2;2881:18;;2910:61;2885:9;2944:6;2910:61;;;3019:9;3013:4;3009:20;3004:2;2993:9;2989:18;2982:48;3044:78;3117:4;3108:6;3100;3044:78;;;3036:86;2867:265;-1:-1;;;;;2867:265;3139:181;3241:2;3226:18;;3255:55;3230:9;3283:6;3255:55;;3327:231;3454:2;3439:18;;3468:80;3443:9;3521:6;3468:80;;3565:301;3703:2;3717:47;;;3688:18;;3778:78;3688:18;3842:6;3834;3778:78;;3873:193;3981:2;3966:18;;3995:61;3970:9;4029:6;3995:61;;4073:105;;4142:31;4167:5;4142:31;;4185:92;4258:13;4251:21;;4234:43;4284:128;-1:-1;;;;;4353:54;;4336:76;4419:79;4488:5;4471:27;4703:159;;4801:56;4851:5;4801:56;;5011:145;5092:6;5087:3;5082;5069:30;-1:-1;5148:1;5130:16;;5123:27;5062:94;5164:97;5252:2;5232:14;-1:-1;;5228:28;;5212:49",
+  "source": "pragma solidity ^0.5.0;\npragma experimental ABIEncoderV2;\n\nimport './Workerpool.sol';\nimport './RegistryBase.sol';\n\ncontract WorkerpoolRegistry is RegistryBase //, OwnableMutable // is Owned by IexecHub\n{\n\tevent CreateWorkerpool(address indexed workerpoolOwner, address indexed workerpool, string workerpoolDescription);\n\n\t/**\n\t * Constructor\n\t */\n\tconstructor()\n\tpublic\n\t{\n\t}\n\n\t/**\n\t * Pool creation\n\t */\n\tfunction createWorkerpool(\n\t\taddress          _workerpoolOwner,\n\t\tstring  calldata _workerpoolDescription)\n\texternal /* onlyOwner /*owner == IexecHub*/ returns (Workerpool)\n\t{\n\t\tWorkerpool newWorkerpool = new Workerpool(\n\t\t\t_workerpoolOwner,\n\t\t\t_workerpoolDescription\n\t\t);\n\t\trequire(insert(address(newWorkerpool), _workerpoolOwner));\n\t\temit CreateWorkerpool(_workerpoolOwner, address(newWorkerpool), _workerpoolDescription);\n\t\treturn newWorkerpool;\n\t}\n}\n",
+  "sourcePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/registries/WorkerpoolRegistry.sol",
+  "ast": {
+    "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/registries/WorkerpoolRegistry.sol",
+    "exportedSymbols": {
+      "WorkerpoolRegistry": [
+        5380
+      ]
+    },
+    "id": 5381,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5325,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:24"
+      },
+      {
+        "id": 5326,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "24:33:24"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/registries/Workerpool.sol",
+        "file": "./Workerpool.sol",
+        "id": 5327,
+        "nodeType": "ImportDirective",
+        "scope": 5381,
+        "sourceUnit": 5324,
+        "src": "59:26:24",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/registries/RegistryBase.sol",
+        "file": "./RegistryBase.sol",
+        "id": 5328,
+        "nodeType": "ImportDirective",
+        "scope": 5381,
+        "sourceUnit": 5247,
+        "src": "86:28:24",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 5329,
+              "name": "RegistryBase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 5246,
+              "src": "147:12:24",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_RegistryBase_$5246",
+                "typeString": "contract RegistryBase"
+              }
+            },
+            "id": 5330,
+            "nodeType": "InheritanceSpecifier",
+            "src": "147:12:24"
+          }
+        ],
+        "contractDependencies": [
+          5246,
+          5323
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 5380,
+        "linearizedBaseContracts": [
+          5380,
+          5246
+        ],
+        "name": "WorkerpoolRegistry",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 5338,
+            "name": "CreateWorkerpool",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5337,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5332,
+                  "indexed": true,
+                  "name": "workerpoolOwner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5338,
+                  "src": "229:31:24",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5331,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "229:7:24",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5334,
+                  "indexed": true,
+                  "name": "workerpool",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5338,
+                  "src": "262:26:24",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5333,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "262:7:24",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5336,
+                  "indexed": false,
+                  "name": "workerpoolDescription",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5338,
+                  "src": "290:28:24",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5335,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "290:6:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "228:91:24"
+            },
+            "src": "206:114:24"
+          },
+          {
+            "body": {
+              "id": 5341,
+              "nodeType": "Block",
+              "src": "372:4:24",
+              "statements": []
+            },
+            "documentation": "Constructor",
+            "id": 5342,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5339,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "360:2:24"
+            },
+            "returnParameters": {
+              "id": 5340,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "372:0:24"
+            },
+            "scope": 5380,
+            "src": "349:27:24",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 5378,
+              "nodeType": "Block",
+              "src": "581:277:24",
+              "statements": [
+                {
+                  "assignments": [
+                    5352
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 5352,
+                      "name": "newWorkerpool",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 5378,
+                      "src": "585:24:24",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Workerpool_$5323",
+                        "typeString": "contract Workerpool"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 5351,
+                        "name": "Workerpool",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 5323,
+                        "src": "585:10:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Workerpool_$5323",
+                          "typeString": "contract Workerpool"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 5358,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 5355,
+                        "name": "_workerpoolOwner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5344,
+                        "src": "631:16:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5356,
+                        "name": "_workerpoolDescription",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5346,
+                        "src": "652:22:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      ],
+                      "id": 5354,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "NewExpression",
+                      "src": "612:14:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_creation_nonpayable$_t_address_$_t_string_memory_ptr_$returns$_t_contract$_Workerpool_$5323_$",
+                        "typeString": "function (address,string memory) returns (contract Workerpool)"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 5353,
+                        "name": "Workerpool",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 5323,
+                        "src": "616:10:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Workerpool_$5323",
+                          "typeString": "contract Workerpool"
+                        }
+                      }
+                    },
+                    "id": 5357,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "612:66:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Workerpool_$5323",
+                      "typeString": "contract Workerpool"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "585:93:24"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 5362,
+                                "name": "newWorkerpool",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 5352,
+                                "src": "705:13:24",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_Workerpool_$5323",
+                                  "typeString": "contract Workerpool"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_Workerpool_$5323",
+                                  "typeString": "contract Workerpool"
+                                }
+                              ],
+                              "id": 5361,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "697:7:24",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_address_$",
+                                "typeString": "type(address)"
+                              },
+                              "typeName": "address"
+                            },
+                            "id": 5363,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "697:22:24",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 5364,
+                            "name": "_workerpoolOwner",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5344,
+                            "src": "721:16:24",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 5360,
+                          "name": "insert",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 5245,
+                          "src": "690:6:24",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_address_$returns$_t_bool_$",
+                            "typeString": "function (address,address) returns (bool)"
+                          }
+                        },
+                        "id": 5365,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "690:48:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 5359,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        6278,
+                        6279
+                      ],
+                      "referencedDeclaration": 6278,
+                      "src": "682:7:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 5366,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "682:57:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 5367,
+                  "nodeType": "ExpressionStatement",
+                  "src": "682:57:24"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 5369,
+                        "name": "_workerpoolOwner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5344,
+                        "src": "765:16:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 5371,
+                            "name": "newWorkerpool",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5352,
+                            "src": "791:13:24",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_Workerpool_$5323",
+                              "typeString": "contract Workerpool"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_Workerpool_$5323",
+                              "typeString": "contract Workerpool"
+                            }
+                          ],
+                          "id": 5370,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "783:7:24",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": "address"
+                        },
+                        "id": 5372,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "783:22:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5373,
+                        "name": "_workerpoolDescription",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5346,
+                        "src": "807:22:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      ],
+                      "id": 5368,
+                      "name": "CreateWorkerpool",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5338,
+                      "src": "748:16:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (address,address,string memory)"
+                      }
+                    },
+                    "id": 5374,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "748:82:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 5375,
+                  "nodeType": "EmitStatement",
+                  "src": "743:87:24"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 5376,
+                    "name": "newWorkerpool",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 5352,
+                    "src": "841:13:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Workerpool_$5323",
+                      "typeString": "contract Workerpool"
+                    }
+                  },
+                  "functionReturnParameters": 5350,
+                  "id": 5377,
+                  "nodeType": "Return",
+                  "src": "834:20:24"
+                }
+              ]
+            },
+            "documentation": "Pool creation",
+            "id": 5379,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createWorkerpool",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5347,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5344,
+                  "name": "_workerpoolOwner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5379,
+                  "src": "436:33:24",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5343,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "436:7:24",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5346,
+                  "name": "_workerpoolDescription",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5379,
+                  "src": "473:39:24",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5345,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "473:6:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "432:81:24"
+            },
+            "returnParameters": {
+              "id": 5350,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5349,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5379,
+                  "src": "568:10:24",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Workerpool_$5323",
+                    "typeString": "contract Workerpool"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 5348,
+                    "name": "Workerpool",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 5323,
+                    "src": "568:10:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Workerpool_$5323",
+                      "typeString": "contract Workerpool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "567:12:24"
+            },
+            "scope": 5380,
+            "src": "407:451:24",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 5381,
+        "src": "116:744:24"
+      }
+    ],
+    "src": "0:861:24"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/registries/WorkerpoolRegistry.sol",
+    "exportedSymbols": {
+      "WorkerpoolRegistry": [
+        5380
+      ]
+    },
+    "id": 5381,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 5325,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:24"
+      },
+      {
+        "id": 5326,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "24:33:24"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/registries/Workerpool.sol",
+        "file": "./Workerpool.sol",
+        "id": 5327,
+        "nodeType": "ImportDirective",
+        "scope": 5381,
+        "sourceUnit": 5324,
+        "src": "59:26:24",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/registries/RegistryBase.sol",
+        "file": "./RegistryBase.sol",
+        "id": 5328,
+        "nodeType": "ImportDirective",
+        "scope": 5381,
+        "sourceUnit": 5247,
+        "src": "86:28:24",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 5329,
+              "name": "RegistryBase",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 5246,
+              "src": "147:12:24",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_RegistryBase_$5246",
+                "typeString": "contract RegistryBase"
+              }
+            },
+            "id": 5330,
+            "nodeType": "InheritanceSpecifier",
+            "src": "147:12:24"
+          }
+        ],
+        "contractDependencies": [
+          5246,
+          5323
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 5380,
+        "linearizedBaseContracts": [
+          5380,
+          5246
+        ],
+        "name": "WorkerpoolRegistry",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "anonymous": false,
+            "documentation": null,
+            "id": 5338,
+            "name": "CreateWorkerpool",
+            "nodeType": "EventDefinition",
+            "parameters": {
+              "id": 5337,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5332,
+                  "indexed": true,
+                  "name": "workerpoolOwner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5338,
+                  "src": "229:31:24",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5331,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "229:7:24",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5334,
+                  "indexed": true,
+                  "name": "workerpool",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5338,
+                  "src": "262:26:24",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5333,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "262:7:24",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5336,
+                  "indexed": false,
+                  "name": "workerpoolDescription",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5338,
+                  "src": "290:28:24",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5335,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "290:6:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "228:91:24"
+            },
+            "src": "206:114:24"
+          },
+          {
+            "body": {
+              "id": 5341,
+              "nodeType": "Block",
+              "src": "372:4:24",
+              "statements": []
+            },
+            "documentation": "Constructor",
+            "id": 5342,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5339,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "360:2:24"
+            },
+            "returnParameters": {
+              "id": 5340,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "372:0:24"
+            },
+            "scope": 5380,
+            "src": "349:27:24",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 5378,
+              "nodeType": "Block",
+              "src": "581:277:24",
+              "statements": [
+                {
+                  "assignments": [
+                    5352
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 5352,
+                      "name": "newWorkerpool",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 5378,
+                      "src": "585:24:24",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_Workerpool_$5323",
+                        "typeString": "contract Workerpool"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 5351,
+                        "name": "Workerpool",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 5323,
+                        "src": "585:10:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Workerpool_$5323",
+                          "typeString": "contract Workerpool"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 5358,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 5355,
+                        "name": "_workerpoolOwner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5344,
+                        "src": "631:16:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5356,
+                        "name": "_workerpoolDescription",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5346,
+                        "src": "652:22:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      ],
+                      "id": 5354,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "nodeType": "NewExpression",
+                      "src": "612:14:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_creation_nonpayable$_t_address_$_t_string_memory_ptr_$returns$_t_contract$_Workerpool_$5323_$",
+                        "typeString": "function (address,string memory) returns (contract Workerpool)"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 5353,
+                        "name": "Workerpool",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 5323,
+                        "src": "616:10:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_Workerpool_$5323",
+                          "typeString": "contract Workerpool"
+                        }
+                      }
+                    },
+                    "id": 5357,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "612:66:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Workerpool_$5323",
+                      "typeString": "contract Workerpool"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "585:93:24"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "arguments": [
+                              {
+                                "argumentTypes": null,
+                                "id": 5362,
+                                "name": "newWorkerpool",
+                                "nodeType": "Identifier",
+                                "overloadedDeclarations": [],
+                                "referencedDeclaration": 5352,
+                                "src": "705:13:24",
+                                "typeDescriptions": {
+                                  "typeIdentifier": "t_contract$_Workerpool_$5323",
+                                  "typeString": "contract Workerpool"
+                                }
+                              }
+                            ],
+                            "expression": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_contract$_Workerpool_$5323",
+                                  "typeString": "contract Workerpool"
+                                }
+                              ],
+                              "id": 5361,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "nodeType": "ElementaryTypeNameExpression",
+                              "src": "697:7:24",
+                              "typeDescriptions": {
+                                "typeIdentifier": "t_type$_t_address_$",
+                                "typeString": "type(address)"
+                              },
+                              "typeName": "address"
+                            },
+                            "id": 5363,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": false,
+                            "kind": "typeConversion",
+                            "lValueRequested": false,
+                            "names": [],
+                            "nodeType": "FunctionCall",
+                            "src": "697:22:24",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 5364,
+                            "name": "_workerpoolOwner",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5344,
+                            "src": "721:16:24",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            },
+                            {
+                              "typeIdentifier": "t_address",
+                              "typeString": "address"
+                            }
+                          ],
+                          "id": 5360,
+                          "name": "insert",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 5245,
+                          "src": "690:6:24",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_address_$returns$_t_bool_$",
+                            "typeString": "function (address,address) returns (bool)"
+                          }
+                        },
+                        "id": 5365,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "functionCall",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "690:48:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      ],
+                      "id": 5359,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        6278,
+                        6279
+                      ],
+                      "referencedDeclaration": 6278,
+                      "src": "682:7:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
+                        "typeString": "function (bool) pure"
+                      }
+                    },
+                    "id": 5366,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "682:57:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 5367,
+                  "nodeType": "ExpressionStatement",
+                  "src": "682:57:24"
+                },
+                {
+                  "eventCall": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 5369,
+                        "name": "_workerpoolOwner",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5344,
+                        "src": "765:16:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 5371,
+                            "name": "newWorkerpool",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 5352,
+                            "src": "791:13:24",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_contract$_Workerpool_$5323",
+                              "typeString": "contract Workerpool"
+                            }
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_contract$_Workerpool_$5323",
+                              "typeString": "contract Workerpool"
+                            }
+                          ],
+                          "id": 5370,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "783:7:24",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_address_$",
+                            "typeString": "type(address)"
+                          },
+                          "typeName": "address"
+                        },
+                        "id": 5372,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "783:22:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 5373,
+                        "name": "_workerpoolDescription",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 5346,
+                        "src": "807:22:24",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_string_calldata_ptr",
+                          "typeString": "string calldata"
+                        }
+                      ],
+                      "id": 5368,
+                      "name": "CreateWorkerpool",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 5338,
+                      "src": "748:16:24",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (address,address,string memory)"
+                      }
+                    },
+                    "id": 5374,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "748:82:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 5375,
+                  "nodeType": "EmitStatement",
+                  "src": "743:87:24"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 5376,
+                    "name": "newWorkerpool",
+                    "nodeType": "Identifier",
+                    "overloadedDeclarations": [],
+                    "referencedDeclaration": 5352,
+                    "src": "841:13:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Workerpool_$5323",
+                      "typeString": "contract Workerpool"
+                    }
+                  },
+                  "functionReturnParameters": 5350,
+                  "id": 5377,
+                  "nodeType": "Return",
+                  "src": "834:20:24"
+                }
+              ]
+            },
+            "documentation": "Pool creation",
+            "id": 5379,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "createWorkerpool",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 5347,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5344,
+                  "name": "_workerpoolOwner",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5379,
+                  "src": "436:33:24",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 5343,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "436:7:24",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 5346,
+                  "name": "_workerpoolDescription",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5379,
+                  "src": "473:39:24",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_calldata_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 5345,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "473:6:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "432:81:24"
+            },
+            "returnParameters": {
+              "id": 5350,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 5349,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 5379,
+                  "src": "568:10:24",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_contract$_Workerpool_$5323",
+                    "typeString": "contract Workerpool"
+                  },
+                  "typeName": {
+                    "contractScope": null,
+                    "id": 5348,
+                    "name": "Workerpool",
+                    "nodeType": "UserDefinedTypeName",
+                    "referencedDeclaration": 5323,
+                    "src": "568:10:24",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_Workerpool_$5323",
+                      "typeString": "contract Workerpool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "567:12:24"
+            },
+            "scope": 5380,
+            "src": "407:451:24",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 5381,
+        "src": "116:744:24"
+      }
+    ],
+    "src": "0:861:24"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.0-beta.2",
+  "updatedAt": "2018-12-03T12:54:15.757Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {
+      "constructor": "Constructor",
+      "createWorkerpool(address,string)": {
+        "notice": "Pool creation"
+      },
+      "isRegistered(address)": {
+        "notice": "Accessors"
+      }
+    }
+  }
+}

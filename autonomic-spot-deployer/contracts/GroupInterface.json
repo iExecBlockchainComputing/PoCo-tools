@@ -1,0 +1,605 @@
+{
+  "contractName": "GroupInterface",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "viewPermissions",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes1"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.5.0;\npragma experimental ABIEncoderV2;\n\nlibrary IexecPermission\n{\n\tbytes1 public constant SUBMIT = 0x01;\n\tbytes1 public constant ACCESS = 0x02;\n\tbytes1 public constant ADMIN  = 0x04;\n}\ninterface GroupInterface\n{\n\tfunction viewPermissions(address) external view returns (bytes1);\n}\n",
+  "sourcePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/permissions/GroupInterface.sol",
+  "ast": {
+    "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/permissions/GroupInterface.sol",
+    "exportedSymbols": {
+      "GroupInterface": [
+        4648
+      ],
+      "IexecPermission": [
+        4640
+      ]
+    },
+    "id": 4649,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4629,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:14"
+      },
+      {
+        "id": 4630,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "24:33:14"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "library",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 4640,
+        "linearizedBaseContracts": [
+          4640
+        ],
+        "name": "IexecPermission",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": true,
+            "id": 4633,
+            "name": "SUBMIT",
+            "nodeType": "VariableDeclaration",
+            "scope": 4640,
+            "src": "86:36:14",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes1",
+              "typeString": "bytes1"
+            },
+            "typeName": {
+              "id": 4631,
+              "name": "bytes1",
+              "nodeType": "ElementaryTypeName",
+              "src": "86:6:14",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes1",
+                "typeString": "bytes1"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "30783031",
+              "id": 4632,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "118:4:14",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_1_by_1",
+                "typeString": "int_const 1"
+              },
+              "value": "0x01"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "id": 4636,
+            "name": "ACCESS",
+            "nodeType": "VariableDeclaration",
+            "scope": 4640,
+            "src": "125:36:14",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes1",
+              "typeString": "bytes1"
+            },
+            "typeName": {
+              "id": 4634,
+              "name": "bytes1",
+              "nodeType": "ElementaryTypeName",
+              "src": "125:6:14",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes1",
+                "typeString": "bytes1"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "30783032",
+              "id": 4635,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "157:4:14",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_2_by_1",
+                "typeString": "int_const 2"
+              },
+              "value": "0x02"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "id": 4639,
+            "name": "ADMIN",
+            "nodeType": "VariableDeclaration",
+            "scope": 4640,
+            "src": "164:36:14",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes1",
+              "typeString": "bytes1"
+            },
+            "typeName": {
+              "id": 4637,
+              "name": "bytes1",
+              "nodeType": "ElementaryTypeName",
+              "src": "164:6:14",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes1",
+                "typeString": "bytes1"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "30783034",
+              "id": 4638,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "196:4:14",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_4_by_1",
+                "typeString": "int_const 4"
+              },
+              "value": "0x04"
+            },
+            "visibility": "public"
+          }
+        ],
+        "scope": 4649,
+        "src": "59:144:14"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 4648,
+        "linearizedBaseContracts": [
+          4648
+        ],
+        "name": "GroupInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 4647,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "viewPermissions",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4643,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4642,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4647,
+                  "src": "257:7:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4641,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "257:7:14",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "256:9:14"
+            },
+            "returnParameters": {
+              "id": 4646,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4645,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4647,
+                  "src": "289:6:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes1",
+                    "typeString": "bytes1"
+                  },
+                  "typeName": {
+                    "id": 4644,
+                    "name": "bytes1",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "289:6:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes1",
+                      "typeString": "bytes1"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "288:8:14"
+            },
+            "scope": 4648,
+            "src": "232:65:14",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 4649,
+        "src": "204:95:14"
+      }
+    ],
+    "src": "0:300:14"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/permissions/GroupInterface.sol",
+    "exportedSymbols": {
+      "GroupInterface": [
+        4648
+      ],
+      "IexecPermission": [
+        4640
+      ]
+    },
+    "id": 4649,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 4629,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:14"
+      },
+      {
+        "id": 4630,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "24:33:14"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "library",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 4640,
+        "linearizedBaseContracts": [
+          4640
+        ],
+        "name": "IexecPermission",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": true,
+            "id": 4633,
+            "name": "SUBMIT",
+            "nodeType": "VariableDeclaration",
+            "scope": 4640,
+            "src": "86:36:14",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes1",
+              "typeString": "bytes1"
+            },
+            "typeName": {
+              "id": 4631,
+              "name": "bytes1",
+              "nodeType": "ElementaryTypeName",
+              "src": "86:6:14",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes1",
+                "typeString": "bytes1"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "30783031",
+              "id": 4632,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "118:4:14",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_1_by_1",
+                "typeString": "int_const 1"
+              },
+              "value": "0x01"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "id": 4636,
+            "name": "ACCESS",
+            "nodeType": "VariableDeclaration",
+            "scope": 4640,
+            "src": "125:36:14",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes1",
+              "typeString": "bytes1"
+            },
+            "typeName": {
+              "id": 4634,
+              "name": "bytes1",
+              "nodeType": "ElementaryTypeName",
+              "src": "125:6:14",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes1",
+                "typeString": "bytes1"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "30783032",
+              "id": 4635,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "157:4:14",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_2_by_1",
+                "typeString": "int_const 2"
+              },
+              "value": "0x02"
+            },
+            "visibility": "public"
+          },
+          {
+            "constant": true,
+            "id": 4639,
+            "name": "ADMIN",
+            "nodeType": "VariableDeclaration",
+            "scope": 4640,
+            "src": "164:36:14",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes1",
+              "typeString": "bytes1"
+            },
+            "typeName": {
+              "id": 4637,
+              "name": "bytes1",
+              "nodeType": "ElementaryTypeName",
+              "src": "164:6:14",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes1",
+                "typeString": "bytes1"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "30783034",
+              "id": 4638,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "196:4:14",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_4_by_1",
+                "typeString": "int_const 4"
+              },
+              "value": "0x04"
+            },
+            "visibility": "public"
+          }
+        ],
+        "scope": 4649,
+        "src": "59:144:14"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 4648,
+        "linearizedBaseContracts": [
+          4648
+        ],
+        "name": "GroupInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 4647,
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "viewPermissions",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 4643,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4642,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4647,
+                  "src": "257:7:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 4641,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "257:7:14",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "256:9:14"
+            },
+            "returnParameters": {
+              "id": 4646,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 4645,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 4647,
+                  "src": "289:6:14",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes1",
+                    "typeString": "bytes1"
+                  },
+                  "typeName": {
+                    "id": 4644,
+                    "name": "bytes1",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "289:6:14",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes1",
+                      "typeString": "bytes1"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "288:8:14"
+            },
+            "scope": 4648,
+            "src": "232:65:14",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 4649,
+        "src": "204:95:14"
+      }
+    ],
+    "src": "0:300:14"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.0-beta.2",
+  "updatedAt": "2018-12-03T12:54:15.755Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
