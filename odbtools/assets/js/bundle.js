@@ -66872,12 +66872,12 @@ var bootstrap         = require('bootstrap')
  *                                Environment                                *
  *****************************************************************************/
 
-var DappABI    = null;
-var DataABI    = null;
-var PoolABI    = null;
-var IexecClerk = null;
-var IexecHub   = null;
-var RLC        = null;
+var AppABI        = null;
+var DatasetABI    = null;
+var WorkerpoolABI = null;
+var IexecClerk    = null;
+var IexecHub      = null;
+var RLC           = null;
 
 const NULLDATASET = {"dataset":"0x0000000000000000000000000000000000000000","datasetprice":0,"volume":0,"tag":0,"apprestrict":"0x0000000000000000000000000000000000000000","workerpoolrestrict":"0x0000000000000000000000000000000000000000","requesterrestrict":"0x0000000000000000000000000000000000000000","salt":"0x0000000000000000000000000000000000000000","sign":{"r":"0x0000000000000000000000000000000000000000000000000000000000000000","s":"0x0000000000000000000000000000000000000000000000000000000000000000","v":0}};
 
@@ -67093,7 +67093,7 @@ function getOrderOwner(order)
 		}
 		else if (isValidOrder("WorkerpoolOrder", order))
 		{
-			(new web3.eth.Contract(WorkerpoolABI, order.workerpool)).methods.m_owner().call().then(resolve);
+			(new web3.eth.Contract(WorkerWorkerpoolABI, order.workerpool)).methods.m_owner().call().then(resolve);
 		}
 		else if (isValidOrder("RequestOrder", order))
 		{
@@ -67173,7 +67173,7 @@ async function main()
 
 		AppABI        = (await $.getJSON("contracts/App.json"       )).abi;
 		DatasetABI    = (await $.getJSON("contracts/Dataset.json"   )).abi;
-		WorkerpoolABI = (await $.getJSON("contracts/Workerpool.json")).abi;
+		WorkerWorkerpoolABI = (await $.getJSON("contracts/Workerpool.json")).abi;
 		RLCABI        = (await $.getJSON("contracts/RLC.json"       )).abi;
 		IexecClerkABI = (await $.getJSON("contracts/IexecClerk.json")).abi;
 		IexecHubABI   = (await $.getJSON("contracts/IexecHub.json"  )).abi;
@@ -67274,7 +67274,7 @@ async function RequestOrderProgress(requesthash, requestorder)
 
 		var descr = [];
 		descr.push("Tasks " + (first+1) + " → " + last);
-		descr.push("Pool: " + deal.pool.pointer);
+		descr.push("Pool: " + deal.workerpool.pointer);
 		descr.push("Category: " + config.category);
 		descr.push("Trust: " + deal.trust);
 		descr.push("Parameters: " + $('<div/>').text(deal.params).html());
@@ -67497,7 +67497,7 @@ $("#workerpoolorder-sign").click(() => {
 	if (!web3.utils.isAddress(workerpoolorder.apprestrict      )) { alert("Invalid apprestrict address"     ); return;}
 	if (!web3.utils.isAddress(workerpoolorder.datasetrestrict  )) { alert("Invalid datasetrestrict address" ); return;}
 	if (!web3.utils.isAddress(workerpoolorder.requesterrestrict)) { alert("Invalid requesterestrict address"); return;}
-	(new web3.eth.Contract(WorkerpoolABI, workerpoolorder.workerpool)).methods.m_owner().call()
+	(new web3.eth.Contract(WorkerWorkerpoolABI, workerpoolorder.workerpool)).methods.m_owner().call()
 	.then(owner => {
 		signStruct("WorkerpoolOrder", workerpoolorder, owner)
 		.then(signed => {
@@ -67507,7 +67507,7 @@ $("#workerpoolorder-sign").click(() => {
 		})
 		.catch(console.log);
 	})
-	.catch(() => alert("Could not read pool smartcontract"));
+	.catch(() => alert("Could not read workerpool smartcontract"));
 });
 
 

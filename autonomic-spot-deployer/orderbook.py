@@ -6,7 +6,7 @@ import urllib.request
 import sys
 
 
-class ActiveOrderbook(object):
+class ActiveListener(object):
 	def __init__(self, gateway, headers={}, callback=None):
 		self.gateway  = gateway
 		self.headers  = headers
@@ -29,9 +29,9 @@ class ActiveOrderbook(object):
 				self.callback(entry)
 
 	def __repr__(self):
-		return "ActiveOrderbook[{}]".format(self.gateway, self.headers)
+		return "ActiveListener[{}]".format(self.gateway, self.headers)
 
-class PassiveOrderbook(object):
+class PassiveListener(object):
 	def __init__(self, gateway, headers={}):
 		self.gateway = gateway
 		self.headers = headers
