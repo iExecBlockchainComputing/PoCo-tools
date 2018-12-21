@@ -12,96 +12,86 @@ from flask                import Flask, jsonify, make_response, request
 from flask_restful        import Api, Resource, reqparse
 from flask_sqlalchemy     import SQLAlchemy
 
-OwnableABI    = json.load(open('/home/amxx/Work/iExec/code/PoCo-dev/build/contracts/OwnableImmutable.json'   ))['abi']
-AppABI        = json.load(open('/home/amxx/Work/iExec/code/PoCo-dev/build/contracts/App.json'                ))['abi']
-IexecClerkABI = json.load(open('/home/amxx/Work/iExec/code/PoCo-dev/build/contracts/IexecClerkABILegacy.json'))['abi']
-IexecHubABI   = json.load(open('/home/amxx/Work/iExec/code/PoCo-dev/build/contracts/IexecHubABILegacy.json'  ))['abi']
 
-def getContract(w3, ABI, address):
-	return w3.eth.contract(address=address, abi=ABI, ContractFactoryClass=Contract)
+# Config
+# - path
+# - gateway
+# - hub
+# - clerk
+# - listen
 
-web3       = Web3(HTTPProvider('http://localhost:8545'))
-IexecClerk = getContract(web3, IexecClerkABI, address='0x8BE59dA9Bf70e75Aa56bF29A3e55d22e882F91bA')
-IexecHub   = getContract(web3, IexecHubABI,   address='0x7C788C2B85E20B4Fa25bd579A6B1D0218D86BDd1')
-
-
-
-
-
-
-authorizationJSON = """
-	{
-		"worker": "0x892407E8E2440DEf7a8854AB0A936D94784d658F",
-		"taskid": "0x284cc3a2121190b1db55b92ed7f18e70dadac6183980cd7c7b9d7f9fc5bb83ae",
-		"enclave": "0x0000000000000000000000000000000000000000",
-		"sign":
-		{
-			"r": "0x5f815a46c3b2466c6d8b6f0531812a0fb7405745cd9e7a159712a910389d6793",
-			"s": "0x099f4b70a2f0700853c6500be19beb686129d607f95e3889cbf8e0fa28e54c25",
-			"v": 28
+class iExecBlockchain(object):
+	def __init__(self, path, gateway='http://localhost:8545'):
+		super(iExecBlockchain, self).__init__()
+		self.w3 = Web3(HTTPProvider(gateway))
+		self.ABIs = {                                                                 \
+			'Ownable':    json.load(open(f'{path}/OwnableImmutable.json'   ))['abi'], \
+			'App':        json.load(open(f'{path}/App.json'                ))['abi'], \
+			'IexecClerk': json.load(open(f'{path}/IexecClerkABILegacy.json'))['abi'], \
+			'IexecHub':   json.load(open(f'{path}/IexecHubABILegacy.json'  ))['abi'], \
 		}
-	}
-"""
+		self.IexecClerk = self.getContract(                                   \
+			address='0x8BE59dA9Bf70e75Aa56bF29A3e55d22e882F91bA',             \
+			abiname='IexecClerk',                                             \
+		)
+		self.IexecHub = self.getContract(                                     \
+			address='0x7C788C2B85E20B4Fa25bd579A6B1D0218D86BDd1',             \
+			abiname='IexecHub',                                               \
+		)
 
+	def getContract(self, address, abiname):
+		return self.w3.eth.contract(                                          \
+			address=address,                                                  \
+			abi=self.ABIs[abiname],                                           \
+			ContractFactoryClass=Contract,                                    \
+		)
 
+	def validateAuthorization(self, auth):
+		# Get task details
+		taskid = auth['taskid']
+		task   = self.IexecHub.functions.viewTaskABILegacy(taskid).call()
 
+		# CHECK 1: Task must be Active
+		# assert(task[0] == 1)
 
+		# Get deal details
+		dealid = task[1]
+		deal = self.IexecClerk.functions.viewDealABILegacy_pt1(dealid).call() \
+		     + self.IexecClerk.functions.viewDealABILegacy_pt2(dealid).call()
 
+		appaddr        = deal[0]
+		datasetaddr    = deal[3]
+		scheduler      = deal[7]
+		beneficiary    = deal[11]
 
-def validateAuthorization(auth):
-	# Get task details
-	taskid = auth['taskid']
-	task   = IexecHub.functions.viewTaskABILegacy(taskid).call()
+		# CHECK 2: Authorisation to contribute must be authentic
+		hash = self.w3.soliditySha3([                                         \
+			'address',                                                        \
+			'bytes32',                                                        \
+			'address'                                                         \
+		], [                                                                  \
+			auth['worker'],                                                   \
+			auth['taskid'],                                                   \
+			auth['enclave']                                                   \
+		])
+		signer = self.w3.eth.account.recoverHash(                             \
+			message_hash=defunct_hash_message(hash),                          \
+			vrs=(auth['sign']['v'], auth['sign']['r'], auth['sign']['s'])     \
+		)
+		assert(signer == scheduler)
 
-	# CHECK 1: Task must be Active
-	# assert(task[0] == 1)
+		# Get enclave secret
+		MREnclave = self.getContract(                                         \
+			address=appaddr,                                                  \
+			abiname='App',                                                    \
+		)
+		# TODO: VALIDATE MREnclave of throw AssertionError
 
-	# Get deal details
-	dealid = task[1]
-	deal = IexecClerk.functions.viewDealABILegacy_pt1(dealid).call()          \
-	     + IexecClerk.functions.viewDealABILegacy_pt2(dealid).call()
+		# sys.stderr.write("[DEBUG] task: {}\n".format(task))
+		# sys.stderr.write("[DEBUG] deal: {}\n".format(deal))
+		# sys.stderr.write("[DEBUG] MREnclave: {}\n".format(MREnclave))
 
-	appaddr        = deal[0]
-	datasetaddr    = deal[3]
-	workerpooladdr = deal[6]
-	scheduler      = deal[7]
-	beneficiary    = deal[11]
-
-	# CHECK 2: Authorisation to contribute must be authentic
-	hash = web3.soliditySha3([                                                \
-		'address',                                                            \
-		'bytes32',                                                            \
-		'address'                                                             \
-	], [                                                                      \
-		auth['worker'],                                                       \
-		auth['taskid'],                                                       \
-		auth['enclave']                                                       \
-	])
-	signer = web3.eth.account.recoverHash(                                    \
-		message_hash=defunct_hash_message(hash),                              \
-		vrs=(auth['sign']['v'], auth['sign']['r'], auth['sign']['s'])         \
-	)
-	assert(signer == scheduler)
-
-	# Get enclave secret
-	MREnclave = getContract(                                                  \
-		w3      = web3,                                                       \
-		ABI     = AppABI,                                                     \
-		address = appaddr                                                     \
-	).functions.m_appMREnclave().call()
-	# TODO: VALIDATE MREnclave of throw AssertionError
-
-	# sys.stderr.write("[DEBUG] task: {}\n".format(task))
-	# sys.stderr.write("[DEBUG] deal: {}\n".format(deal))
-	# sys.stderr.write("[DEBUG] MREnclave: {}\n".format(MREnclave))
-
-	return datasetaddr, workerpooladdr, beneficiary
-
-
-
-
-
-
+		return datasetaddr, auth['enclave'], beneficiary
 
 # +---------------------------------------------------------------------------+
 # |                      For beneficiary encryption key                       |
@@ -116,18 +106,18 @@ class AccountAPI(Resource):
 
 	def get(self, address):
 		entry = Secret.query.filter_by(address=address).first()
-		return jsonify({                                                      \
-			'address': address,                                               \
-			'hash':    entry.hash if entry else None                          \
-		})
+		if entry:
+			return jsonify({ 'address': address, 'hash': entry.hash })
+		else:
+			return jsonify({})
 
 	def post(self, address):
 		args   = self.reqparse.parse_args()
-		signer = web3.eth.account.recoverHash(                                \
+		signer = iexecblockchain.w3.eth.account.recoverHash(                  \
 			message_hash=defunct_hash_message(text=args.secret),              \
 			signature=args.sign                                               \
 		)
-		valid  = self.__check(address, signer)
+		valid  = self.check(address, signer)
 		if valid:
 			secret = Secret(                                                  \
 				address = address,                                            \
@@ -144,9 +134,8 @@ class AccountAPI(Resource):
 			return jsonify({                                                  \
 				'error': 'invalid signature',                                 \
 			})
-	def __check(self, address, signer):
-		# return address.lower() == signer.lower()
-		return True
+	def check(self, address, signer):
+		return address.lower() == signer.lower()
 
 # +---------------------------------------------------------------------------+
 # |                      For app/dataset encryption key                       |
@@ -156,11 +145,11 @@ class ContractAPI(AccountAPI):
 	def __init__(self):
 		super(ContractAPI, self).__init__()
 
-	def __check(self, address, signer):
-		# owner  = getContract(                                               \
-		# 	ABI=OwnableABI,                                                   \
-		# 	address=address                                                   \
-		# ).functions.m_owner().call()
+	def check(self, address, signer):
+		owner  = iexecblockchain.getContract(                                 \
+			address=address,                                                  \
+			abiname='Ownable',                                                \
+		).functions.m_owner().call()
 		# return owner.lower() == signer.lower()
 		return True
 
@@ -174,11 +163,11 @@ class GenerateAPI(Resource):
 		# self.reqparse = reqparse.RequestParser()
 		# self.reqparse.add_argument('secret', type=str, location='json', required=True)
 
-	def post(self, address):
-		account = web3.eth.account.create()
+	def get(self, address):
+		account = iexecblockchain.w3.eth.account.create()
 		secret = Secret(                                                      \
 			address = account.address,                                        \
-			secret  = account.privateKey,                                     \
+			secret  = iexecblockchain.w3.toHex(account.privateKey),           \
 			hash    = None                                                    \
 		)
 		db.session.merge(secret)
@@ -195,7 +184,7 @@ class SecureAPI(Resource):
 
 	def get(self):
 		try:
-			ids = validateAuthorization(request.json['auth'])
+			ids = iexecblockchain.validateAuthorization(request.json['auth'])
 			Kd = Secret.query.filter_by(address=ids[0]).first()
 			Ke = Secret.query.filter_by(address=ids[1]).first()
 			Kb = Secret.query.filter_by(address=ids[2]).first()
@@ -211,6 +200,7 @@ class SecureAPI(Resource):
 
 
 
+iexecblockchain = iExecBlockchain(path='/home/amxx/Work/iExec/code/PoCo-dev/build/contracts')
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/sms.db'
@@ -248,3 +238,21 @@ if __name__ == '__main__':
 	db.create_all()
 	app.run(debug=True)
 	db.drop_all()
+
+
+
+
+
+# authorizationJSON = """
+# 	{
+# 		"worker": "0x892407E8E2440DEf7a8854AB0A936D94784d658F",
+# 		"taskid": "0x284cc3a2121190b1db55b92ed7f18e70dadac6183980cd7c7b9d7f9fc5bb83ae",
+# 		"enclave": "0x0000000000000000000000000000000000000000",
+# 		"sign":
+# 		{
+# 			"r": "0x5f815a46c3b2466c6d8b6f0531812a0fb7405745cd9e7a159712a910389d6793",
+# 			"s": "0x099f4b70a2f0700853c6500be19beb686129d607f95e3889cbf8e0fa28e54c25",
+# 			"v": 28
+# 		}
+# 	}
+# """
