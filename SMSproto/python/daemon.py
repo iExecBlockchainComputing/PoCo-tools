@@ -18,12 +18,13 @@ from flask_sqlalchemy     import SQLAlchemy
 # +---------------------------------------------------------------------------+
 app = Flask(__name__)
 api = Api(app)
-db = SQLAlchemy(app)
+db  = SQLAlchemy(app)
 
 # +---------------------------------------------------------------------------+
 # |                                 DB MODELS                                 |
 # +---------------------------------------------------------------------------+
-# generic secret format for accounts and contracts
+
+### DB STORE: generic secret format for accounts and contracts
 class Secret(db.Model):
 	address = db.Column(db.String(42), primary_key=True)
 	secret  = db.Column(db.TEXT,       unique=False, nullable=True)
@@ -32,7 +33,7 @@ class Secret(db.Model):
 	def jsonify(self):
 		return { 'address': self.address, 'secret': self.secret }
 
-# ethereum keypair for enclave attestation
+### DB STORE: ethereum keypair for enclave attestation
 class KeyPair(db.Model):
 	address = db.Column(db.String(42), primary_key=True)
 	private = db.Column(db.String(66), unique=True,  nullable=False)
@@ -45,19 +46,20 @@ class KeyPair(db.Model):
 # |                               APP ENDPOINTS                               |
 # +---------------------------------------------------------------------------+
 @app.route('/', methods=['GET'])
-def index(): return "This is a test SMS service"
+def index():
+	return "This is a test SMS service"
 
 @app.errorhandler(404)
-def not_found(error): return make_response(jsonify({'error': 'Not found'}), 404)
+def not_found(error):
+	return make_response(jsonify({'error': 'Not found'}), 404)
 
-# For secret storing
+### APP ENDPOINT: secret storing & hash retreival
 class SecretAPI(Resource):
 	def __init__(self):
 		super(SecretAPI, self).__init__()
 		self.reqparse = reqparse.RequestParser()
 		self.reqparse.add_argument('secret', type=str, location='json', required=True)
 		self.reqparse.add_argument('sign',   type=str, location='json', required=True)
-
 
 	def get(self, address):
 		entry = Secret.query.filter_by(address=address).first()
@@ -103,7 +105,7 @@ class SecretAPI(Resource):
 		except:
 			return False
 
-# For enclave attestation provisionning
+### APP ENDPOINT: enclave attestation provisionning
 class GenerateAPI(Resource):
 	def __init__(self):
 		super(GenerateAPI, self).__init__()
@@ -119,7 +121,7 @@ class GenerateAPI(Resource):
 		db.session.commit()
 		return jsonify({ 'address': account.address })
 
-# For enclave attestation check
+### APP ENDPOINT: enclave attestation verification
 class VerifyAPI(Resource):
 	def __init__(self):
 		super(VerifyAPI, self).__init__()
@@ -131,7 +133,7 @@ class VerifyAPI(Resource):
 		else:
 			return jsonify({})
 
-# For secret retreival by enclave
+### APP ENDPOINT: secret retreival by enclave
 class SecureAPI(Resource):
 	def __init__(self):
 		super(SecureAPI, self).__init__()
