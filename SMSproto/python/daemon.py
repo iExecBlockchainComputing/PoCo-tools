@@ -103,7 +103,7 @@ class SecretAPI(Resource):
 		except:
 			return False
 
-# For enclave attestation
+# For enclave attestation provisionning
 class GenerateAPI(Resource):
 	def __init__(self):
 		super(GenerateAPI, self).__init__()
@@ -119,6 +119,7 @@ class GenerateAPI(Resource):
 		db.session.commit()
 		return jsonify({ 'address': account.address })
 
+# For enclave attestation check
 class VerifyAPI(Resource):
 	def __init__(self):
 		super(VerifyAPI, self).__init__()
@@ -154,7 +155,7 @@ class BlockchainInterface(object):
 	def __init__(self, config):
 		super(BlockchainInterface, self).__init__()
 		self.w3 = Web3(HTTPProvider(args.gateway))
-		self.ABIs = {                                                              \
+		self.ABIs = {                                                                          \
 			'Ownable':    json.load(open(f'{config.contracts}/OwnableImmutable.json'))['abi'], \
 			'App':        json.load(open(f'{config.contracts}/App.json'             ))['abi'], \
 			'IexecClerk': json.load(open(f'{config.contracts}/IexecClerk.json'      ))['abi'], \
