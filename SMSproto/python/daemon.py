@@ -28,8 +28,8 @@ db  = SQLAlchemy(app)
 
 ### DB STORE: generic secret format for accounts and contracts
 class Secret(db.Model):
-	address = db.Column(db.String(42),       primary_key=True)
-	secret  = db.Column(db.VARCHAR(MAXSIZE), unique=False, nullable=True)
+	address = db.Column(db.String(42),    primary_key=True)
+	secret  = db.Column(db.UnicodeText(), unique=False, nullable=True) # MAXSIZE
 
 	def jsonify(self):
 		return { 'address': self.address, 'secret': self.secret }
