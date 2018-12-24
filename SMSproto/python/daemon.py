@@ -216,10 +216,7 @@ class BlockchainInterface(object):
 		assert(signer == scheduler)
 
 		# Get enclave secret
-		MREnclave = self.getContract(                                         \
-			address=appaddr,                                                  \
-			abiname='App',                                                    \
-		)
+		MREnclave = self.getContract(address=appaddr, abiname='App')
 		# TODO: VALIDATE MREnclave of throw AssertionError
 
 		Kd = Secret.query.filter_by (address=datasetaddr                 ).first()
