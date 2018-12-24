@@ -194,10 +194,10 @@ class BlockchainInterface(object):
 		deal = self.IexecClerk.functions.viewDealABILegacy_pt1(dealid).call() \
 		     + self.IexecClerk.functions.viewDealABILegacy_pt2(dealid).call()
 
-		appaddr        = deal[0]
-		datasetaddr    = deal[3]
-		scheduler      = deal[7]
-		beneficiary    = deal[11]
+		app         = deal[0]
+		dataset     = deal[3]
+		scheduler   = deal[7]
+		beneficiary = deal[11]
 
 		# CHECK 2: Authorisation to contribute must be authentic
 		hash = self.w3.soliditySha3([                                         \
@@ -216,12 +216,12 @@ class BlockchainInterface(object):
 		assert(signer == scheduler)
 
 		# Get enclave secret
-		MREnclave = self.getContract(address=appaddr, abiname='App')
+		MREnclave = self.getContract(address=app, abiname='App')
 		# TODO: VALIDATE MREnclave of throw AssertionError
 
-		Kd = Secret.query.filter_by (address=datasetaddr                 ).first()
-		Ke = KeyPair.query.filter_by(address=auth['enclave'], app=appaddr).first()
-		Kb = Secret.query.filter_by (address=beneficiary                 ).first()
+		Kd = Secret.query.filter_by (address=dataset                 ).first()
+		Ke = KeyPair.query.filter_by(address=auth['enclave'], app=app).first()
+		Kb = Secret.query.filter_by (address=beneficiary             ).first()
 		return Kd, Ke, Kb
 
 
