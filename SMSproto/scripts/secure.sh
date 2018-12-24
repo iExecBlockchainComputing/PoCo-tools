@@ -5,12 +5,12 @@ curl -H "Content-Type: application/json" -X GET -d '{
 	{
 		"worker": "0x748e091bf16048cb5103E0E10F9D5a8b7fBDd860",
 		"taskid": "0x098f400f58acd32ac4016fe3f95aaf9b3718d3906dd975fe8a65c7648e72954d",
-		"enclave": "0x715a60A32d99677020AB3c14987F947Ae5962A4C",
+		"enclave": "0xC773B9cd33B20aCd3752BbCFC5b6175f62247593",
 		"sign":
 		{
-			"r": "0x9894dad1a898a6ab699feddb587781e99deee374d4e0ee9f22d43ecd2ce3db10",
-			"s": "0x0a01c4d18ae305e15d48a7fb15e03409de699a46ed3afb15ce4192ac778085bb",
-			"v": 27
+			"r": "0x62cb05d1964f835617ad9bd35af087f00ec8fed852577ddf7610b9e7cbf5b0c1",
+			"s": "0x5320da9d7823b8c114d5dae3a55c28f2a9abfb3febe7bdfb76d7fafb68ff1cbb",
+			"v": 28
 			}
 	}
 }' http://localhost:5000/secure

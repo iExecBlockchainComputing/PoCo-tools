@@ -13,6 +13,8 @@ from flask                import Flask, jsonify, make_response, request
 from flask_restful        import Api, Resource, reqparse
 from flask_sqlalchemy     import SQLAlchemy
 
+MAXSIZE= 4096
+
 # +---------------------------------------------------------------------------+
 # |                           ENVIRONMENT VARIABLES                           |
 # +---------------------------------------------------------------------------+
@@ -74,26 +76,27 @@ class SecretAPI(Resource):
 			return jsonify({})
 
 	def post(self, address):
-		args   = self.reqparse.parse_args()
-		signer = blockchaininterface.w3.eth.account.recoverHash(              \
-			message_hash=defunct_hash_message(text=args.secret),              \
-			signature=args.sign                                               \
-		)
-		if self.__check(address, signer):
-			entry = Secret(                                                   \
+		args = self.reqparse.parse_args()
+		if len(args.secret) > MAXSIZE:
+			return jsonify({ 'error': 'secret is to large.' }) # TODO: add error code?
+		elif self.__check(address, self.__getsigner(args.secret, args.sign)):
+			db.session.merge(Secret(                                          \
 				address = address,                                            \
 				secret  = args.secret,                                        \
-			)
-			db.session.merge(entry)
+			))
 			db.session.commit()
 			return jsonify({                                                  \
-				'address': entry.address,                                     \
-				'hash':    hashlib.sha256(entry.secret.encode()).hexdigest(), \
+				'address': address,                                           \
+				'hash':    hashlib.sha256(args.secret.encode()).hexdigest(),  \
 			})
 		else:
-			return jsonify({                                                  \
-				'error': 'invalid signature',                                 \
-			})
+			return jsonify({ 'error': 'invalid signature' }) # TODO: add error code?
+
+	def __getsigner(self, text, signature):
+		return blockchaininterface.w3.eth.account.recoverHash(                \
+			message_hash = defunct_hash_message(text=text),                   \
+			signature    = signature                                          \
+		)
 
 	def __check(self, address, signer):
 		try:
@@ -116,12 +119,11 @@ class GenerateAPI(Resource):
 
 	def get(self, address):
 		account = blockchaininterface.w3.eth.account.create()
-		entry  = KeyPair(                                                     \
+		db.session.merge(KeyPair(                                             \
 			address = account.address,                                        \
 			private = blockchaininterface.w3.toHex(account.privateKey),       \
 			app     = address                                                 \
-		)
-		db.session.merge(entry)
+		))
 		db.session.commit()
 		return jsonify({ 'address': account.address })
 
