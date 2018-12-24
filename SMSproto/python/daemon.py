@@ -28,8 +28,8 @@ db  = SQLAlchemy(app)
 
 ### DB STORE: generic secret format for accounts and contracts
 class Secret(db.Model):
-	address = db.Column(db.String(42), primary_key=True)
-	secret  = db.Column(db.TEXT,       unique=False, nullable=True)
+	address = db.Column(db.String(42),       primary_key=True)
+	secret  = db.Column(db.VARCHAR(MAXSIZE), unique=False, nullable=True)
 
 	def jsonify(self):
 		return { 'address': self.address, 'secret': self.secret }
@@ -78,10 +78,7 @@ class SecretAPI(Resource):
 		if len(args.secret) > MAXSIZE:
 			return jsonify({ 'error': 'secret is to large.' }) # TODO: add error code?
 		elif self.__check(address, self.__getsigner(args.secret, args.sign)):
-			db.session.merge(Secret(                                          \
-				address = address,                                            \
-				secret  = args.secret,                                        \
-			))
+			db.session.merge(Secret(address=address, secret=args.secret))
 			db.session.commit()
 			return jsonify({                                                  \
 				'address': address,                                           \
@@ -92,8 +89,8 @@ class SecretAPI(Resource):
 
 	def __getsigner(self, text, signature):
 		return blockchaininterface.w3.eth.account.recoverHash(                \
-			message_hash = defunct_hash_message(text=text),                   \
-			signature    = signature                                          \
+			message_hash=defunct_hash_message(text=text),                     \
+			signature=signature                                               \
 		)
 
 	def __check(self, address, signer):
@@ -118,9 +115,9 @@ class GenerateAPI(Resource):
 	def get(self, address):
 		account = blockchaininterface.w3.eth.account.create()
 		db.session.merge(KeyPair(                                             \
-			address = account.address,                                        \
-			private = blockchaininterface.w3.toHex(account.privateKey),       \
-			app     = address                                                 \
+			address=account.address,                                          \
+			private=blockchaininterface.w3.toHex(account.privateKey),         \
+			app=address                                                       \
 		))
 		db.session.commit()
 		return jsonify({ 'address': account.address })
@@ -243,10 +240,10 @@ if __name__ == '__main__':
 	blockchaininterface = BlockchainInterface(config=args)
 
 	# SETUP ENDPOINTS
-	api.add_resource(SecretAPI,   '/secret/<string:address>',               endpoint = 'secret'  ) # address: account or ressource SC
-	api.add_resource(GenerateAPI, '/attestation/generate/<string:address>', endpoint = 'generate') # address: appid
-	api.add_resource(VerifyAPI,   '/attestation/verify/<string:address>',   endpoint = 'verify'  ) # address: enclaveChallenge
-	api.add_resource(SecureAPI,   '/secure',                                endpoint = 'secure'  )
+	api.add_resource(SecretAPI,   '/secret/<string:address>',               endpoint='secret'  ) # address: account or ressource SC
+	api.add_resource(GenerateAPI, '/attestation/generate/<string:address>', endpoint='generate') # address: appid
+	api.add_resource(VerifyAPI,   '/attestation/verify/<string:address>',   endpoint='verify'  ) # address: enclaveChallenge
+	api.add_resource(SecureAPI,   '/secure',                                endpoint='secure'  )
 
 	# RUN DAEMON
 	db.create_all()
