@@ -3,17 +3,15 @@
 import argparse
 import json
 import hashlib
-import io
-import sys
 
 from web3                 import Web3, HTTPProvider
-from web3.contract        import Contract, ConciseContract
+from web3.contract        import Contract
 from eth_account.messages import defunct_hash_message
 from flask                import Flask, jsonify, make_response, request
 from flask_restful        import Api, Resource, reqparse
 from flask_sqlalchemy     import SQLAlchemy
 
-MAXSIZE= 4096
+MAXSIZE = 4096
 
 # +---------------------------------------------------------------------------+
 # |                           ENVIRONMENT VARIABLES                           |
