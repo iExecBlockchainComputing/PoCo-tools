@@ -16,7 +16,9 @@ from flask_sqlalchemy     import SQLAlchemy
 # +---------------------------------------------------------------------------+
 # |                           ENVIRONMENT VARIABLES                           |
 # +---------------------------------------------------------------------------+
-app = Flask(__name__)
+app = Flask("SMS prototype - v1")
+app.config['SQLALCHEMY_DATABASE_URI'       ] = "sqlite:///:memory:"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api = Api(app)
 db  = SQLAlchemy(app)
 
@@ -28,7 +30,6 @@ db  = SQLAlchemy(app)
 class Secret(db.Model):
 	address = db.Column(db.String(42), primary_key=True)
 	secret  = db.Column(db.TEXT,       unique=False, nullable=True)
-	hash    = db.Column(db.String(64), unique=False, nullable=True)
 
 	def jsonify(self):
 		return { 'address': self.address, 'secret': self.secret }
@@ -54,6 +55,7 @@ def not_found(error):
 	return make_response(jsonify({'error': 'Not found'}), 404)
 
 ### APP ENDPOINT: secret storing & hash retreival
+# Secrets are strings: it is recommand to base64encode the actual object before storing it.
 class SecretAPI(Resource):
 	def __init__(self):
 		super(SecretAPI, self).__init__()
@@ -64,7 +66,10 @@ class SecretAPI(Resource):
 	def get(self, address):
 		entry = Secret.query.filter_by(address=address).first()
 		if entry:
-			return jsonify({ 'address': address, 'hash': entry.hash })
+			return jsonify({                                                  \
+				'address': address,                                           \
+				'hash':    hashlib.sha256(entry.secret.encode()).hexdigest()  \
+			})
 		else:
 			return jsonify({})
 
@@ -75,16 +80,15 @@ class SecretAPI(Resource):
 			signature=args.sign                                               \
 		)
 		if self.__check(address, signer):
-			secret = Secret(                                                  \
+			entry = Secret(                                                   \
 				address = address,                                            \
 				secret  = args.secret,                                        \
-				hash    = hashlib.sha256(args.secret.encode()).hexdigest()    \
 			)
-			db.session.merge(secret)
+			db.session.merge(entry)
 			db.session.commit()
 			return jsonify({                                                  \
-				'address': secret.address,                                    \
-				'hash':    secret.hash,                                       \
+				'address': entry.address,                                     \
+				'hash':    hashlib.sha256(entry.secret.encode()).hexdigest(), \
 			})
 		else:
 			return jsonify({                                                  \
@@ -112,12 +116,12 @@ class GenerateAPI(Resource):
 
 	def get(self, address):
 		account = blockchaininterface.w3.eth.account.create()
-		keypair  = KeyPair(                                                   \
+		entry  = KeyPair(                                                     \
 			address = account.address,                                        \
 			private = blockchaininterface.w3.toHex(account.privateKey),       \
 			app     = address                                                 \
 		)
-		db.session.merge(keypair)
+		db.session.merge(entry)
 		db.session.commit()
 		return jsonify({ 'address': account.address })
 
@@ -229,19 +233,19 @@ class BlockchainInterface(object):
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--host',      type=str, default='0.0.0.0')
-	parser.add_argument('--port',      type=int, default=5000)
+	parser.add_argument('--host',      type=str, default='0.0.0.0'              )
+	parser.add_argument('--port',      type=int, default=5000                   )
 	parser.add_argument('--gateway',   type=str, default='http://localhost:8545')
-	parser.add_argument('--database',  type=str, default='sqlite:////tmp/sms.db')
-	parser.add_argument('--contracts', type=str, default='contracts')
-	parser.add_argument('--clerk',     type=str, required=True)
-	parser.add_argument('--hub',       type=str, required=True)
+	parser.add_argument('--database',  type=str                                 )# default='sqlite:////tmp/sms.db')
+	parser.add_argument('--contracts', type=str, default='contracts'            )
+	parser.add_argument('--clerk',     type=str, required=True                  )
+	parser.add_argument('--hub',       type=str, required=True                  )
 	args = parser.parse_args()
 
+	# CREATE BLOCKCHAIN INTERFACE
 	blockchaininterface = BlockchainInterface(config=args)
 
-	app.config['SQLALCHEMY_DATABASE_URI'] = args.database
-
+	# SETUP ENDPOINTS
 	api.add_resource(SecretAPI,   '/secret/<string:address>',               endpoint = 'secret'  ) # address: account or ressource SC
 	api.add_resource(GenerateAPI, '/attestation/generate/<string:address>', endpoint = 'generate') # address: appid
 	api.add_resource(VerifyAPI,   '/attestation/verify/<string:address>',   endpoint = 'verify'  ) # address: enclaveChallenge
@@ -250,4 +254,4 @@ if __name__ == '__main__':
 	# RUN DAEMON
 	db.create_all()
 	app.run(host=args.host, port=args.port, debug=False)
-	# db.drop_all()
+	db.drop_all()

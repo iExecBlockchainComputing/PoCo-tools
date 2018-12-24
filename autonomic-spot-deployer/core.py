@@ -100,38 +100,46 @@ if __name__ == '__main__':
 	# account = '0x2D29bfBEc903479fe4Ba991918bAB99B494f2bEf'
 
 	IexecClerkInstance = getContract(path='contracts/IexecClerk.json', address='0x8BE59dA9Bf70e75Aa56bF29A3e55d22e882F91bA')
-	print("clerk: {}".format(IexecClerkInstance.address))
-	print("token: {}".format(IexecClerkInstance.functions.token().call()))
-	print("hub  : {}".format(IexecClerkInstance.functions.iexechub().call()))
+	print('┌───────────────────────────────────────────────────┐')
+	print("│ clerk: {} │".format(IexecClerkInstance.address))
+	print("│ token: {} │".format(IexecClerkInstance.functions.token().call()))
+	print("│ hub  : {} │".format(IexecClerkInstance.functions.iexechub().call()))
+	print('└───────────────────────────────────────────────────┘')
 
-	# orderfactory = eip712.Factory(web3=web3, domain=eip712.Domain(
-	# 	name              = "iExecODB",
-	# 	version           = "3.0-alpha",
-	# 	chainId           = 1544020727674,
-	# 	verifyingContract = IexecClerkInstance.address
-	# ))
-	# print(web3.toHex(orderfactory.EIP712DOMAIN_SEPARATOR))
-	# print(web3.toHex(IexecClerkInstance.functions.EIP712DOMAIN_SEPARATOR().call()))
+	orderfactory = eip712.Factory(web3=web3, domain=eip712.Domain(
+		name              = "iExecODB",
+		version           = "3.0-alpha",
+		chainId           = 1544020727674,
+		verifyingContract = IexecClerkInstance.address
+	))
+	print("local domain separator: {}".format(web3.toHex(orderfactory.EIP712DOMAIN_SEPARATOR)))
+	print("exact domain separator: {}".format(web3.toHex(IexecClerkInstance.functions.EIP712DOMAIN_SEPARATOR().call())))
 
 
-	topic1 = web3.sha3(text="OrdersMatched(bytes32,bytes32,bytes32,bytes32,bytes32,uint256)").hex()
-	topic2 = web3.sha3(text="SchedulerNotice(address,bytes32)").hex()
-	print("address:", IexecClerkInstance.address)
-	print("topic 1:", topic1)
-	print("topic 2:", topic2)
+
+
+	evhashs = [
+		web3.sha3(text="OrdersMatched(bytes32,bytes32,bytes32,bytes32,bytes32,uint256)").hex(),
+		web3.sha3(text="SchedulerNotice(address,bytes32)").hex(),
+	]
 
 	evfilter = web3.eth.filter({
 		# "address": IexecClerkInstance.address,
-		# "topics": [ topic1 ]
+		"topics": [ evhashs ]
 	})
 
 	# evfilter = IexecClerkInstance.events.OrdersMatched.createFilter(fromBlock='latest')
 
 
 	def tick():
-		print("-")
-		for ev in evfilter.get_all_entries():
-			print("[EVENT@{blockNumber}] from: {address} topic: {topics[0]}".format(**ev))
+		events = evfilter.get_all_entries()
+		if events:
+			sys.stdout.write("\n")
+			for event in events:
+				sys.stdout.write("[EVENT@{blockNumber}]\n- from:  {address}\n- topic: {topics}\n- data:  {data}\n".format(**event))
+		else:
+			sys.stdout.write(".")
+			sys.stdout.flush()
 
 
 
