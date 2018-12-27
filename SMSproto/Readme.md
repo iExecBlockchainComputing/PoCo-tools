@@ -3,8 +3,8 @@ Python SMS prototype API
 
 The prototype SMS server is a Python3 application that uses Flask, SQLAlchemy and Web3 to provide secret and keypair management for the iExec platform. Its services are accessible through an HTTP API. The API endpoint are the as follows:
 
-POST /secret/<string:address>
------------------------------
+POST /secret/\<string:address\>
+-------------------------------
 
 This endpoint is used to provision a secret for the ressource pointed to by the address. The ressource is an ethereum address that can be a simple account, in which case the ressource is relative to the owner (for example a users' encryption key), or an `Ownable` smart contract, in which case the ressource is relative to the ressource described by the smart contract (for example a dataset encryption key).
 
@@ -38,8 +38,8 @@ $ curl -H "Content-Type: application/json" -X POST -d '{
 {"address":"0x385fFe1c9Ec3d6a0798eD7a13445Cb2B2de9fd09","hash":"7277c4ad7b8a076ba750939f9c8601720a92d6fed7cf194601fa182c647c55da"}
 ```
 
-GET /secret/<string:address>
-----------------------------
+GET /secret/\<string:address\>
+------------------------------
 
 This endpoint is used to check if a secret is set for the corresponding address.
 
@@ -59,8 +59,8 @@ $ curl -H "Content-Type: application/json" -X GET -d '' http://localhost:5000/se
 {}
 ```
 
-GET /attestation/generate/<string:address>
-------------------------------------------
+GET /attestation/generate/\<string:address\>
+--------------------------------------------
 
 This endpoint is used to obtain the public address of an ethereum keypair used for the enclave attestation of runs involving the application designated by the address. Only certified runs of this application will be able to obtain the private part of the keypair
 
@@ -75,8 +75,8 @@ $ curl -H "Content-Type: application/json" -X GET -d '' http://localhost:5000/at
 {"address":"0x3E04a05575731Fbf21d82C72D72a5DD8b20FaF38"}
 ```
 
-GET /attestation/verify/<string:address>
-----------------------------------------
+GET /attestation/verify/\<string:address\>
+------------------------------------------
 
 This endpoint is used to check which application is authorized to obtain the private part of the keypair described by the addesss.
 
@@ -113,7 +113,7 @@ If the verification steps are successfull, a json object containing secrets for 
 
 If the verification failled, the server returns `{"error":"access denied"}`
 
-**Example:**
+**Example 1:**
 
 ```
 $ curl -H "Content-Type: application/json" -X GET -d '{
@@ -132,6 +132,8 @@ $ curl -H "Content-Type: application/json" -X GET -d '{
 }' http://localhost:5000/secure
 {"error":"access denied"}
 ```
+
+**Example 2:**
 
 ```
 $ curl -H "Content-Type: application/json" -X GET -d '{
