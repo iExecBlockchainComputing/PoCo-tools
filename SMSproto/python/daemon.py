@@ -179,51 +179,55 @@ class BlockchainInterface(object):
 		)
 
 	def validateAndGetKeys(self, auth):
-		# Get task details
-		taskid = auth['taskid']
-		# task1 = self.IexecHub.functions.viewTask(taskid).call()
-		# print(task1)
-		task = self.IexecHub.functions.viewTaskABILegacy(taskid).call()
+		try:
+			# Get task details
+			taskid = auth['taskid']
+			# task1 = self.IexecHub.functions.viewTask(taskid).call()
+			# print(task1)
+			task = self.IexecHub.functions.viewTaskABILegacy(taskid).call()
 
-		# CHECK 1: Task must be Active
-		assert(task[0] == 1)
+			# CHECK 1: Task must be Active
+			assert(task[0] == 1)
 
-		# Get deal details
-		dealid = task[1]
-		# deal1 = self.IexecClerk.functions.viewDeal(dealid).call()
-		# print(deal1)
-		deal = self.IexecClerk.functions.viewDealABILegacy_pt1(dealid).call() \
-		     + self.IexecClerk.functions.viewDealABILegacy_pt2(dealid).call()
+			# Get deal details
+			dealid = task[1]
+			# deal1 = self.IexecClerk.functions.viewDeal(dealid).call()
+			# print(deal1)
+			deal = self.IexecClerk.functions.viewDealABILegacy_pt1(dealid).call() \
+			     + self.IexecClerk.functions.viewDealABILegacy_pt2(dealid).call()
 
-		app         = deal[0]
-		dataset     = deal[3]
-		scheduler   = deal[7]
-		beneficiary = deal[11]
+			app         = deal[0]
+			dataset     = deal[3]
+			scheduler   = deal[7]
+			beneficiary = deal[11]
 
-		# CHECK 2: Authorisation to contribute must be authentic
-		hash = self.w3.soliditySha3([                                         \
-			'address',                                                        \
-			'bytes32',                                                        \
-			'address'                                                         \
-		], [                                                                  \
-			auth['worker'],                                                   \
-			auth['taskid'],                                                   \
-			auth['enclave']                                                   \
-		])
-		signer = self.w3.eth.account.recoverHash(                             \
-			message_hash=defunct_hash_message(hash),                          \
-			vrs=(auth['sign']['v'], auth['sign']['r'], auth['sign']['s'])     \
-		)
-		assert(signer == scheduler)
+			# CHECK 2: Authorisation to contribute must be authentic
+			hash = self.w3.soliditySha3([                                         \
+				'address',                                                        \
+				'bytes32',                                                        \
+				'address'                                                         \
+			], [                                                                  \
+				auth['worker'],                                                   \
+				auth['taskid'],                                                   \
+				auth['enclave']                                                   \
+			])
+			signer = self.w3.eth.account.recoverHash(                             \
+				message_hash=defunct_hash_message(hash),                          \
+				vrs=(auth['sign']['v'], auth['sign']['r'], auth['sign']['s'])     \
+			)
+			assert(signer == scheduler)
 
-		# Get enclave secret
-		MREnclave = self.getContract(address=app, abiname='App').functions.m_appMREnclave().call()
-		# TODO: VALIDATE MREnclave of throw AssertionError
+			# Get enclave secret
+			MREnclave = self.getContract(address=app, abiname='App').functions.m_appMREnclave().call()
+			print(f'MREnclave: {MREnclave}')
+			# TODO: VALIDATE MREnclave of throw AssertionError
 
-		Kd = Secret.query.filter_by (address=dataset                 ).first()
-		Ke = KeyPair.query.filter_by(address=auth['enclave'], app=app).first()
-		Kb = Secret.query.filter_by (address=beneficiary             ).first()
-		return Kd, Ke, Kb
+			Kd = Secret.query.filter_by (address=dataset                 ).first()
+			Ke = KeyPair.query.filter_by(address=auth['enclave'], app=app).first()
+			Kb = Secret.query.filter_by (address=beneficiary             ).first()
+			return Kd, Ke, Kb
+		except:
+			return None, None, None
 
 
 

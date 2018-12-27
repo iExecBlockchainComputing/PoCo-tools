@@ -10,7 +10,7 @@ curl -H "Content-Type: application/json" -X GET -d '{
 		{
 			"r": "0x80530f73ad3c6de390ea3fcc46ace2fa038cdff69a6de0b25772d9fabe4c1bd1",
 			"s": "0x00c44ee34460f103f71b6a855f15626ccc2214e147ccede5c745b38fe841cee5",
-			"v": 28
+			"v": 27
 			}
 	}
 }' http://localhost:5000/secure
