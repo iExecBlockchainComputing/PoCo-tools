@@ -17,7 +17,7 @@ MAXSIZE = 4096
 # |                           ENVIRONMENT VARIABLES                           |
 # +---------------------------------------------------------------------------+
 app = Flask("SMS prototype - v1")
-app.config['SQLALCHEMY_DATABASE_URI'       ] = "sqlite:///:memory:" # overwritten by args.database
+app.config['SQLALCHEMY_DATABASE_URI'       ] = "sqlite:///:memory:" # overwritten by params.database
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api = Api(app)
 db  = SQLAlchemy(app)
@@ -161,15 +161,15 @@ class SecureAPI(Resource):
 class BlockchainInterface(object):
 	def __init__(self, config):
 		super(BlockchainInterface, self).__init__()
-		self.w3 = Web3(HTTPProvider(args.gateway))
+		self.w3 = Web3(HTTPProvider(config.gateway))
 		self.ABIs = {                                                                          \
 			'Ownable':    json.load(open(f'{config.contracts}/OwnableImmutable.json'))['abi'], \
 			'App':        json.load(open(f'{config.contracts}/App.json'             ))['abi'], \
 			'IexecClerk': json.load(open(f'{config.contracts}/IexecClerk.json'      ))['abi'], \
 			'IexecHub':   json.load(open(f'{config.contracts}/IexecHub.json'        ))['abi'], \
 		}
-		self.IexecClerk = self.getContract(address=args.clerk, abiname='IexecClerk')
-		self.IexecHub   = self.getContract(address=args.hub,   abiname='IexecHub'  )
+		self.IexecClerk = self.getContract(address=config.clerk, abiname='IexecClerk')
+		self.IexecHub   = self.getContract(address=config.hub,   abiname='IexecHub'  )
 
 	def getContract(self, address, abiname):
 		return self.w3.eth.contract(                                          \
@@ -235,20 +235,20 @@ class BlockchainInterface(object):
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--host',      type=str, default='0.0.0.0',               help='REST api host - default: 0.0.0.0'              )
-	parser.add_argument('--port',      type=int, default=5000,                    help='REST api port - default: 5000'                 )
+	parser.add_argument('--host',      type=str, default='0.0.0.0',               help='REST api host - default: 0.0.0.0'             )
+	parser.add_argument('--port',      type=int, default=5000,                    help='REST api port - default: 5000'                )
 	parser.add_argument('--gateway',   type=str, default='http://localhost:8545', help='web3 gateway - default: http://localhost:8545')
 	parser.add_argument('--database',  type=str, default='sqlite:///:memory:',    help='SMS database - default: sqlite:///:memory:'   )# for persistency use 'sqlite:////tmp/sms.db'
-	parser.add_argument('--contracts', type=str, default='contracts',             help='iExec SC folder - default: ./contracts')
-	parser.add_argument('--clerk',     type=str, required=True,                   help='iExecClerk address')
-	parser.add_argument('--hub',       type=str, required=True,                   help='iExecHub address')
-	args = parser.parse_args()
+	parser.add_argument('--contracts', type=str, default='contracts',             help='iExec SC folder - default: ./contracts'       )
+	parser.add_argument('--clerk',     type=str, required=True,                   help='iExecClerk address'                           )
+	parser.add_argument('--hub',       type=str, required=True,                   help='iExecHub address'                             )
+	params = parser.parse_args()
 
 	# CREATE BLOCKCHAIN INTERFACE
 	blockchaininterface = BlockchainInterface(config=args)
 
 	# DATABASE SETTINGS
-	app.config['SQLALCHEMY_DATABASE_URI'] = args.database
+	app.config['SQLALCHEMY_DATABASE_URI'] = params.database
 
 	# SETUP ENDPOINTS
 	api.add_resource(SecretAPI,   '/secret/<string:address>',               endpoint='secret'  ) # address: account or ressource SC
@@ -258,5 +258,5 @@ if __name__ == '__main__':
 
 	# RUN DAEMON
 	db.create_all()
-	app.run(host=args.host, port=args.port, debug=False)
+	app.run(host=params.host, port=params.port, debug=False)
 	# db.drop_all() # Don't drop
