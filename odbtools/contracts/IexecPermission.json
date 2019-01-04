@@ -46,25 +46,25 @@
   ],
   "bytecode": "0x61018e610030600b82828239805160001a6073146000811461002057610022565bfe5b5030600052607381538281f3fe730000000000000000000000000000000000000000301460806040526004361061006d5763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416632a0acc6a811461007257806342fa44e014610090578063c3d75b7c14610098575b600080fd5b61007a6100a0565b604051610087919061011b565b60405180910390f35b61007a6100c4565b61007a6100e8565b7f040000000000000000000000000000000000000000000000000000000000000081565b7f010000000000000000000000000000000000000000000000000000000000000081565b7f020000000000000000000000000000000000000000000000000000000000000081565b6101158161012f565b82525050565b60208101610129828461010c565b92915050565b7fff00000000000000000000000000000000000000000000000000000000000000169056fea265627a7a723058207d92547162e37c842e0433097e3cc7ec3ab9ef02493522ecbd0cd29b03170ec26c6578706572696d656e74616cf50037",
   "deployedBytecode": "0x730000000000000000000000000000000000000000301460806040526004361061006d5763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416632a0acc6a811461007257806342fa44e014610090578063c3d75b7c14610098575b600080fd5b61007a6100a0565b604051610087919061011b565b60405180910390f35b61007a6100c4565b61007a6100e8565b7f040000000000000000000000000000000000000000000000000000000000000081565b7f010000000000000000000000000000000000000000000000000000000000000081565b7f020000000000000000000000000000000000000000000000000000000000000081565b6101158161012f565b82525050565b60208101610129828461010c565b92915050565b7fff00000000000000000000000000000000000000000000000000000000000000169056fea265627a7a723058207d92547162e37c842e0433097e3cc7ec3ab9ef02493522ecbd0cd29b03170ec26c6578706572696d656e74616cf50037",
-  "sourceMap": "59:144:14:-;;132:2:-1;166:7;155:9;146:7;137:37;252:7;246:14;243:1;238:23;232:4;229:33;270:1;265:20;;;;222:63;;265:20;274:9;222:63;;298:9;295:1;288:20;328:4;319:7;311:22;352:7;343;336:24",
-  "deployedSourceMap": "59:144:14:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;164:36;;;;;;;;;;;;;;;;;;;;86;;;;125;;;;164;;;:::o;86:::-;;;:::o;125:::-;;;:::o;5:115:-1:-;84:30;108:5;84:30;;;79:3;72:43;66:54;;;127:205;241:2;226:18;;255:67;230:9;295:6;255:67;;;212:120;;;;;339:151;418:66;407:78;;390:100",
+  "sourceMap": "59:144:17:-;;132:2:-1;166:7;155:9;146:7;137:37;252:7;246:14;243:1;238:23;232:4;229:33;270:1;265:20;;;;222:63;;265:20;274:9;222:63;;298:9;295:1;288:20;328:4;319:7;311:22;352:7;343;336:24",
+  "deployedSourceMap": "59:144:17:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;164:36;;;;;;;;;;;;;;;;;;;;86;;;;125;;;;164;;;:::o;86:::-;;;:::o;125:::-;;;:::o;5:115:-1:-;84:30;108:5;84:30;;;79:3;72:43;66:54;;;127:205;241:2;226:18;;255:67;230:9;295:6;255:67;;;212:120;;;;;339:151;418:66;407:78;;390:100",
   "source": "pragma solidity ^0.5.0;\npragma experimental ABIEncoderV2;\n\nlibrary IexecPermission\n{\n\tbytes1 public constant SUBMIT = 0x01;\n\tbytes1 public constant ACCESS = 0x02;\n\tbytes1 public constant ADMIN  = 0x04;\n}\ninterface GroupInterface\n{\n\tfunction viewPermissions(address) external view returns (bytes1);\n}\n",
   "sourcePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/permissions/GroupInterface.sol",
   "ast": {
     "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/permissions/GroupInterface.sol",
     "exportedSymbols": {
       "GroupInterface": [
-        4648
+        5560
       ],
       "IexecPermission": [
-        4640
+        5552
       ]
     },
-    "id": 4649,
+    "id": 5561,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4629,
+        "id": 5541,
         "literals": [
           "solidity",
           "^",
@@ -72,16 +72,16 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:14"
+        "src": "0:23:17"
       },
       {
-        "id": 4630,
+        "id": 5542,
         "literals": [
           "experimental",
           "ABIEncoderV2"
         ],
         "nodeType": "PragmaDirective",
-        "src": "24:33:14"
+        "src": "24:33:17"
       },
       {
         "baseContracts": [],
@@ -89,20 +89,20 @@
         "contractKind": "library",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 4640,
+        "id": 5552,
         "linearizedBaseContracts": [
-          4640
+          5552
         ],
         "name": "IexecPermission",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 4633,
+            "id": 5545,
             "name": "SUBMIT",
             "nodeType": "VariableDeclaration",
-            "scope": 4640,
-            "src": "86:36:14",
+            "scope": 5552,
+            "src": "86:36:17",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -110,10 +110,10 @@
               "typeString": "bytes1"
             },
             "typeName": {
-              "id": 4631,
+              "id": 5543,
               "name": "bytes1",
               "nodeType": "ElementaryTypeName",
-              "src": "86:6:14",
+              "src": "86:6:17",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes1",
                 "typeString": "bytes1"
@@ -122,14 +122,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "30783031",
-              "id": 4632,
+              "id": 5544,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "118:4:14",
+              "src": "118:4:17",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_1_by_1",
@@ -141,11 +141,11 @@
           },
           {
             "constant": true,
-            "id": 4636,
+            "id": 5548,
             "name": "ACCESS",
             "nodeType": "VariableDeclaration",
-            "scope": 4640,
-            "src": "125:36:14",
+            "scope": 5552,
+            "src": "125:36:17",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -153,10 +153,10 @@
               "typeString": "bytes1"
             },
             "typeName": {
-              "id": 4634,
+              "id": 5546,
               "name": "bytes1",
               "nodeType": "ElementaryTypeName",
-              "src": "125:6:14",
+              "src": "125:6:17",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes1",
                 "typeString": "bytes1"
@@ -165,14 +165,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "30783032",
-              "id": 4635,
+              "id": 5547,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "157:4:14",
+              "src": "157:4:17",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_2_by_1",
@@ -184,11 +184,11 @@
           },
           {
             "constant": true,
-            "id": 4639,
+            "id": 5551,
             "name": "ADMIN",
             "nodeType": "VariableDeclaration",
-            "scope": 4640,
-            "src": "164:36:14",
+            "scope": 5552,
+            "src": "164:36:17",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -196,10 +196,10 @@
               "typeString": "bytes1"
             },
             "typeName": {
-              "id": 4637,
+              "id": 5549,
               "name": "bytes1",
               "nodeType": "ElementaryTypeName",
-              "src": "164:6:14",
+              "src": "164:6:17",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes1",
                 "typeString": "bytes1"
@@ -208,14 +208,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "30783034",
-              "id": 4638,
+              "id": 5550,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "196:4:14",
+              "src": "196:4:17",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_4_by_1",
@@ -226,8 +226,8 @@
             "visibility": "public"
           }
         ],
-        "scope": 4649,
-        "src": "59:144:14"
+        "scope": 5561,
+        "src": "59:144:17"
       },
       {
         "baseContracts": [],
@@ -235,9 +235,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 4648,
+        "id": 5560,
         "linearizedBaseContracts": [
-          4648
+          5560
         ],
         "name": "GroupInterface",
         "nodeType": "ContractDefinition",
@@ -245,23 +245,23 @@
           {
             "body": null,
             "documentation": null,
-            "id": 4647,
+            "id": 5559,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "viewPermissions",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4643,
+              "id": 5555,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4642,
+                  "id": 5554,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4647,
-                  "src": "257:7:14",
+                  "scope": 5559,
+                  "src": "257:7:17",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -269,10 +269,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 4641,
+                    "id": 5553,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "257:7:14",
+                    "src": "257:7:17",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -283,19 +283,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "256:9:14"
+              "src": "256:9:17"
             },
             "returnParameters": {
-              "id": 4646,
+              "id": 5558,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4645,
+                  "id": 5557,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4647,
-                  "src": "289:6:14",
+                  "scope": 5559,
+                  "src": "289:6:17",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -303,10 +303,10 @@
                     "typeString": "bytes1"
                   },
                   "typeName": {
-                    "id": 4644,
+                    "id": 5556,
                     "name": "bytes1",
                     "nodeType": "ElementaryTypeName",
-                    "src": "289:6:14",
+                    "src": "289:6:17",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes1",
                       "typeString": "bytes1"
@@ -316,36 +316,36 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "288:8:14"
+              "src": "288:8:17"
             },
-            "scope": 4648,
-            "src": "232:65:14",
+            "scope": 5560,
+            "src": "232:65:17",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 4649,
-        "src": "204:95:14"
+        "scope": 5561,
+        "src": "204:95:17"
       }
     ],
-    "src": "0:300:14"
+    "src": "0:300:17"
   },
   "legacyAST": {
     "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/permissions/GroupInterface.sol",
     "exportedSymbols": {
       "GroupInterface": [
-        4648
+        5560
       ],
       "IexecPermission": [
-        4640
+        5552
       ]
     },
-    "id": 4649,
+    "id": 5561,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4629,
+        "id": 5541,
         "literals": [
           "solidity",
           "^",
@@ -353,16 +353,16 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:14"
+        "src": "0:23:17"
       },
       {
-        "id": 4630,
+        "id": 5542,
         "literals": [
           "experimental",
           "ABIEncoderV2"
         ],
         "nodeType": "PragmaDirective",
-        "src": "24:33:14"
+        "src": "24:33:17"
       },
       {
         "baseContracts": [],
@@ -370,20 +370,20 @@
         "contractKind": "library",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 4640,
+        "id": 5552,
         "linearizedBaseContracts": [
-          4640
+          5552
         ],
         "name": "IexecPermission",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 4633,
+            "id": 5545,
             "name": "SUBMIT",
             "nodeType": "VariableDeclaration",
-            "scope": 4640,
-            "src": "86:36:14",
+            "scope": 5552,
+            "src": "86:36:17",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -391,10 +391,10 @@
               "typeString": "bytes1"
             },
             "typeName": {
-              "id": 4631,
+              "id": 5543,
               "name": "bytes1",
               "nodeType": "ElementaryTypeName",
-              "src": "86:6:14",
+              "src": "86:6:17",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes1",
                 "typeString": "bytes1"
@@ -403,14 +403,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "30783031",
-              "id": 4632,
+              "id": 5544,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "118:4:14",
+              "src": "118:4:17",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_1_by_1",
@@ -422,11 +422,11 @@
           },
           {
             "constant": true,
-            "id": 4636,
+            "id": 5548,
             "name": "ACCESS",
             "nodeType": "VariableDeclaration",
-            "scope": 4640,
-            "src": "125:36:14",
+            "scope": 5552,
+            "src": "125:36:17",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -434,10 +434,10 @@
               "typeString": "bytes1"
             },
             "typeName": {
-              "id": 4634,
+              "id": 5546,
               "name": "bytes1",
               "nodeType": "ElementaryTypeName",
-              "src": "125:6:14",
+              "src": "125:6:17",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes1",
                 "typeString": "bytes1"
@@ -446,14 +446,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "30783032",
-              "id": 4635,
+              "id": 5547,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "157:4:14",
+              "src": "157:4:17",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_2_by_1",
@@ -465,11 +465,11 @@
           },
           {
             "constant": true,
-            "id": 4639,
+            "id": 5551,
             "name": "ADMIN",
             "nodeType": "VariableDeclaration",
-            "scope": 4640,
-            "src": "164:36:14",
+            "scope": 5552,
+            "src": "164:36:17",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -477,10 +477,10 @@
               "typeString": "bytes1"
             },
             "typeName": {
-              "id": 4637,
+              "id": 5549,
               "name": "bytes1",
               "nodeType": "ElementaryTypeName",
-              "src": "164:6:14",
+              "src": "164:6:17",
               "typeDescriptions": {
                 "typeIdentifier": "t_bytes1",
                 "typeString": "bytes1"
@@ -489,14 +489,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "30783034",
-              "id": 4638,
+              "id": 5550,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "196:4:14",
+              "src": "196:4:17",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_4_by_1",
@@ -507,8 +507,8 @@
             "visibility": "public"
           }
         ],
-        "scope": 4649,
-        "src": "59:144:14"
+        "scope": 5561,
+        "src": "59:144:17"
       },
       {
         "baseContracts": [],
@@ -516,9 +516,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 4648,
+        "id": 5560,
         "linearizedBaseContracts": [
-          4648
+          5560
         ],
         "name": "GroupInterface",
         "nodeType": "ContractDefinition",
@@ -526,23 +526,23 @@
           {
             "body": null,
             "documentation": null,
-            "id": 4647,
+            "id": 5559,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "viewPermissions",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4643,
+              "id": 5555,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4642,
+                  "id": 5554,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4647,
-                  "src": "257:7:14",
+                  "scope": 5559,
+                  "src": "257:7:17",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -550,10 +550,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 4641,
+                    "id": 5553,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "257:7:14",
+                    "src": "257:7:17",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -564,19 +564,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "256:9:14"
+              "src": "256:9:17"
             },
             "returnParameters": {
-              "id": 4646,
+              "id": 5558,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4645,
+                  "id": 5557,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4647,
-                  "src": "289:6:14",
+                  "scope": 5559,
+                  "src": "289:6:17",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -584,10 +584,10 @@
                     "typeString": "bytes1"
                   },
                   "typeName": {
-                    "id": 4644,
+                    "id": 5556,
                     "name": "bytes1",
                     "nodeType": "ElementaryTypeName",
-                    "src": "289:6:14",
+                    "src": "289:6:17",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes1",
                       "typeString": "bytes1"
@@ -597,28 +597,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "288:8:14"
+              "src": "288:8:17"
             },
-            "scope": 4648,
-            "src": "232:65:14",
+            "scope": 5560,
+            "src": "232:65:17",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 4649,
-        "src": "204:95:14"
+        "scope": 5561,
+        "src": "204:95:17"
       }
     ],
-    "src": "0:300:14"
+    "src": "0:300:17"
   },
   "compiler": {
     "name": "solc",
     "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.0.0-beta.2",
-  "updatedAt": "2018-12-03T12:54:15.755Z",
+  "schemaVersion": "3.0.0",
+  "updatedAt": "2019-01-03T12:57:44.521Z",
   "devdoc": {
     "methods": {}
   },

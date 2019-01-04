@@ -13,7 +13,7 @@ var IexecClerk    = null;
 var IexecHub      = null;
 var RLC           = null;
 
-const NULLDATASET = {"dataset":"0x0000000000000000000000000000000000000000","datasetprice":0,"volume":0,"tag":0,"apprestrict":"0x0000000000000000000000000000000000000000","workerpoolrestrict":"0x0000000000000000000000000000000000000000","requesterrestrict":"0x0000000000000000000000000000000000000000","salt":"0x0000000000000000000000000000000000000000","sign":{"r":"0x0000000000000000000000000000000000000000000000000000000000000000","s":"0x0000000000000000000000000000000000000000000000000000000000000000","v":0}};
+const NULLDATASET = {"dataset":"0x0000000000000000000000000000000000000000","datasetprice":0,"volume":0,"tag":"0x0000000000000000000000000000000000000000000000000000000000000000","apprestrict":"0x0000000000000000000000000000000000000000","workerpoolrestrict":"0x0000000000000000000000000000000000000000","requesterrestrict":"0x0000000000000000000000000000000000000000","salt":"0x0000000000000000000000000000000000000000","sign":{"r":"0x0000000000000000000000000000000000000000000000000000000000000000","s":"0x0000000000000000000000000000000000000000000000000000000000000000","v":0}};
 
 var DOMAIN =
 {
@@ -35,7 +35,7 @@ var TYPES =
 		{ name: "app",                type: "address" },
 		{ name: "appprice",           type: "uint256" },
 		{ name: "volume",             type: "uint256" },
-		{ name: "tag",                type: "uint256" },
+		{ name: "tag",                type: "bytes32" },
 		{ name: "datasetrestrict",    type: "address" },
 		{ name: "workerpoolrestrict", type: "address" },
 		{ name: "requesterrestrict",  type: "address" },
@@ -45,7 +45,7 @@ var TYPES =
 		{ name: "dataset",            type: "address" },
 		{ name: "datasetprice",       type: "uint256" },
 		{ name: "volume",             type: "uint256" },
-		{ name: "tag",                type: "uint256" },
+		{ name: "tag",                type: "bytes32" },
 		{ name: "apprestrict",        type: "address" },
 		{ name: "workerpoolrestrict", type: "address" },
 		{ name: "requesterrestrict",  type: "address" },
@@ -55,7 +55,7 @@ var TYPES =
 		{ name: "workerpool",        type: "address" },
 		{ name: "workerpoolprice",   type: "uint256" },
 		{ name: "volume",            type: "uint256" },
-		{ name: "tag",               type: "uint256" },
+		{ name: "tag",               type: "bytes32" },
 		{ name: "category",          type: "uint256" },
 		{ name: "trust",             type: "uint256" },
 		{ name: "apprestrict",       type: "address" },
@@ -72,7 +72,7 @@ var TYPES =
 		{ name: "workerpoolmaxprice", type: "uint256" },
 		{ name: "requester",          type: "address" },
 		{ name: "volume",             type: "uint256" },
-		{ name: "tag",                type: "uint256" },
+		{ name: "tag",                type: "bytes32" },
 		{ name: "category",           type: "uint256" },
 		{ name: "trust",              type: "uint256" },
 		{ name: "beneficiary",        type: "address" },
@@ -98,7 +98,7 @@ function AppOrderStructHash(apporder)
 		"address",
 		"uint256",
 		"uint256",
-		"uint256",
+		"bytes32",
 		"address",
 		"address",
 		"address",
@@ -123,7 +123,7 @@ function DatasetOrderStructHash(datasetorder)
 		"address",
 		"uint256",
 		"uint256",
-		"uint256",
+		"bytes32",
 		"address",
 		"address",
 		"address",
@@ -148,7 +148,7 @@ function WorkerpoolOrderStructHash(workerpoolorder)
 		"address",
 		"uint256",
 		"uint256",
-		"uint256",
+		"bytes32",
 		"uint256",
 		"uint256",
 		"address",
@@ -182,7 +182,7 @@ function RequestOrderStructHash(requestorder)
 		"uint256",
 		"address",
 		"uint256",
-		"uint256",
+		"bytes32",
 		"uint256",
 		"uint256",
 		"address",
@@ -395,21 +395,22 @@ async function RequestOrderProgress(requesthash, requestorder)
 	for (var idx = 0; idx < requestorder.volume;)
 	{
 		var dealid = web3.utils.soliditySha3({ type: "bytes32", value: requesthash }, { type: "uint256", value: idx });
+		console.log(dealid)
 		var deal   = await IexecClerk.methods.viewDeal(dealid).call();
-		var config = await IexecClerk.methods.viewConfig(dealid).call();
-		if (config.botSize == 0) break;
-		deals[idx] = { deal: deal, config: config };
+		console.log(deal)
+		if (deal.botSize == 0) break;
+		deals[idx] = deal;
 
-		first     = parseInt(config.botFirst);
-		last      = first + parseInt(config.botSize);
+		first     = parseInt(deal.botFirst);
+		last      = first + parseInt(deal.botSize);
 		var style = [ "bg-primary", "bg-info "][$("#view-progress-deals").children().length % 2];
-		var width = (parseInt(config.botSize)*100/requestorder.volume) + "%";
+		var width = (parseInt(deal.botSize)*100/requestorder.volume) + "%";
 		var title = "Deal " + dealid;
 
 		var descr = [];
 		descr.push("Tasks " + (first+1) + " → " + last);
 		descr.push("Pool: " + deal.workerpool.pointer);
-		descr.push("Category: " + config.category);
+		descr.push("Category: " + deal.category);
 		descr.push("Trust: " + deal.trust);
 		descr.push("Parameters: " + $('<div/>').text(deal.params).html());
 		descr.push("Beneficiary: " + deal.beneficiary);
@@ -428,7 +429,7 @@ async function RequestOrderProgress(requesthash, requestorder)
 			.popover({ html: true })
 		);
 
-		for (var _ = 0; _ < parseInt(config.botSize); ++idx, ++_)
+		for (var _ = 0; _ < parseInt(deal.botSize); ++idx, ++_)
 		{
 			var taskid = web3.utils.soliditySha3({ type: "bytes32", value: dealid }, { type: "uint256", value: idx });
 			var task   = await IexecHub.methods.viewTask(taskid).call();
@@ -540,19 +541,19 @@ $("#apporder-sign").click(() => {
 		app:                           $("#apporder-address"           ).val(),
 		appprice:           parseFloat($("#apporder-price-value"       ).val()) * $("#apporder-price-unit").val(),
 		volume:             parseInt  ($("#apporder-volume"            ).val()),
-		tag:                parseInt  ($("#apporder-tag"               ).val()),
+		tag:                           $("#apporder-tag"               ).val(),
 		datasetrestrict:               $("#apporder-datasetrestrict"   ).val(),
 		workerpoolrestrict:            $("#apporder-workerpoolrestrict").val(),
 		requesterrestrict:             $("#apporder-requesterrestrict" ).val(),
 		salt:                          $("#apporder-salt"              ).val(),
 	};
-	if (isNaN(apporder.appprice         )) { apporder.appprice           = 0;                                            }
-	if (isNaN(apporder.volume           )) { apporder.volume             = 1;                                            }
-	if (isNaN(apporder.tag              )) { apporder.tag                = 0x0;                                          }
-	if (apporder.datasetrestrict    == "") { apporder.datasetrestrict    = "0x0000000000000000000000000000000000000000"; }
-	if (apporder.workerpoolrestrict == "") { apporder.workerpoolrestrict = "0x0000000000000000000000000000000000000000"; }
-	if (apporder.requesterrestrict  == "") { apporder.requesterrestrict  = "0x0000000000000000000000000000000000000000"; }
-	if (apporder.salt               == "") { apporder.salt               = randomHex(32);                                }
+	if (isNaN(apporder.appprice         )) { apporder.appprice           = 0;                                                                    }
+	if (isNaN(apporder.volume           )) { apporder.volume             = 1;                                                                    }
+	if (apporder.tag                == "") { apporder.tag                = "0x0000000000000000000000000000000000000000000000000000000000000000"; }
+	if (apporder.datasetrestrict    == "") { apporder.datasetrestrict    = "0x0000000000000000000000000000000000000000";                         }
+	if (apporder.workerpoolrestrict == "") { apporder.workerpoolrestrict = "0x0000000000000000000000000000000000000000";                         }
+	if (apporder.requesterrestrict  == "") { apporder.requesterrestrict  = "0x0000000000000000000000000000000000000000";                         }
+	if (apporder.salt               == "") { apporder.salt               = randomHex(32);                                                        }
 	if (!web3.utils.isAddress(apporder.app               )) { alert("Invalid app address"               ); return;}
 	if (!web3.utils.isAddress(apporder.datasetrestrict   )) { alert("Invalid datasetrestrict address"   ); return;}
 	if (!web3.utils.isAddress(apporder.workerpoolrestrict)) { alert("Invalid workerpoolrestrict address"); return;}
@@ -575,19 +576,19 @@ $("#datasetorder-sign").click(() => {
 		dataset:                       $("#datasetorder-address"           ).val(),
 		datasetprice:       parseFloat($("#datasetorder-price-value"       ).val()) * $("#datasetorder-price-unit").val(),
 		volume:             parseInt  ($("#datasetorder-volume"            ).val()),
-		tag:                parseInt  ($("#datasetorder-tag"               ).val()),
+		tag:                           $("#datasetorder-tag"               ).val(),
 		apprestrict:                   $("#datasetorder-apprestrict"       ).val(),
 		workerpoolrestrict:            $("#datasetorder-workerpoolrestrict").val(),
 		requesterrestrict:             $("#datasetorder-requesterrestrict" ).val(),
 		salt:                          $("#datasetorder-salt"              ).val(),
 	};
-	if (isNaN(datasetorder.datasetprice     )) { datasetorder.datasetprice       = 0;                                            }
-	if (isNaN(datasetorder.volume           )) { datasetorder.volume             = 1;                                            }
-	if (isNaN(datasetorder.tag              )) { datasetorder.tag                = 0x0;                                          }
-	if (datasetorder.apprestrict        == "") { datasetorder.apprestrict        = "0x0000000000000000000000000000000000000000"; }
-	if (datasetorder.workerpoolrestrict == "") { datasetorder.workerpoolrestrict = "0x0000000000000000000000000000000000000000"; }
-	if (datasetorder.requesterrestrict  == "") { datasetorder.requesterrestrict  = "0x0000000000000000000000000000000000000000"; }
-	if (datasetorder.salt               == "") { datasetorder.salt               = randomHex(32);                                }
+	if (isNaN(datasetorder.datasetprice     )) { datasetorder.datasetprice       = 0;                                                                    }
+	if (isNaN(datasetorder.volume           )) { datasetorder.volume             = 1;                                                                    }
+	if (datasetorder.tag                == "") { datasetorder.tag                = "0x0000000000000000000000000000000000000000000000000000000000000000"; }
+	if (datasetorder.apprestrict        == "") { datasetorder.apprestrict        = "0x0000000000000000000000000000000000000000";                         }
+	if (datasetorder.workerpoolrestrict == "") { datasetorder.workerpoolrestrict = "0x0000000000000000000000000000000000000000";                         }
+	if (datasetorder.requesterrestrict  == "") { datasetorder.requesterrestrict  = "0x0000000000000000000000000000000000000000";                         }
+	if (datasetorder.salt               == "") { datasetorder.salt               = randomHex(32);                                                        }
 	if (!web3.utils.isAddress(datasetorder.dataset           )) { alert("Invalid dataset address"           ); return;}
 	if (!web3.utils.isAddress(datasetorder.apprestrict       )) { alert("Invalid apprestrict address"       ); return;}
 	if (!web3.utils.isAddress(datasetorder.workerpoolrestrict)) { alert("Invalid workerpoolrestrict address"); return;}
@@ -610,7 +611,7 @@ $("#workerpoolorder-sign").click(() => {
 		workerpool:                   $("#workerpoolorder-address"     ).val(),
 		workerpoolprice:   parseFloat($("#workerpoolorder-price-value" ).val()) * $("#workerpoolorder-price-unit").val(),
 		volume:            parseInt  ($("#workerpoolorder-volume"      ).val()),
-		tag:               parseInt  ($("#workerpoolorder-tag"         ).val()),
+		tag:                          $("#workerpoolorder-tag"         ).val(),
 		category:          parseInt  ($("#workerpoolorder-category"    ).val()),
 		trust:             parseInt  ($("#workerpoolorder-trust"       ).val()),
 		apprestrict:                  $("#workerpoolorder-apprestrict").val(),
@@ -618,15 +619,15 @@ $("#workerpoolorder-sign").click(() => {
 		requesterrestrict:            $("#workerpoolorder-requesterrestrict").val(),
 		salt:                         $("#workerpoolorder-salt"        ).val(),
 	};
-	if (isNaN(workerpoolorder.workerpoolprice )) { workerpoolorder.workerpoolprice   = 0;                                            }
-	if (isNaN(workerpoolorder.volume          )) { workerpoolorder.volume            = 1;                                            }
-	if (isNaN(workerpoolorder.category        )) { workerpoolorder.category          = 5;                                            }
-	if (isNaN(workerpoolorder.trust           )) { workerpoolorder.trust             = 100;                                          }
-	if (isNaN(workerpoolorder.tag             )) { workerpoolorder.tag               = 0x0;                                          }
-	if (workerpoolorder.apprestrict       == "") { workerpoolorder.apprestrict       = "0x0000000000000000000000000000000000000000"; }
-	if (workerpoolorder.datasetrestrict   == "") { workerpoolorder.datasetrestrict   = "0x0000000000000000000000000000000000000000"; }
-	if (workerpoolorder.requesterrestrict == "") { workerpoolorder.requesterrestrict = "0x0000000000000000000000000000000000000000"; }
-	if (workerpoolorder.salt              == "") { workerpoolorder.salt              = randomHex(32);                                }
+	if (isNaN(workerpoolorder.workerpoolprice )) { workerpoolorder.workerpoolprice   = 0;                                                                    }
+	if (isNaN(workerpoolorder.volume          )) { workerpoolorder.volume            = 1;                                                                    }
+	if (isNaN(workerpoolorder.category        )) { workerpoolorder.category          = 5;                                                                    }
+	if (isNaN(workerpoolorder.trust           )) { workerpoolorder.trust             = 100;                                                                  }
+	if (workerpoolorder.tag               == "") { workerpoolorder.tag               = "0x0000000000000000000000000000000000000000000000000000000000000000"; }
+	if (workerpoolorder.apprestrict       == "") { workerpoolorder.apprestrict       = "0x0000000000000000000000000000000000000000";                         }
+	if (workerpoolorder.datasetrestrict   == "") { workerpoolorder.datasetrestrict   = "0x0000000000000000000000000000000000000000";                         }
+	if (workerpoolorder.requesterrestrict == "") { workerpoolorder.requesterrestrict = "0x0000000000000000000000000000000000000000";                         }
+	if (workerpoolorder.salt              == "") { workerpoolorder.salt              = randomHex(32);                                                        }
 	if (!web3.utils.isAddress(workerpoolorder.workerpool       )) { alert("Invalid workerpool address"      ); return;}
 	if (!web3.utils.isAddress(workerpoolorder.apprestrict      )) { alert("Invalid apprestrict address"     ); return;}
 	if (!web3.utils.isAddress(workerpoolorder.datasetrestrict  )) { alert("Invalid datasetrestrict address" ); return;}
@@ -654,7 +655,7 @@ $("#requestorder-sign").click(() => {
 		workerpool:                    $("#requestorder-workerpool"              ).val(),
 		workerpoolmaxprice: parseFloat($("#requestorder-workerpoolmaxprice-value").val()) * $("#requestorder-workerpoolmaxprice-unit").val(),
 		volume:             parseInt  ($("#requestorder-volume"                  ).val()),
-		tag:                parseInt  ($("#requestorder-tag"                     ).val()),
+		tag:                           $("#requestorder-tag"                     ).val(),
 		category:           parseInt  ($("#requestorder-category"                ).val()),
 		trust:              parseInt  ($("#requestorder-trust"                   ).val()),
 		requester:                     $("#requestorder-requester"               ).val(),
@@ -663,19 +664,19 @@ $("#requestorder-sign").click(() => {
 		params:                        $("#requestorder-params"                  ).val(),
 		salt:                          $("#requestorder-salt"                    ).val(),
 	};
-	if (requestorder.dataset       == ""      ) { requestorder.dataset            = "0x0000000000000000000000000000000000000000"; }
-	if (requestorder.workerpool    == ""      ) { requestorder.workerpool         = "0x0000000000000000000000000000000000000000"; }
-	if (isNaN(requestorder.appmaxprice       )) { requestorder.appmaxprice        = 0;                                            }
-	if (isNaN(requestorder.datasetmaxprice   )) { requestorder.datasetmaxprice    = 0;                                            }
-	if (isNaN(requestorder.workerpoolmaxprice)) { requestorder.workerpoolmaxprice = 0;                                            }
-	if (isNaN(requestorder.volume            )) { requestorder.volume             = 1;                                            }
-	if (isNaN(requestorder.tag               )) { requestorder.tag                = 0x0;                                          }
-	if (isNaN(requestorder.category          )) { requestorder.category           = 5;                                            }
-	if (isNaN(requestorder.trust             )) { requestorder.trust              = 100;                                          }
-	if (requestorder.beneficiary   == ""      ) { requestorder.beneficiary        = requestorder.requester;                       }
-	if (requestorder.callback      == ""      ) { requestorder.callback           = "0x0000000000000000000000000000000000000000"; }
-	if (requestorder.params        == ""      ) { requestorder.params             = "\0";                                         }
-	if (requestorder.salt          == ""      ) { requestorder.salt               = randomHex(32);                                }
+	if (requestorder.dataset             == "") { requestorder.dataset            = "0x0000000000000000000000000000000000000000";                         }
+	if (requestorder.workerpool          == "") { requestorder.workerpool         = "0x0000000000000000000000000000000000000000";                         }
+	if (isNaN(requestorder.appmaxprice       )) { requestorder.appmaxprice        = 0;                                                                    }
+	if (isNaN(requestorder.datasetmaxprice   )) { requestorder.datasetmaxprice    = 0;                                                                    }
+	if (isNaN(requestorder.workerpoolmaxprice)) { requestorder.workerpoolmaxprice = 0;                                                                    }
+	if (isNaN(requestorder.volume            )) { requestorder.volume             = 1;                                                                    }
+	if (requestorder.tag                 == "") { requestorder.tag                = "0x0000000000000000000000000000000000000000000000000000000000000000"; }
+	if (isNaN(requestorder.category          )) { requestorder.category           = 5;                                                                    }
+	if (isNaN(requestorder.trust             )) { requestorder.trust              = 100;                                                                  }
+	if (requestorder.beneficiary         == "") { requestorder.beneficiary        = requestorder.requester;                                               }
+	if (requestorder.callback            == "") { requestorder.callback           = "0x0000000000000000000000000000000000000000";                         }
+	if (requestorder.params              == "") { requestorder.params             = "\0";                                                                 }
+	if (requestorder.salt                == "") { requestorder.salt               = randomHex(32);                                                        }
 	if (!web3.utils.isAddress(requestorder.app        )) { alert("Invalid app address"        ); return;}
 	if (!web3.utils.isAddress(requestorder.dataset    )) { alert("Invalid dataset address"    ); return;}
 	if (!web3.utils.isAddress(requestorder.workerpool )) { alert("Invalid workerpool address" ); return;}
