@@ -238,14 +238,14 @@ if __name__ == '__main__':
 	parser.add_argument('--host',      type=str, default='0.0.0.0',               help='REST api host - default: 0.0.0.0'             )
 	parser.add_argument('--port',      type=int, default=5000,                    help='REST api port - default: 5000'                )
 	parser.add_argument('--gateway',   type=str, default='http://localhost:8545', help='web3 gateway - default: http://localhost:8545')
-	parser.add_argument('--database',  type=str, default='sqlite:///:memory:',    help='SMS database - default: sqlite:///:memory:'   )# for persistency use 'sqlite:////tmp/sms.db'
+	parser.add_argument('--database',  type=str, default='sqlite:///:memory:',    help='SMS database - default: sqlite:///:memory:'   ) # for persistency use 'sqlite:////tmp/sms.db'
 	parser.add_argument('--contracts', type=str, default='contracts',             help='iExec SC folder - default: ./contracts'       )
 	parser.add_argument('--clerk',     type=str, required=True,                   help='iExecClerk address'                           )
 	parser.add_argument('--hub',       type=str, required=True,                   help='iExecHub address'                             )
 	params = parser.parse_args()
 
 	# CREATE BLOCKCHAIN INTERFACE
-	blockchaininterface = BlockchainInterface(config=args)
+	blockchaininterface = BlockchainInterface(config=params)
 
 	# DATABASE SETTINGS
 	app.config['SQLALCHEMY_DATABASE_URI'] = params.database
