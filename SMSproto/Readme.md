@@ -16,7 +16,7 @@ If the signature is correct, the server returns the address or the secret and th
 
 **Example 1:**
 
-A user with address `0x9a43BB008b7A657e1936ebf5d8e28e5c5E021596` sends the secret `cGVyc29uYWxTZWNyZXQ`
+A user with address `0x9a43BB008b7A657e1936ebf5d8e28e5c5E021596` sends the secret `cGVyc29uYWxTZWNyZXQ=`
 
 ```
 $ curl -H "Content-Type: application/json" -X POST -d '{
@@ -127,7 +127,7 @@ $ curl -H "Content-Type: application/json" -X GET -d '{
 			"r": "0x0000000000000000000000000000000000000000000000000000000000000000",
 			"s": "0x0000000000000000000000000000000000000000000000000000000000000000",
 			"v": 0
-			}
+		}
 	}
 }' http://localhost:5000/secure
 {"error":"access denied"}
@@ -147,7 +147,7 @@ $ curl -H "Content-Type: application/json" -X GET -d '{
 			"r": "0x80530f73ad3c6de390ea3fcc46ace2fa038cdff69a6de0b25772d9fabe4c1bd1",
 			"s": "0x00c44ee34460f103f71b6a855f15626ccc2214e147ccede5c745b38fe841cee5",
 			"v": 27
-			}
+		}
 	}
 }' http://localhost:5000/secure
 {"Kb":{"address":"0x9a43BB008b7A657e1936ebf5d8e28e5c5E021596","secret":"cGVyc29uYWxTZWNyZXQ="},"Kd":{"address":"0x385fFe1c9Ec3d6a0798eD7a13445Cb2B2de9fd09","secret":"ZGF0YXNldFNlY3JldA=="},"Ke":{"address":"0x3E04a05575731Fbf21d82C72D72a5DD8b20FaF38","private":"0xe746b4556c7d320215a407cfcc61eab9cd493d972d638495857c4c26c494b05f"}}
