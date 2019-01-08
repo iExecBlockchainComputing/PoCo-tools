@@ -1,0 +1,2765 @@
+{
+  "contractName": "IexecInterface",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_signer",
+          "type": "address"
+        },
+        {
+          "name": "_hash",
+          "type": "bytes32"
+        },
+        {
+          "components": [
+            {
+              "name": "v",
+              "type": "uint8"
+            },
+            {
+              "name": "r",
+              "type": "bytes32"
+            },
+            {
+              "name": "s",
+              "type": "bytes32"
+            }
+          ],
+          "name": "_signature",
+          "type": "tuple"
+        }
+      ],
+      "name": "verify",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x0db73bfe"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "app",
+              "type": "address"
+            },
+            {
+              "name": "appprice",
+              "type": "uint256"
+            },
+            {
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "name": "datasetrestrict",
+              "type": "address"
+            },
+            {
+              "name": "workerpoolrestrict",
+              "type": "address"
+            },
+            {
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "name": "v",
+                  "type": "uint8"
+                },
+                {
+                  "name": "r",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "s",
+                  "type": "bytes32"
+                }
+              ],
+              "name": "sign",
+              "type": "tuple"
+            }
+          ],
+          "name": "_apporder",
+          "type": "tuple"
+        }
+      ],
+      "name": "cancelAppOrder",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0x22c8c04a"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_taskid",
+          "type": "bytes32"
+        },
+        {
+          "name": "_resultHash",
+          "type": "bytes32"
+        },
+        {
+          "name": "_resultSeal",
+          "type": "bytes32"
+        },
+        {
+          "name": "_enclaveChallenge",
+          "type": "address"
+        },
+        {
+          "components": [
+            {
+              "name": "v",
+              "type": "uint8"
+            },
+            {
+              "name": "r",
+              "type": "bytes32"
+            },
+            {
+              "name": "s",
+              "type": "bytes32"
+            }
+          ],
+          "name": "_enclaveSign",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "v",
+              "type": "uint8"
+            },
+            {
+              "name": "r",
+              "type": "bytes32"
+            },
+            {
+              "name": "s",
+              "type": "bytes32"
+            }
+          ],
+          "name": "_workerpoolSign",
+          "type": "tuple"
+        }
+      ],
+      "name": "contribute",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0x25a57534"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "workClockTimeRef",
+          "type": "uint256"
+        }
+      ],
+      "name": "createCategory",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0x298503d9"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdraw",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0x2e1a7d4d"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "name": "_target",
+          "type": "address"
+        }
+      ],
+      "name": "depositFor",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0x36efd16f"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "appregistry",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x45b637a9"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_token",
+          "type": "address"
+        },
+        {
+          "name": "_chainid",
+          "type": "uint256"
+        },
+        {
+          "name": "_appregistryAddress",
+          "type": "address"
+        },
+        {
+          "name": "_datasetregistryAddress",
+          "type": "address"
+        },
+        {
+          "name": "_workerpoolregistryAddress",
+          "type": "address"
+        }
+      ],
+      "name": "configure",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0x467e9b73"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_id",
+          "type": "bytes32"
+        }
+      ],
+      "name": "viewConsumed",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x4b2bec8c"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_catid",
+          "type": "uint256"
+        }
+      ],
+      "name": "viewCategory",
+      "outputs": [
+        {
+          "components": [
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "description",
+              "type": "string"
+            },
+            {
+              "name": "workClockTimeRef",
+              "type": "uint256"
+            }
+          ],
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x4f5f44ec"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_dealid",
+          "type": "bytes32"
+        },
+        {
+          "name": "idx",
+          "type": "uint256"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0x5b36c66b"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_user",
+          "type": "address"
+        }
+      ],
+      "name": "viewAccount",
+      "outputs": [
+        {
+          "components": [
+            {
+              "name": "stake",
+              "type": "uint256"
+            },
+            {
+              "name": "locked",
+              "type": "uint256"
+            }
+          ],
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x6b55f4a5"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_id",
+          "type": "bytes32"
+        }
+      ],
+      "name": "viewRequestDeals",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32[]"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x6dc2df05"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "dataset",
+              "type": "address"
+            },
+            {
+              "name": "datasetprice",
+              "type": "uint256"
+            },
+            {
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "name": "apprestrict",
+              "type": "address"
+            },
+            {
+              "name": "workerpoolrestrict",
+              "type": "address"
+            },
+            {
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "name": "v",
+                  "type": "uint8"
+                },
+                {
+                  "name": "r",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "s",
+                  "type": "bytes32"
+                }
+              ],
+              "name": "sign",
+              "type": "tuple"
+            }
+          ],
+          "name": "_datasetorder",
+          "type": "tuple"
+        }
+      ],
+      "name": "signDatasetOrder",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0x79ea83aa"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "app",
+              "type": "address"
+            },
+            {
+              "name": "appprice",
+              "type": "uint256"
+            },
+            {
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "name": "datasetrestrict",
+              "type": "address"
+            },
+            {
+              "name": "workerpoolrestrict",
+              "type": "address"
+            },
+            {
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "name": "v",
+                  "type": "uint8"
+                },
+                {
+                  "name": "r",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "s",
+                  "type": "bytes32"
+                }
+              ],
+              "name": "sign",
+              "type": "tuple"
+            }
+          ],
+          "name": "_apporder",
+          "type": "tuple"
+        }
+      ],
+      "name": "signAppOrder",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0x8209ff3f"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "app",
+              "type": "address"
+            },
+            {
+              "name": "appmaxprice",
+              "type": "uint256"
+            },
+            {
+              "name": "dataset",
+              "type": "address"
+            },
+            {
+              "name": "datasetmaxprice",
+              "type": "uint256"
+            },
+            {
+              "name": "workerpool",
+              "type": "address"
+            },
+            {
+              "name": "workerpoolmaxprice",
+              "type": "uint256"
+            },
+            {
+              "name": "requester",
+              "type": "address"
+            },
+            {
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "name": "category",
+              "type": "uint256"
+            },
+            {
+              "name": "trust",
+              "type": "uint256"
+            },
+            {
+              "name": "beneficiary",
+              "type": "address"
+            },
+            {
+              "name": "callback",
+              "type": "address"
+            },
+            {
+              "name": "params",
+              "type": "string"
+            },
+            {
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "name": "v",
+                  "type": "uint8"
+                },
+                {
+                  "name": "r",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "s",
+                  "type": "bytes32"
+                }
+              ],
+              "name": "sign",
+              "type": "tuple"
+            }
+          ],
+          "name": "_requestorder",
+          "type": "tuple"
+        }
+      ],
+      "name": "cancelRequestOrder",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0x83d6aa85"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "dataset",
+              "type": "address"
+            },
+            {
+              "name": "datasetprice",
+              "type": "uint256"
+            },
+            {
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "name": "apprestrict",
+              "type": "address"
+            },
+            {
+              "name": "workerpoolrestrict",
+              "type": "address"
+            },
+            {
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "name": "v",
+                  "type": "uint8"
+                },
+                {
+                  "name": "r",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "s",
+                  "type": "bytes32"
+                }
+              ],
+              "name": "sign",
+              "type": "tuple"
+            }
+          ],
+          "name": "_datasetorder",
+          "type": "tuple"
+        }
+      ],
+      "name": "cancelDatasetOrder",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0x86d94546"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "workerpoolregistry",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0x90a0f546"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "app",
+              "type": "address"
+            },
+            {
+              "name": "appmaxprice",
+              "type": "uint256"
+            },
+            {
+              "name": "dataset",
+              "type": "address"
+            },
+            {
+              "name": "datasetmaxprice",
+              "type": "uint256"
+            },
+            {
+              "name": "workerpool",
+              "type": "address"
+            },
+            {
+              "name": "workerpoolmaxprice",
+              "type": "uint256"
+            },
+            {
+              "name": "requester",
+              "type": "address"
+            },
+            {
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "name": "category",
+              "type": "uint256"
+            },
+            {
+              "name": "trust",
+              "type": "uint256"
+            },
+            {
+              "name": "beneficiary",
+              "type": "address"
+            },
+            {
+              "name": "callback",
+              "type": "address"
+            },
+            {
+              "name": "params",
+              "type": "string"
+            },
+            {
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "name": "v",
+                  "type": "uint8"
+                },
+                {
+                  "name": "r",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "s",
+                  "type": "bytes32"
+                }
+              ],
+              "name": "sign",
+              "type": "tuple"
+            }
+          ],
+          "name": "_requestorder",
+          "type": "tuple"
+        }
+      ],
+      "name": "signRequestOrder",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xa3648c37"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_taskid",
+          "type": "bytes32"
+        }
+      ],
+      "name": "viewTask",
+      "outputs": [
+        {
+          "components": [
+            {
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "name": "dealid",
+              "type": "bytes32"
+            },
+            {
+              "name": "idx",
+              "type": "uint256"
+            },
+            {
+              "name": "timeref",
+              "type": "uint256"
+            },
+            {
+              "name": "contributionDeadline",
+              "type": "uint256"
+            },
+            {
+              "name": "revealDeadline",
+              "type": "uint256"
+            },
+            {
+              "name": "finalDeadline",
+              "type": "uint256"
+            },
+            {
+              "name": "consensusValue",
+              "type": "bytes32"
+            },
+            {
+              "name": "revealCounter",
+              "type": "uint256"
+            },
+            {
+              "name": "winnerCounter",
+              "type": "uint256"
+            },
+            {
+              "name": "contributors",
+              "type": "address[]"
+            },
+            {
+              "name": "results",
+              "type": "bytes"
+            }
+          ],
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xadccf0d5"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "datasetregistry",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xb1b11d2c"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_dealid",
+          "type": "bytes32[]"
+        },
+        {
+          "name": "_idx",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "initializeArray",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xb504681d"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "deposit",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xb6b55f25"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_id",
+          "type": "bytes32"
+        }
+      ],
+      "name": "viewDeal",
+      "outputs": [
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "name": "pointer",
+                  "type": "address"
+                },
+                {
+                  "name": "owner",
+                  "type": "address"
+                },
+                {
+                  "name": "price",
+                  "type": "uint256"
+                }
+              ],
+              "name": "app",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "pointer",
+                  "type": "address"
+                },
+                {
+                  "name": "owner",
+                  "type": "address"
+                },
+                {
+                  "name": "price",
+                  "type": "uint256"
+                }
+              ],
+              "name": "dataset",
+              "type": "tuple"
+            },
+            {
+              "components": [
+                {
+                  "name": "pointer",
+                  "type": "address"
+                },
+                {
+                  "name": "owner",
+                  "type": "address"
+                },
+                {
+                  "name": "price",
+                  "type": "uint256"
+                }
+              ],
+              "name": "workerpool",
+              "type": "tuple"
+            },
+            {
+              "name": "trust",
+              "type": "uint256"
+            },
+            {
+              "name": "category",
+              "type": "uint256"
+            },
+            {
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "name": "requester",
+              "type": "address"
+            },
+            {
+              "name": "beneficiary",
+              "type": "address"
+            },
+            {
+              "name": "callback",
+              "type": "address"
+            },
+            {
+              "name": "params",
+              "type": "string"
+            },
+            {
+              "name": "startTime",
+              "type": "uint256"
+            },
+            {
+              "name": "botFirst",
+              "type": "uint256"
+            },
+            {
+              "name": "botSize",
+              "type": "uint256"
+            },
+            {
+              "name": "workerStake",
+              "type": "uint256"
+            },
+            {
+              "name": "schedulerRewardRatio",
+              "type": "uint256"
+            }
+          ],
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xb74861b2"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "app",
+              "type": "address"
+            },
+            {
+              "name": "appprice",
+              "type": "uint256"
+            },
+            {
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "name": "datasetrestrict",
+              "type": "address"
+            },
+            {
+              "name": "workerpoolrestrict",
+              "type": "address"
+            },
+            {
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "name": "v",
+                  "type": "uint8"
+                },
+                {
+                  "name": "r",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "s",
+                  "type": "bytes32"
+                }
+              ],
+              "name": "sign",
+              "type": "tuple"
+            }
+          ],
+          "name": "_apporder",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "dataset",
+              "type": "address"
+            },
+            {
+              "name": "datasetprice",
+              "type": "uint256"
+            },
+            {
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "name": "apprestrict",
+              "type": "address"
+            },
+            {
+              "name": "workerpoolrestrict",
+              "type": "address"
+            },
+            {
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "name": "v",
+                  "type": "uint8"
+                },
+                {
+                  "name": "r",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "s",
+                  "type": "bytes32"
+                }
+              ],
+              "name": "sign",
+              "type": "tuple"
+            }
+          ],
+          "name": "_datasetorder",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "workerpool",
+              "type": "address"
+            },
+            {
+              "name": "workerpoolprice",
+              "type": "uint256"
+            },
+            {
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "name": "category",
+              "type": "uint256"
+            },
+            {
+              "name": "trust",
+              "type": "uint256"
+            },
+            {
+              "name": "apprestrict",
+              "type": "address"
+            },
+            {
+              "name": "datasetrestrict",
+              "type": "address"
+            },
+            {
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "name": "v",
+                  "type": "uint8"
+                },
+                {
+                  "name": "r",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "s",
+                  "type": "bytes32"
+                }
+              ],
+              "name": "sign",
+              "type": "tuple"
+            }
+          ],
+          "name": "_workerpoolorder",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "name": "app",
+              "type": "address"
+            },
+            {
+              "name": "appmaxprice",
+              "type": "uint256"
+            },
+            {
+              "name": "dataset",
+              "type": "address"
+            },
+            {
+              "name": "datasetmaxprice",
+              "type": "uint256"
+            },
+            {
+              "name": "workerpool",
+              "type": "address"
+            },
+            {
+              "name": "workerpoolmaxprice",
+              "type": "uint256"
+            },
+            {
+              "name": "requester",
+              "type": "address"
+            },
+            {
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "name": "category",
+              "type": "uint256"
+            },
+            {
+              "name": "trust",
+              "type": "uint256"
+            },
+            {
+              "name": "beneficiary",
+              "type": "address"
+            },
+            {
+              "name": "callback",
+              "type": "address"
+            },
+            {
+              "name": "params",
+              "type": "string"
+            },
+            {
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "name": "v",
+                  "type": "uint8"
+                },
+                {
+                  "name": "r",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "s",
+                  "type": "bytes32"
+                }
+              ],
+              "name": "sign",
+              "type": "tuple"
+            }
+          ],
+          "name": "_requestorder",
+          "type": "tuple"
+        }
+      ],
+      "name": "matchOrders",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xbafbf19c"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_taskid",
+          "type": "bytes32"
+        }
+      ],
+      "name": "claim",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xbd66528a"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_taskid",
+          "type": "bytes32"
+        },
+        {
+          "name": "_results",
+          "type": "bytes"
+        }
+      ],
+      "name": "finalize",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xc037f13e"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "countCategory",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xc140996f"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_restriction",
+          "type": "address"
+        },
+        {
+          "name": "_candidate",
+          "type": "address"
+        },
+        {
+          "name": "_mask",
+          "type": "bytes1"
+        }
+      ],
+      "name": "checkRestriction",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xc3ee9d3b"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "workerpool",
+              "type": "address"
+            },
+            {
+              "name": "workerpoolprice",
+              "type": "uint256"
+            },
+            {
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "name": "category",
+              "type": "uint256"
+            },
+            {
+              "name": "trust",
+              "type": "uint256"
+            },
+            {
+              "name": "apprestrict",
+              "type": "address"
+            },
+            {
+              "name": "datasetrestrict",
+              "type": "address"
+            },
+            {
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "name": "v",
+                  "type": "uint8"
+                },
+                {
+                  "name": "r",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "s",
+                  "type": "bytes32"
+                }
+              ],
+              "name": "sign",
+              "type": "tuple"
+            }
+          ],
+          "name": "_workerpoolorder",
+          "type": "tuple"
+        }
+      ],
+      "name": "cancelWorkerpoolOrder",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xcd3d80a1"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "resultFor",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xd09cc57e"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_id",
+          "type": "bytes32"
+        }
+      ],
+      "name": "viewPresigned",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xd286eb16"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "name": "workerpool",
+              "type": "address"
+            },
+            {
+              "name": "workerpoolprice",
+              "type": "uint256"
+            },
+            {
+              "name": "volume",
+              "type": "uint256"
+            },
+            {
+              "name": "tag",
+              "type": "bytes32"
+            },
+            {
+              "name": "category",
+              "type": "uint256"
+            },
+            {
+              "name": "trust",
+              "type": "uint256"
+            },
+            {
+              "name": "apprestrict",
+              "type": "address"
+            },
+            {
+              "name": "datasetrestrict",
+              "type": "address"
+            },
+            {
+              "name": "requesterrestrict",
+              "type": "address"
+            },
+            {
+              "name": "salt",
+              "type": "bytes32"
+            },
+            {
+              "components": [
+                {
+                  "name": "v",
+                  "type": "uint8"
+                },
+                {
+                  "name": "r",
+                  "type": "bytes32"
+                },
+                {
+                  "name": "s",
+                  "type": "bytes32"
+                }
+              ],
+              "name": "sign",
+              "type": "tuple"
+            }
+          ],
+          "name": "_workerpoolorder",
+          "type": "tuple"
+        }
+      ],
+      "name": "signWorkerpoolOrder",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xd8091e81"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_worker",
+          "type": "address"
+        }
+      ],
+      "name": "viewScore",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xdb230b52"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "m_owner",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xdeff41c1"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_taskid",
+          "type": "bytes32"
+        },
+        {
+          "name": "_worker",
+          "type": "address"
+        }
+      ],
+      "name": "viewContribution",
+      "outputs": [
+        {
+          "components": [
+            {
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "name": "resultHash",
+              "type": "bytes32"
+            },
+            {
+              "name": "resultSeal",
+              "type": "bytes32"
+            },
+            {
+              "name": "enclaveChallenge",
+              "type": "address"
+            }
+          ],
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xe741363b"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xf2fde38b"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_taskid",
+          "type": "bytes32"
+        }
+      ],
+      "name": "reopen",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xf6c68e10"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_dealid",
+          "type": "bytes32[]"
+        },
+        {
+          "name": "_idx",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "initializeAndClaimArray",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xf722cb32"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_taskid",
+          "type": "bytes32[]"
+        }
+      ],
+      "name": "claimArray",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xfa055d7e"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "token",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xfc0c546a"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_taskid",
+          "type": "bytes32"
+        },
+        {
+          "name": "_resultDigest",
+          "type": "bytes32"
+        }
+      ],
+      "name": "reveal",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function",
+      "signature": "0xfc334e8c"
+    },
+    {
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "fallback"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "appHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ClosedAppOrder",
+      "type": "event",
+      "signature": "0x7343f75be43aba524f85326508cd975d016ef7884676377366c69a7c32e30668"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "datasetHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ClosedDatasetOrder",
+      "type": "event",
+      "signature": "0xcf52e3228bc482a6656d8ab56c09888b1c5bf6aaadba0185e96a34836f2bb1d4"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "workerpoolHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ClosedWorkerpoolOrder",
+      "type": "event",
+      "signature": "0x145ad51e4496173bca15e24e7eb46f9ab3a10eea0497e2801a3a6806c06113a3"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "requestHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "ClosedRequestOrder",
+      "type": "event",
+      "signature": "0x582f43f2a741cbe708aae3b8d38a4efc3d09d7e81919697b3ca693f4c444cc05"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Deposit",
+      "type": "event",
+      "signature": "0xe1fffcc4923d04b559f4d29a8bfc6cda04eb5b0d3c460751c2402c5c5cc9109c"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "target",
+          "type": "address"
+        }
+      ],
+      "name": "DepositFor",
+      "type": "event",
+      "signature": "0xcce62bfcdb09eddbe4e5ff5ec3bafdbabc25a52e1cf34f014a0a7a0864f9634c"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Withdraw",
+      "type": "event",
+      "signature": "0x884edad9ce6fa2440d8a54cc123490eb96d2768479d49ff9c7366125a9424364"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Reward",
+      "type": "event",
+      "signature": "0x619caafabdd75649b302ba8419e48cccf64f37f1983ac4727cfb38b57703ffc9"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "Seize",
+      "type": "event",
+      "signature": "0x4051ba94e08bb094159fc38391422b4b8ccfd2b1f8919c0eb37bb042d4b9cd8e"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "dealid",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "appHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "datasetHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "workerpoolHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "requestHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "volume",
+          "type": "uint256"
+        }
+      ],
+      "name": "OrdersMatched",
+      "type": "event",
+      "signature": "0xd811b592ed0899225773e8933d8df64bd0b62761a9d7aad4ed5b22735f4610a4"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "workerpool",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "dealid",
+          "type": "bytes32"
+        }
+      ],
+      "name": "SchedulerNotice",
+      "type": "event",
+      "signature": "0x692ad61076dceddd0f1a861f737553dd61fc8501cf4190d29c4e90af6607f765"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "taskid",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "name": "workerpool",
+          "type": "address"
+        }
+      ],
+      "name": "TaskInitialize",
+      "type": "event",
+      "signature": "0x252992fb0468d68d6a5784ec03214f0d0a362083f2d7ebd157af43b017a22e06"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "taskid",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "name": "worker",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "hash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "TaskContribute",
+      "type": "event",
+      "signature": "0x3fdb8d7797562d49a81078dbf7fa1771958ea452f8b13d1148383bd9506aecfb"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "taskid",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "consensus",
+          "type": "bytes32"
+        }
+      ],
+      "name": "TaskConsensus",
+      "type": "event",
+      "signature": "0xf6d49bf3e05d33a4bc497d3c793fb5756388bb96b947cf51bb60aaecb0e022e3"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "taskid",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "name": "worker",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "digest",
+          "type": "bytes32"
+        }
+      ],
+      "name": "TaskReveal",
+      "type": "event",
+      "signature": "0x4b1763d473ac8fa80b4432ba90047e1b92444d8fabc55e6a002d9b1a316d7959"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "taskid",
+          "type": "bytes32"
+        }
+      ],
+      "name": "TaskReopen",
+      "type": "event",
+      "signature": "0x3afe0f24796ce653c6ab1f3e7aba5ce564eece5e82aee724aff28253e829f07b"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "taskid",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "results",
+          "type": "bytes"
+        }
+      ],
+      "name": "TaskFinalize",
+      "type": "event",
+      "signature": "0x78ce8a8bc0fcb704e8ba3b3dbb36aa88002df8038128b4af2f27ef65db665044"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "taskid",
+          "type": "bytes32"
+        }
+      ],
+      "name": "TaskClaimed",
+      "type": "event",
+      "signature": "0xcbc308b5f91040d2659a5201858344b0b583cd2f9e18e8470c2fa052c5b21ff8"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "worker",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "taskid",
+          "type": "bytes32"
+        }
+      ],
+      "name": "AccurateContribution",
+      "type": "event",
+      "signature": "0x9703f4589802246c80b822e63697180da799e363cd1b6fd9465a5e5574d53492"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "worker",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "taskid",
+          "type": "bytes32"
+        }
+      ],
+      "name": "FaultyContribution",
+      "type": "event",
+      "signature": "0xf868788948d55240774fdbad06555105ef20bbc70d1b7eccda982b65e11e79bb"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "catid",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "name": "workClockTimeRef",
+          "type": "uint256"
+        }
+      ],
+      "name": "CreateCategory",
+      "type": "event",
+      "signature": "0x62bf08360c9d561749c54eaf4f8bf8cb6c8b6f4f40607bcec39a8172e714d25c"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "message",
+          "type": "string"
+        }
+      ],
+      "name": "CommitMessage",
+      "type": "event",
+      "signature": "0xaa1c0a0a78cec2470f9652e5d29540752e7a64d70f926933cebf13afaeda45de"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "functionId",
+          "type": "bytes4"
+        },
+        {
+          "indexed": true,
+          "name": "oldDelegate",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "newDelegate",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "functionSignature",
+          "type": "string"
+        }
+      ],
+      "name": "FunctionUpdate",
+      "type": "event",
+      "signature": "0x3234040ce3bd4564874e44810f198910133a1b24c4e84aac87edbf6b458f5353"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event",
+      "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.5.0;\npragma experimental ABIEncoderV2;\n\nimport \"./IexecProxy.sol\";\nimport \"./delegate/IexecAccessors.sol\";\nimport \"./delegate/IexecCategoryManager.sol\";\nimport \"./delegate/IexecCore.sol\";\nimport \"./delegate/IexecOrderSignature.sol\";\n\ncontract IexecInterface is IexecProxy, IexecAccessors, IexecCategoryManager, IexecCore, IexecOrderSignature\n{\n}\n",
+  "sourcePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/IexecInterface.sol",
+  "ast": {
+    "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/IexecInterface.sol",
+    "exportedSymbols": {
+      "IexecInterface": [
+        925
+      ]
+    },
+    "id": 926,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 908,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:3"
+      },
+      {
+        "id": 909,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "24:33:3"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/IexecProxy.sol",
+        "file": "./IexecProxy.sol",
+        "id": 910,
+        "nodeType": "ImportDirective",
+        "scope": 926,
+        "sourceUnit": 1025,
+        "src": "59:26:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/delegate/IexecAccessors.sol",
+        "file": "./delegate/IexecAccessors.sol",
+        "id": 911,
+        "nodeType": "ImportDirective",
+        "scope": 926,
+        "sourceUnit": 1356,
+        "src": "86:39:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/delegate/IexecCategoryManager.sol",
+        "file": "./delegate/IexecCategoryManager.sol",
+        "id": 912,
+        "nodeType": "ImportDirective",
+        "scope": 926,
+        "sourceUnit": 1464,
+        "src": "126:45:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/delegate/IexecCore.sol",
+        "file": "./delegate/IexecCore.sol",
+        "id": 913,
+        "nodeType": "ImportDirective",
+        "scope": 926,
+        "sourceUnit": 4541,
+        "src": "172:34:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/delegate/IexecOrderSignature.sol",
+        "file": "./delegate/IexecOrderSignature.sol",
+        "id": 914,
+        "nodeType": "ImportDirective",
+        "scope": 926,
+        "sourceUnit": 4907,
+        "src": "207:44:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 915,
+              "name": "IexecProxy",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1024,
+              "src": "280:10:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecProxy_$1024",
+                "typeString": "contract IexecProxy"
+              }
+            },
+            "id": 916,
+            "nodeType": "InheritanceSpecifier",
+            "src": "280:10:3"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 917,
+              "name": "IexecAccessors",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1221,
+              "src": "292:14:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecAccessors_$1221",
+                "typeString": "contract IexecAccessors"
+              }
+            },
+            "id": 918,
+            "nodeType": "InheritanceSpecifier",
+            "src": "292:14:3"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 919,
+              "name": "IexecCategoryManager",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1394,
+              "src": "308:20:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecCategoryManager_$1394",
+                "typeString": "contract IexecCategoryManager"
+              }
+            },
+            "id": 920,
+            "nodeType": "InheritanceSpecifier",
+            "src": "308:20:3"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 921,
+              "name": "IexecCore",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1730,
+              "src": "330:9:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecCore_$1730",
+                "typeString": "contract IexecCore"
+              }
+            },
+            "id": 922,
+            "nodeType": "InheritanceSpecifier",
+            "src": "330:9:3"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 923,
+              "name": "IexecOrderSignature",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 4621,
+              "src": "341:19:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecOrderSignature_$4621",
+                "typeString": "contract IexecOrderSignature"
+              }
+            },
+            "id": 924,
+            "nodeType": "InheritanceSpecifier",
+            "src": "341:19:3"
+          }
+        ],
+        "contractDependencies": [
+          906,
+          1024,
+          1153,
+          1221,
+          1394,
+          1730,
+          4621,
+          4924,
+          6782,
+          6825
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 925,
+        "linearizedBaseContracts": [
+          925,
+          4621,
+          1730,
+          1394,
+          1221,
+          4924,
+          1024,
+          1153,
+          906,
+          6825,
+          6782
+        ],
+        "name": "IexecInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 926,
+        "src": "253:111:3"
+      }
+    ],
+    "src": "0:365:3"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/IexecInterface.sol",
+    "exportedSymbols": {
+      "IexecInterface": [
+        925
+      ]
+    },
+    "id": 926,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 908,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:3"
+      },
+      {
+        "id": 909,
+        "literals": [
+          "experimental",
+          "ABIEncoderV2"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "24:33:3"
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/IexecProxy.sol",
+        "file": "./IexecProxy.sol",
+        "id": 910,
+        "nodeType": "ImportDirective",
+        "scope": 926,
+        "sourceUnit": 1025,
+        "src": "59:26:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/delegate/IexecAccessors.sol",
+        "file": "./delegate/IexecAccessors.sol",
+        "id": 911,
+        "nodeType": "ImportDirective",
+        "scope": 926,
+        "sourceUnit": 1356,
+        "src": "86:39:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/delegate/IexecCategoryManager.sol",
+        "file": "./delegate/IexecCategoryManager.sol",
+        "id": 912,
+        "nodeType": "ImportDirective",
+        "scope": 926,
+        "sourceUnit": 1464,
+        "src": "126:45:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/delegate/IexecCore.sol",
+        "file": "./delegate/IexecCore.sol",
+        "id": 913,
+        "nodeType": "ImportDirective",
+        "scope": 926,
+        "sourceUnit": 4541,
+        "src": "172:34:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/delegate/IexecOrderSignature.sol",
+        "file": "./delegate/IexecOrderSignature.sol",
+        "id": 914,
+        "nodeType": "ImportDirective",
+        "scope": 926,
+        "sourceUnit": 4907,
+        "src": "207:44:3",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 915,
+              "name": "IexecProxy",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1024,
+              "src": "280:10:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecProxy_$1024",
+                "typeString": "contract IexecProxy"
+              }
+            },
+            "id": 916,
+            "nodeType": "InheritanceSpecifier",
+            "src": "280:10:3"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 917,
+              "name": "IexecAccessors",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1221,
+              "src": "292:14:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecAccessors_$1221",
+                "typeString": "contract IexecAccessors"
+              }
+            },
+            "id": 918,
+            "nodeType": "InheritanceSpecifier",
+            "src": "292:14:3"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 919,
+              "name": "IexecCategoryManager",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1394,
+              "src": "308:20:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecCategoryManager_$1394",
+                "typeString": "contract IexecCategoryManager"
+              }
+            },
+            "id": 920,
+            "nodeType": "InheritanceSpecifier",
+            "src": "308:20:3"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 921,
+              "name": "IexecCore",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 1730,
+              "src": "330:9:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecCore_$1730",
+                "typeString": "contract IexecCore"
+              }
+            },
+            "id": 922,
+            "nodeType": "InheritanceSpecifier",
+            "src": "330:9:3"
+          },
+          {
+            "arguments": null,
+            "baseName": {
+              "contractScope": null,
+              "id": 923,
+              "name": "IexecOrderSignature",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 4621,
+              "src": "341:19:3",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IexecOrderSignature_$4621",
+                "typeString": "contract IexecOrderSignature"
+              }
+            },
+            "id": 924,
+            "nodeType": "InheritanceSpecifier",
+            "src": "341:19:3"
+          }
+        ],
+        "contractDependencies": [
+          906,
+          1024,
+          1153,
+          1221,
+          1394,
+          1730,
+          4621,
+          4924,
+          6782,
+          6825
+        ],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": false,
+        "id": 925,
+        "linearizedBaseContracts": [
+          925,
+          4621,
+          1730,
+          1394,
+          1221,
+          4924,
+          1024,
+          1153,
+          906,
+          6825,
+          6782
+        ],
+        "name": "IexecInterface",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 926,
+        "src": "253:111:3"
+      }
+    ],
+    "src": "0:365:3"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.1",
+  "updatedAt": "2019-01-08T09:34:24.414Z",
+  "devdoc": {
+    "methods": {
+      "transferOwnership(address)": {
+        "details": "Allows the current owner to transfer control of the contract to a newOwner.",
+        "params": {
+          "_newOwner": "The address to transfer ownership to."
+        }
+      }
+    }
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
