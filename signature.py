@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import shutil
 import json
 import os
 
@@ -18,12 +19,12 @@ if __name__ == '__main__':
 	if not taskid: raise ValueError('Missing TASKID')
 	if not worker: raise ValueError('Missing WORKER')
 
+	print("Genrating result and consensus.iexec in /iexec ...")
+	shutil.copy("/app/result.txt", "/iexec/result.txt")
+	shutil.copy("/app/result.txt", "/iexec/consensus.iexec")
+
 	with open(keyfile) as f:
 		private = f.read().splitlines()[0]
-
-	print("Genrating result and consensus.iexec in /iexec ...")
-	print(os.system("cp /app/result.txt /iexec/result.txt"))
-	print(os.system("cp /app/result.txt /iexec/consensus.iexec"))
 
 	digest    = "0x" + fileChecksum("/iexec/consensus.iexec", "sha256") # hexstring
 	hash      = w3.soliditySha3([            'bytes32', 'bytes32' ], [         taskid, digest ])
@@ -46,7 +47,10 @@ if __name__ == '__main__':
 		}, f, ensure_ascii=False)
 
 	print("------ Additional log -------")
-	print("ls /iexec/")
-	print(os.system("ls /iexec/"))
-	print("cat /iexec/enclaveSig.iexec")
-	print(os.system("cat /iexec/enclaveSig.iexec"))
+	print("Listing files in /iexec:")
+	for entry in os.listdir("/iexec"):
+		print("- {}".format(entry))
+	print("Content of /iexec/enclaveSig.iexec")
+	with open("/iexec/enclaveSig.iexec") as f:
+		for line in f:
+			print(f, end='')
