@@ -34,14 +34,14 @@ if __name__ == '__main__':
 
 	with open("/tmp/enclaveSig.iexec", 'w') as f:
 		json.dump({
-			'digest': "0x{}".format(digest),
-			'hash':   "0x{}".format(hash.hex()),
-			'seal':   "0x{}".format(seal.hex()),
+			'digest': digest,
+			'hash':   w3.toHex(hash),
+			'seal':   w3.toHex(seal),
 			'sign':
 			{
 				'v': signature.v,
-				'r': "0x{0:x}".format(signature.r),
-				's': "0x{0:x}".format(signature.s)
+				'r': w3.toHex(signature.r),
+				's': w3.toHex(signature.s)
 			}
 		}, f, ensure_ascii=False)
 
