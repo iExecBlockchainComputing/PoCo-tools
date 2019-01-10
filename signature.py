@@ -35,7 +35,7 @@ if __name__ == '__main__':
 	message   = w3.soliditySha3([ 'bytes' ], [ b'\x19Ethereum Signed Message:\n32' + contrib ])
 	signature = w3.eth.account.signHash(message, private)
 
-	with open("/tmp/enclaveSig.iexec", 'w') as f:
+	with open("/iexec/enclaveSig.iexec", 'w') as f:
 		json.dump({
 			'digest': digest,
 			'hash':   w3.toHex(hash),
