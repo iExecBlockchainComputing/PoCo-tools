@@ -16,8 +16,10 @@ if __name__ == '__main__':
 	worker  = os.environ.get('WORKER' ) # or '0x748e091bf16048cb5103E0E10F9D5a8b7fBDd860'
 	keyfile = os.environ.get('KEYFILE') or '/app/priv_key'
 
-	if not taskid: raise ValueError('Missing TASKID')
-	if not worker: raise ValueError('Missing WORKER')
+	if not taskid:               raise ValueError('Missing TASKID')
+	if not w3.isAddress(worker): raise ValueError('Invalid worker address')
+
+	worker = w3.toChecksumAddress(worker)
 
 	print("Genrating result and consensus.iexec in /iexec ...")
 	shutil.copy("/app/result.txt", "/iexec/result.txt")
