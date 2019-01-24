@@ -199,7 +199,8 @@ class BlockchainInterface(object):
 			app         = deal[0]
 			dataset     = deal[3]
 			scheduler   = deal[7]
-			beneficiary = deal[11]
+			tag         = deal[10]
+			beneficiary = deal[12]
 
 			# CHECK 2: Authorisation to contribute must be authentic
 			hash = self.w3.soliditySha3([                                         \
@@ -217,10 +218,12 @@ class BlockchainInterface(object):
 			)
 			assert(signer == scheduler)
 
-			# Get enclave secret
-			MREnclave = self.getContract(address=app, abiname='App').functions.m_appMREnclave().call()
-			print(f'MREnclave: {MREnclave}')
-			# TODO: VALIDATE MREnclave of throw AssertionError
+			# CHECK 3: MREnclave verification (only if part of the deal)
+			if tag[31] & 0x01:
+				# Get enclave secret
+				ExpectedMREnclave = self.getContract(address=app, abiname='App').functions.m_appMREnclave().call()
+				# print(f'MREnclave: {MREnclave}')
+				raise NotImplementedError('MREnclave verification not implemented')
 
 			Kd = Secret.query.filter_by (address=dataset                 ).first()
 			Ke = KeyPair.query.filter_by(address=auth['enclave'], app=app).first()
