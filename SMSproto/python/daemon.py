@@ -32,7 +32,8 @@ class Secret(db.Model):
 	secret  = db.Column(db.UnicodeText(), unique=False, nullable=True) # MAXSIZE
 
 	def jsonify(self):
-		return { 'address': self.address, 'secret': self.secret }
+		# return { 'address': self.address, 'secret': self.secret }
+		return self.secret
 
 ### DB STORE: ethereum keypair for enclave attestation
 class KeyPair(db.Model):
@@ -41,7 +42,8 @@ class KeyPair(db.Model):
 	app     = db.Column(db.String(42), unique=False, nullable=False)
 
 	def jsonify(self):
-		return { 'address': self.address, 'private': self.private }
+		# return { 'address': self.address, 'private': self.private }
+		return self.private
 
 # +---------------------------------------------------------------------------+
 # |                               APP ENDPOINTS                               |
@@ -146,12 +148,7 @@ class SecureAPI(Resource):
 
 	def get(self):
 		try:
-			Kd, Ke, Kb = blockchaininterface.validateAndGetKeys(request.json['auth'])
-			return jsonify({                                                  \
-				'Kd': Kd.jsonify() if Kd else None,                           \
-				'Ke': Ke.jsonify() if Ke else None,                           \
-				'Kb': Kb.jsonify() if Kb else None                            \
-			})
+			return jsonify(blockchaininterface.validateAndGetKeys(request.json['auth']))
 		except AssertionError:
 			return jsonify({ 'error': 'access denied' })
 
@@ -179,60 +176,57 @@ class BlockchainInterface(object):
 		)
 
 	def validateAndGetKeys(self, auth):
-		try:
-			# Get task details
-			taskid = auth['taskid']
-			# task1 = self.IexecHub.functions.viewTask(taskid).call()
-			# print(task1)
-			task = self.IexecHub.functions.viewTaskABILegacy(taskid).call()
+		# Get task details
+		taskid = auth['taskid']
+		# task = self.IexecHub.functions.viewTask(taskid).call()
+		# print(task)
+		task = self.IexecHub.functions.viewTaskABILegacy(taskid).call()
 
-			# CHECK 1: Task must be Active
-			assert(task[0] == 1)
+		# CHECK 1: Task must be Active
+		assert(task[0] == 1)
 
-			# Get deal details
-			dealid = task[1]
-			# deal1 = self.IexecClerk.functions.viewDeal(dealid).call()
-			# print(deal1)
-			deal = self.IexecClerk.functions.viewDealABILegacy_pt1(dealid).call() \
-			     + self.IexecClerk.functions.viewDealABILegacy_pt2(dealid).call()
+		# Get deal details
+		dealid = task[1]
+		# deal = self.IexecClerk.functions.viewDeal(dealid).call()
+		# print(deal)
+		deal = self.IexecClerk.functions.viewDealABILegacy_pt1(dealid).call() \
+		     + self.IexecClerk.functions.viewDealABILegacy_pt2(dealid).call()
 
-			app         = deal[0]
-			dataset     = deal[3]
-			scheduler   = deal[7]
-			tag         = deal[10]
-			beneficiary = deal[12]
+		app         = deal[0]
+		dataset     = deal[3]
+		scheduler   = deal[7]
+		tag         = deal[10]
+		beneficiary = deal[12]
 
-			# CHECK 2: Authorisation to contribute must be authentic
-			hash = self.w3.soliditySha3([                                         \
-				'address',                                                        \
-				'bytes32',                                                        \
-				'address'                                                         \
-			], [                                                                  \
-				auth['worker'],                                                   \
-				auth['taskid'],                                                   \
-				auth['enclave']                                                   \
-			])
-			signer = self.w3.eth.account.recoverHash(                             \
-				message_hash=defunct_hash_message(hash),                          \
-				vrs=(auth['sign']['v'], auth['sign']['r'], auth['sign']['s'])     \
-			)
-			assert(signer == scheduler)
+		# CHECK 2: Authorisation to contribute must be authentic
+		hash = self.w3.soliditySha3([                                         \
+			'address',                                                        \
+			'bytes32',                                                        \
+			'address'                                                         \
+		], [                                                                  \
+			auth['worker'],                                                   \
+			auth['taskid'],                                                   \
+			auth['enclave']                                                   \
+		])
+		signer = self.w3.eth.account.recoverHash(                             \
+			message_hash=defunct_hash_message(hash),                          \
+			vrs=(auth['sign']['v'], auth['sign']['r'], auth['sign']['s'])     \
+		)
+		assert(signer == scheduler)
 
-			# CHECK 3: MREnclave verification (only if part of the deal)
-			if tag[31] & 0x01:
-				# Get enclave secret
-				ExpectedMREnclave = self.getContract(address=app, abiname='App').functions.m_appMREnclave().call()
-				# print(f'MREnclave: {MREnclave}')
-				raise NotImplementedError('MREnclave verification not implemented')
+		# CHECK 3: MREnclave verification (only if part of the deal)
+		if tag[31] & 0x01:
+			# Get enclave secret
+			ExpectedMREnclave = self.getContract(address=app, abiname='App').functions.m_appMREnclave().call()
+			# print(f'MREnclave: {MREnclave}')
+			raise NotImplementedError('MREnclave verification not implemented')
 
-			Kd = Secret.query.filter_by (address=dataset                 ).first()
-			Ke = KeyPair.query.filter_by(address=auth['enclave'], app=app).first()
-			Kb = Secret.query.filter_by (address=beneficiary             ).first()
-			return Kd, Ke, Kb
-		except:
-			return None, None, None
+		keys = {}
+		keys[dataset]         = Secret.query.filter_by (address=dataset                 ).first() # Kd
+		keys[beneficiary]     = Secret.query.filter_by (address=beneficiary             ).first() # Kb
+		keys[auth['enclave']] = KeyPair.query.filter_by(address=auth['enclave'], app=app).first() # Ke
 
-
+		return { key: value.jsonify() if value else None for key, value in keys.items() }
 
 
 
