@@ -199,7 +199,9 @@ class BlockchainInterface(object):
 		beneficiary = deal[12]
 
 		# CHECK 2: Authorisation to contribute must be authentic
-		hash = self.w3.soliditySha3([                                         \
+		# web3 v4.8.2 → soliditySha3
+		# web3 v5.0.0 → solidityKeccak
+		hash = self.w3.solidityKeccak([                                       \
 			'address',                                                        \
 			'bytes32',                                                        \
 			'address'                                                         \
