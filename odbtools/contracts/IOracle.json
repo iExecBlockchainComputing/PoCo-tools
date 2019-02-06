@@ -26,22 +26,22 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.5.0;\n\n/**\n * @title EIP1154 interface\n * @dev see https://eips.ethereum.org/EIPS/eip-1154\n */\ninterface IOracleConsumer\n{\n\tfunction receiveResult(bytes32, bytes calldata)\n\t\texternal;\n}\n\ninterface IOracle\n{\n\tfunction resultFor(bytes32)\n\t\texternal view returns (bytes memory);\n}\n",
-  "sourcePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/interfaces/EIP1154.sol",
+  "sourcePath": "/home/amxx/Work/iExec/code/PoCo/node_modules/iexec-solidity/contracts/ERC1154_OracleInterface/IERC1154.sol",
   "ast": {
-    "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/interfaces/EIP1154.sol",
+    "absolutePath": "/home/amxx/Work/iExec/code/PoCo/node_modules/iexec-solidity/contracts/ERC1154_OracleInterface/IERC1154.sol",
     "exportedSymbols": {
       "IOracle": [
-        4932
+        5977
       ],
       "IOracleConsumer": [
-        4924
+        5969
       ]
     },
-    "id": 4933,
+    "id": 5978,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4916,
+        "id": 5961,
         "literals": [
           "solidity",
           "^",
@@ -49,7 +49,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:10"
+        "src": "0:23:24"
       },
       {
         "baseContracts": [],
@@ -57,9 +57,9 @@
         "contractKind": "interface",
         "documentation": "@title EIP1154 interface\n@dev see https://eips.ethereum.org/EIPS/eip-1154",
         "fullyImplemented": false,
-        "id": 4924,
+        "id": 5969,
         "linearizedBaseContracts": [
-          4924
+          5969
         ],
         "name": "IOracleConsumer",
         "nodeType": "ContractDefinition",
@@ -67,23 +67,23 @@
           {
             "body": null,
             "documentation": null,
-            "id": 4923,
+            "id": 5968,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "receiveResult",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4921,
+              "id": 5966,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4918,
+                  "id": 5963,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4923,
-                  "src": "165:7:10",
+                  "scope": 5968,
+                  "src": "165:7:24",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -91,10 +91,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 4917,
+                    "id": 5962,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "165:7:10",
+                    "src": "165:7:24",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -105,11 +105,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 4920,
+                  "id": 5965,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4923,
-                  "src": "174:14:10",
+                  "scope": 5968,
+                  "src": "174:14:24",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -117,10 +117,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 4919,
+                    "id": 5964,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "174:5:10",
+                    "src": "174:5:24",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -130,23 +130,23 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "164:25:10"
+              "src": "164:25:24"
             },
             "returnParameters": {
-              "id": 4922,
+              "id": 5967,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "200:0:10"
+              "src": "200:0:24"
             },
-            "scope": 4924,
-            "src": "142:59:10",
+            "scope": 5969,
+            "src": "142:59:24",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 4933,
-        "src": "113:90:10"
+        "scope": 5978,
+        "src": "113:90:24"
       },
       {
         "baseContracts": [],
@@ -154,9 +154,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 4932,
+        "id": 5977,
         "linearizedBaseContracts": [
-          4932
+          5977
         ],
         "name": "IOracle",
         "nodeType": "ContractDefinition",
@@ -164,23 +164,23 @@
           {
             "body": null,
             "documentation": null,
-            "id": 4931,
+            "id": 5976,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "resultFor",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4927,
+              "id": 5972,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4926,
+                  "id": 5971,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4931,
-                  "src": "245:7:10",
+                  "scope": 5976,
+                  "src": "245:7:24",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -188,10 +188,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 4925,
+                    "id": 5970,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "245:7:10",
+                    "src": "245:7:24",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -201,19 +201,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "244:9:10"
+              "src": "244:9:24"
             },
             "returnParameters": {
-              "id": 4930,
+              "id": 5975,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4929,
+                  "id": 5974,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4931,
-                  "src": "279:12:10",
+                  "scope": 5976,
+                  "src": "279:12:24",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -221,10 +221,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 4928,
+                    "id": 5973,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "279:5:10",
+                    "src": "279:5:24",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -234,36 +234,36 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "278:14:10"
+              "src": "278:14:24"
             },
-            "scope": 4932,
-            "src": "226:67:10",
+            "scope": 5977,
+            "src": "226:67:24",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 4933,
-        "src": "205:90:10"
+        "scope": 5978,
+        "src": "205:90:24"
       }
     ],
-    "src": "0:296:10"
+    "src": "0:296:24"
   },
   "legacyAST": {
-    "absolutePath": "/home/amxx/Work/iExec/code/PoCo-dev/contracts/interfaces/EIP1154.sol",
+    "absolutePath": "/home/amxx/Work/iExec/code/PoCo/node_modules/iexec-solidity/contracts/ERC1154_OracleInterface/IERC1154.sol",
     "exportedSymbols": {
       "IOracle": [
-        4932
+        5977
       ],
       "IOracleConsumer": [
-        4924
+        5969
       ]
     },
-    "id": 4933,
+    "id": 5978,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4916,
+        "id": 5961,
         "literals": [
           "solidity",
           "^",
@@ -271,7 +271,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:23:10"
+        "src": "0:23:24"
       },
       {
         "baseContracts": [],
@@ -279,9 +279,9 @@
         "contractKind": "interface",
         "documentation": "@title EIP1154 interface\n@dev see https://eips.ethereum.org/EIPS/eip-1154",
         "fullyImplemented": false,
-        "id": 4924,
+        "id": 5969,
         "linearizedBaseContracts": [
-          4924
+          5969
         ],
         "name": "IOracleConsumer",
         "nodeType": "ContractDefinition",
@@ -289,23 +289,23 @@
           {
             "body": null,
             "documentation": null,
-            "id": 4923,
+            "id": 5968,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "receiveResult",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4921,
+              "id": 5966,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4918,
+                  "id": 5963,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4923,
-                  "src": "165:7:10",
+                  "scope": 5968,
+                  "src": "165:7:24",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -313,10 +313,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 4917,
+                    "id": 5962,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "165:7:10",
+                    "src": "165:7:24",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -327,11 +327,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 4920,
+                  "id": 5965,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4923,
-                  "src": "174:14:10",
+                  "scope": 5968,
+                  "src": "174:14:24",
                   "stateVariable": false,
                   "storageLocation": "calldata",
                   "typeDescriptions": {
@@ -339,10 +339,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 4919,
+                    "id": 5964,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "174:5:10",
+                    "src": "174:5:24",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -352,23 +352,23 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "164:25:10"
+              "src": "164:25:24"
             },
             "returnParameters": {
-              "id": 4922,
+              "id": 5967,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "200:0:10"
+              "src": "200:0:24"
             },
-            "scope": 4924,
-            "src": "142:59:10",
+            "scope": 5969,
+            "src": "142:59:24",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 4933,
-        "src": "113:90:10"
+        "scope": 5978,
+        "src": "113:90:24"
       },
       {
         "baseContracts": [],
@@ -376,9 +376,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 4932,
+        "id": 5977,
         "linearizedBaseContracts": [
-          4932
+          5977
         ],
         "name": "IOracle",
         "nodeType": "ContractDefinition",
@@ -386,23 +386,23 @@
           {
             "body": null,
             "documentation": null,
-            "id": 4931,
+            "id": 5976,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "resultFor",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4927,
+              "id": 5972,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4926,
+                  "id": 5971,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4931,
-                  "src": "245:7:10",
+                  "scope": 5976,
+                  "src": "245:7:24",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -410,10 +410,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 4925,
+                    "id": 5970,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "245:7:10",
+                    "src": "245:7:24",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -423,19 +423,19 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "244:9:10"
+              "src": "244:9:24"
             },
             "returnParameters": {
-              "id": 4930,
+              "id": 5975,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4929,
+                  "id": 5974,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4931,
-                  "src": "279:12:10",
+                  "scope": 5976,
+                  "src": "279:12:24",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -443,10 +443,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 4928,
+                    "id": 5973,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "279:5:10",
+                    "src": "279:5:24",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -456,20 +456,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "278:14:10"
+              "src": "278:14:24"
             },
-            "scope": 4932,
-            "src": "226:67:10",
+            "scope": 5977,
+            "src": "226:67:24",
             "stateMutability": "view",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 4933,
-        "src": "205:90:10"
+        "scope": 5978,
+        "src": "205:90:24"
       }
     ],
-    "src": "0:296:10"
+    "src": "0:296:24"
   },
   "compiler": {
     "name": "solc",
@@ -477,7 +477,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-01-08T08:44:21.781Z",
+  "updatedAt": "2019-01-25T13:01:12.278Z",
   "devdoc": {
     "methods": {}
   },

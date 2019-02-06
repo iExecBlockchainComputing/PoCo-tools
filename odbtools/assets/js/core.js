@@ -9,7 +9,8 @@ var bootstrap         = require('bootstrap')
 var AppABI         = null;
 var DatasetABI     = null;
 var WorkerpoolABI  = null;
-var IexecInterface = null;
+var IexecClerk     = null;
+var IexecHub       = null;
 var RLC            = null;
 
 const NULLDATASET = {"dataset":"0x0000000000000000000000000000000000000000","datasetprice":0,"volume":0,"tag":"0x0000000000000000000000000000000000000000000000000000000000000000","apprestrict":"0x0000000000000000000000000000000000000000","workerpoolrestrict":"0x0000000000000000000000000000000000000000","requesterrestrict":"0x0000000000000000000000000000000000000000","salt":"0x0000000000000000000000000000000000000000","sign":{"r":"0x0000000000000000000000000000000000000000000000000000000000000000","s":"0x0000000000000000000000000000000000000000000000000000000000000000","v":0}};
@@ -241,8 +242,6 @@ function getOrderOwner(order)
 
 function signStruct(typename, message, wallet)
 {
-	console.log(DOMAIN);
-	// console.log(Domain);
 	return new Promise((resolve, reject) => {
 		web3.currentProvider.sendAsync({
 			method: "eth_signTypedData_v3",
@@ -302,19 +301,22 @@ async function main()
 	{
 		urlParams = new URLSearchParams(window.location.search);
 		DOMAIN.chainId           = await web3.eth.net.getId();
-		DOMAIN.verifyingContract = web3.utils.isAddress(urlParams.get("interface")) ? urlParams.get("interface") : "0x8BE59dA9Bf70e75Aa56bF29A3e55d22e882F91bA";
+		DOMAIN.verifyingContract = web3.utils.isAddress(urlParams.get("clerk")) ? urlParams.get("clerk") : "0x8BE59dA9Bf70e75Aa56bF29A3e55d22e882F91bA";
 
 		AppABI            = (await $.getJSON("contracts/App.json"           )).abi;
 		DatasetABI        = (await $.getJSON("contracts/Dataset.json"       )).abi;
 		WorkerpoolABI     = (await $.getJSON("contracts/Workerpool.json"    )).abi;
 		RLCABI            = (await $.getJSON("contracts/RLC.json"           )).abi;
-		IexecInterfaceABI = (await $.getJSON("contracts/IexecInterface.json")).abi;
+		IexecClerkABI     = (await $.getJSON("contracts/IexecClerk.json"    )).abi;
+		IexecHubABI       = (await $.getJSON("contracts/IexecHub.json"      )).abi;
 
-		IexecInterface = new web3.eth.Contract(IexecInterfaceABI, DOMAIN.verifyingContract);
-		RLC            = new web3.eth.Contract(RLCABI,            await IexecInterface.methods.token().call());
+		IexecClerk = new web3.eth.Contract(IexecClerkABI, DOMAIN.verifyingContract);
+		IexecHub   = new web3.eth.Contract(IexecHubABI,   await IexecClerk.methods.iexechub().call());
+		RLC        = new web3.eth.Contract(RLCABI,        await IexecClerk.methods.token().call());
 
-		console.log("using web3:", web3.version);
-		console.log("using interface:", DOMAIN.verifyingContract);
+		console.log("using web3:",  web3.version);
+		console.log("using clerk:", IexecClerk._address);
+		console.log("using hub:  ",   IexecHub._address);
 		console.log("-- let's dance! --");
 	}
 	catch (e)
@@ -376,7 +378,7 @@ $("#addRLC").click(() => {
 	}, console.log);
 });
 
-async function RequestOrderProgress(requesthash, requestorder)
+async function RequestOrderProgress(hash, volume)
 {
 	$("#view-progress").show();
 
@@ -389,19 +391,17 @@ async function RequestOrderProgress(requesthash, requestorder)
 	deals = {};
 	tasks = {};
 
-	for (var idx = 0; idx < requestorder.volume;)
+	for (var idx = 0; idx < volume;)
 	{
-		var dealid = web3.utils.soliditySha3({ type: "bytes32", value: requesthash }, { type: "uint256", value: idx });
-		console.log(dealid)
-		var deal   = await IexecInterface.methods.viewDeal(dealid).call();
-		console.log(deal)
+		var dealid = web3.utils.soliditySha3({ type: "bytes32", value: hash }, { type: "uint256", value: idx });
+		var deal   = await IexecClerk.methods.viewDeal(dealid).call();
 		if (deal.botSize == 0) break;
 		deals[idx] = deal;
 
 		first     = parseInt(deal.botFirst);
 		last      = first + parseInt(deal.botSize);
 		var style = [ "bg-primary", "bg-info "][$("#view-progress-deals").children().length % 2];
-		var width = (parseInt(deal.botSize)*100/requestorder.volume) + "%";
+		var width = (parseInt(deal.botSize)*100/volume) + "%";
 		var title = "Deal " + dealid;
 
 		var descr = [];
@@ -429,13 +429,13 @@ async function RequestOrderProgress(requesthash, requestorder)
 		for (var _ = 0; _ < parseInt(deal.botSize); ++idx, ++_)
 		{
 			var taskid = web3.utils.soliditySha3({ type: "bytes32", value: dealid }, { type: "uint256", value: idx });
-			var task   = await IexecInterfaceABI.methods.viewTask(taskid).call();
+			var task   = await IexecHub.methods.viewTask(taskid).call();
 			tasks[idx] = { deal: deal, task: task };
 
 			var status = parseInt(task.status);
 			var style  = ["bg-secondary", "bg-primary progress-bar-striped progress-bar-animated", "bg-warning progress-bar-striped progress-bar-animated", "bg-success", "bg-danger"][status];
-			var width  = (100 / requestorder.volume) + "%";
-			var title  = "Task " + (idx+1) + "/" + requestorder.volume + ": " + ["Unset", "Active", "Revealing", "Completed", "Failed"][status];
+			var width  = (100 / volume) + "%";
+			var title  = "Task " + (idx+1) + "/" + volume + ": " + ["Unset", "Active", "Revealing", "Completed", "Failed"][status];
 
 			var descr = []
 			if (status == 0) descr.push("Task waiting initialization");
@@ -462,11 +462,11 @@ async function RequestOrderProgress(requesthash, requestorder)
 		}
 	}
 
-	IexecInterface.methods.viewConsumed(requesthash).call().then(consumed => {
+	IexecClerk.methods.viewConsumed(hash).call().then(consumed => {
 		first = last;
 		last  = consumed;
 		var style = "bg-danger progress-bar-striped";
-		var width = ((parseInt(last) - first)*100/requestorder.volume) + "%";
+		var width = ((parseInt(last) - first)*100/volume) + "%";
 		var title = "Cancelled";
 		var descr = [ "Task " + (first+1) + " → " + last ];
 
@@ -503,18 +503,34 @@ async function RequestOrderProgress(requesthash, requestorder)
 }
 
 $("#view-submit").click(() => {
-	__order = JSON.parse($("#view-input").val());
-	if      (isValidOrder("AppOrder",        __order)) { __hash = AppOrderStructHash       (__order); }
-	else if (isValidOrder("DatasetOrder",    __order)) { __hash = DatasetOrderStructHash   (__order); }
-	else if (isValidOrder("WorkerpoolOrder", __order)) { __hash = WorkerpoolOrderStructHash(__order); }
-	else if (isValidOrder("RequestOrder",    __order)) { __hash = RequestOrderStructHash   (__order); }
-	IexecInterface.methods.viewConsumed(__hash).call().then(value => {
-		notify(" status: " + value + " / " + __order.volume);
-		if (isValidOrder("RequestOrder", __order))
+	try
+	{
+		__order = JSON.parse($("#view-input").val());
+		if      (isValidOrder("AppOrder",        __order)) { __expand = false; __hash = AppOrderStructHash       (__order); }
+		else if (isValidOrder("DatasetOrder",    __order)) { __expand = false; __hash = DatasetOrderStructHash   (__order); }
+		else if (isValidOrder("WorkerpoolOrder", __order)) { __expand = false; __hash = WorkerpoolOrderStructHash(__order); }
+		else if (isValidOrder("RequestOrder",    __order)) { __expand = true;  __hash = RequestOrderStructHash   (__order); }
+		else throw "Invalid order";
+	}
+	catch (_)
+	{
+		__hash   = $("#view-input-hash").val();
+		__expand = true;
+	}
+	finally
+	{
+		if (__hash != "")
 		{
-			RequestOrderProgress(__hash, __order);
+			IexecClerk.methods.viewConsumed(__hash).call().then(value => {
+				__volume = typeof __order == "undefined" ? value : __order.volume;
+				notify(" status: " + value + " / " + __volume);
+				if (__expand)
+				{
+					RequestOrderProgress(__hash, __volume);
+				}
+			});
 		}
-	});
+	}
 });
 
 $("#match-submit").click(() => {
@@ -527,7 +543,7 @@ $("#match-submit").click(() => {
 	if (!isValidOrder("PoolOrder", __workerpoolorder)) { alert("Invalid WorkerpoolOrder"); return; }
 	if (!isValidOrder("UserOrder", __requestorder   )) { alert("Invalid RequestOrder"   ); return; }
 	web3.eth.getAccounts().then(account => {
-		IexecInterface.methods.matchOrders(__apporder, __datasetorder, __workerpoolorder, __requestorder)
+		IexecClerk.methods.matchOrders(__apporder, __datasetorder, __workerpoolorder, __requestorder)
 		.send({ from: account[0], gas: 800000 })
 		.then(console.log);
 	});
@@ -690,10 +706,10 @@ $("#requestorder-sign").click(() => {
 
 $("#cancel-submit").click(() => {
 	__order = JSON.parse($("#cancel-input").val());
-	if      (isValidOrder("AppOrder",        __order)) { __method = IexecInterface.methods.cancelAppOrder       (__order); }
-	else if (isValidOrder("DatasetOrder",    __order)) { __method = IexecInterface.methods.cancelDatasetOrder   (__order); }
-	else if (isValidOrder("WorkerpoolOrder", __order)) { __method = IexecInterface.methods.cancelWorkerpoolOrder(__order); }
-	else if (isValidOrder("RequestOrder",    __order)) { __method = IexecInterface.methods.cancelRequestOrder   (__order); }
+	if      (isValidOrder("AppOrder",        __order)) { __method = IexecClerk.methods.cancelAppOrder       (__order); }
+	else if (isValidOrder("DatasetOrder",    __order)) { __method = IexecClerk.methods.cancelDatasetOrder   (__order); }
+	else if (isValidOrder("WorkerpoolOrder", __order)) { __method = IexecClerk.methods.cancelWorkerpoolOrder(__order); }
+	else if (isValidOrder("RequestOrder",    __order)) { __method = IexecClerk.methods.cancelRequestOrder   (__order); }
 	getOrderOwner(__order).then(owner => {
 		__method
 		.send({ from: owner, gas: 80000 })

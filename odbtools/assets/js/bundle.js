@@ -43115,8 +43115,8 @@ module.exports = function (password, salt, iterations, keylen) {
   }
 }
 
-}).call(this,{"isBuffer":require("../../../../../../../v11.4.0/lib/node_modules/browserify/node_modules/is-buffer/index.js")})
-},{"../../../../../../../v11.4.0/lib/node_modules/browserify/node_modules/is-buffer/index.js":346}],146:[function(require,module,exports){
+}).call(this,{"isBuffer":require("../../../../../../../v11.7.0/lib/node_modules/browserify/node_modules/is-buffer/index.js")})
+},{"../../../../../../../v11.7.0/lib/node_modules/browserify/node_modules/is-buffer/index.js":346}],146:[function(require,module,exports){
 var md5 = require('create-hash/md5')
 var RIPEMD160 = require('ripemd160')
 var sha = require('sha.js')
@@ -60225,7 +60225,7 @@ module.exports={
   "_resolved": "https://registry.npmjs.org/elliptic/-/elliptic-6.4.1.tgz",
   "_shasum": "c2d0b7776911b86722c632c3c06c60f2f819939a",
   "_spec": "elliptic@^6.0.0",
-  "_where": "/home/amxx/.nvm/versions/node/v11.4.0/lib/node_modules/browserify/node_modules/browserify-sign",
+  "_where": "/home/amxx/.nvm/versions/node/v11.7.0/lib/node_modules/browserify/node_modules/browserify-sign",
   "author": {
     "name": "Fedor Indutny",
     "email": "fedor@indutny.com"
@@ -61059,12 +61059,208 @@ arguments[4][136][0].apply(exports,arguments)
 },{"dup":136}],354:[function(require,module,exports){
 arguments[4][137][0].apply(exports,arguments)
 },{"./certificate":355,"asn1.js":245,"dup":137}],355:[function(require,module,exports){
-arguments[4][138][0].apply(exports,arguments)
-},{"asn1.js":245,"dup":138}],356:[function(require,module,exports){
+// from https://github.com/Rantanen/node-dtls/blob/25a7dc861bda38cfeac93a723500eea4f0ac2e86/Certificate.js
+// thanks to @Rantanen
+
+'use strict'
+
+var asn = require('asn1.js')
+
+var Time = asn.define('Time', function () {
+  this.choice({
+    utcTime: this.utctime(),
+    generalTime: this.gentime()
+  })
+})
+
+var AttributeTypeValue = asn.define('AttributeTypeValue', function () {
+  this.seq().obj(
+    this.key('type').objid(),
+    this.key('value').any()
+  )
+})
+
+var AlgorithmIdentifier = asn.define('AlgorithmIdentifier', function () {
+  this.seq().obj(
+    this.key('algorithm').objid(),
+    this.key('parameters').optional(),
+    this.key('curve').objid().optional()
+  )
+})
+
+var SubjectPublicKeyInfo = asn.define('SubjectPublicKeyInfo', function () {
+  this.seq().obj(
+    this.key('algorithm').use(AlgorithmIdentifier),
+    this.key('subjectPublicKey').bitstr()
+  )
+})
+
+var RelativeDistinguishedName = asn.define('RelativeDistinguishedName', function () {
+  this.setof(AttributeTypeValue)
+})
+
+var RDNSequence = asn.define('RDNSequence', function () {
+  this.seqof(RelativeDistinguishedName)
+})
+
+var Name = asn.define('Name', function () {
+  this.choice({
+    rdnSequence: this.use(RDNSequence)
+  })
+})
+
+var Validity = asn.define('Validity', function () {
+  this.seq().obj(
+    this.key('notBefore').use(Time),
+    this.key('notAfter').use(Time)
+  )
+})
+
+var Extension = asn.define('Extension', function () {
+  this.seq().obj(
+    this.key('extnID').objid(),
+    this.key('critical').bool().def(false),
+    this.key('extnValue').octstr()
+  )
+})
+
+var TBSCertificate = asn.define('TBSCertificate', function () {
+  this.seq().obj(
+    this.key('version').explicit(0).int().optional(),
+    this.key('serialNumber').int(),
+    this.key('signature').use(AlgorithmIdentifier),
+    this.key('issuer').use(Name),
+    this.key('validity').use(Validity),
+    this.key('subject').use(Name),
+    this.key('subjectPublicKeyInfo').use(SubjectPublicKeyInfo),
+    this.key('issuerUniqueID').implicit(1).bitstr().optional(),
+    this.key('subjectUniqueID').implicit(2).bitstr().optional(),
+    this.key('extensions').explicit(3).seqof(Extension).optional()
+  )
+})
+
+var X509Certificate = asn.define('X509Certificate', function () {
+  this.seq().obj(
+    this.key('tbsCertificate').use(TBSCertificate),
+    this.key('signatureAlgorithm').use(AlgorithmIdentifier),
+    this.key('signatureValue').bitstr()
+  )
+})
+
+module.exports = X509Certificate
+
+},{"asn1.js":245}],356:[function(require,module,exports){
 arguments[4][139][0].apply(exports,arguments)
 },{"browserify-aes":265,"buffer":291,"dup":139,"evp_bytestokey":328}],357:[function(require,module,exports){
-arguments[4][140][0].apply(exports,arguments)
-},{"./aesid.json":353,"./asn1":354,"./fixProc":356,"browserify-aes":265,"buffer":291,"dup":140,"pbkdf2":358}],358:[function(require,module,exports){
+var asn1 = require('./asn1')
+var aesid = require('./aesid.json')
+var fixProc = require('./fixProc')
+var ciphers = require('browserify-aes')
+var compat = require('pbkdf2')
+var Buffer = require('safe-buffer').Buffer
+module.exports = parseKeys
+
+function parseKeys (buffer) {
+  var password
+  if (typeof buffer === 'object' && !Buffer.isBuffer(buffer)) {
+    password = buffer.passphrase
+    buffer = buffer.key
+  }
+  if (typeof buffer === 'string') {
+    buffer = Buffer.from(buffer)
+  }
+
+  var stripped = fixProc(buffer, password)
+
+  var type = stripped.tag
+  var data = stripped.data
+  var subtype, ndata
+  switch (type) {
+    case 'CERTIFICATE':
+      ndata = asn1.certificate.decode(data, 'der').tbsCertificate.subjectPublicKeyInfo
+      // falls through
+    case 'PUBLIC KEY':
+      if (!ndata) {
+        ndata = asn1.PublicKey.decode(data, 'der')
+      }
+      subtype = ndata.algorithm.algorithm.join('.')
+      switch (subtype) {
+        case '1.2.840.113549.1.1.1':
+          return asn1.RSAPublicKey.decode(ndata.subjectPublicKey.data, 'der')
+        case '1.2.840.10045.2.1':
+          ndata.subjectPrivateKey = ndata.subjectPublicKey
+          return {
+            type: 'ec',
+            data: ndata
+          }
+        case '1.2.840.10040.4.1':
+          ndata.algorithm.params.pub_key = asn1.DSAparam.decode(ndata.subjectPublicKey.data, 'der')
+          return {
+            type: 'dsa',
+            data: ndata.algorithm.params
+          }
+        default: throw new Error('unknown key id ' + subtype)
+      }
+      throw new Error('unknown key type ' + type)
+    case 'ENCRYPTED PRIVATE KEY':
+      data = asn1.EncryptedPrivateKey.decode(data, 'der')
+      data = decrypt(data, password)
+      // falls through
+    case 'PRIVATE KEY':
+      ndata = asn1.PrivateKey.decode(data, 'der')
+      subtype = ndata.algorithm.algorithm.join('.')
+      switch (subtype) {
+        case '1.2.840.113549.1.1.1':
+          return asn1.RSAPrivateKey.decode(ndata.subjectPrivateKey, 'der')
+        case '1.2.840.10045.2.1':
+          return {
+            curve: ndata.algorithm.curve,
+            privateKey: asn1.ECPrivateKey.decode(ndata.subjectPrivateKey, 'der').privateKey
+          }
+        case '1.2.840.10040.4.1':
+          ndata.algorithm.params.priv_key = asn1.DSAparam.decode(ndata.subjectPrivateKey, 'der')
+          return {
+            type: 'dsa',
+            params: ndata.algorithm.params
+          }
+        default: throw new Error('unknown key id ' + subtype)
+      }
+      throw new Error('unknown key type ' + type)
+    case 'RSA PUBLIC KEY':
+      return asn1.RSAPublicKey.decode(data, 'der')
+    case 'RSA PRIVATE KEY':
+      return asn1.RSAPrivateKey.decode(data, 'der')
+    case 'DSA PRIVATE KEY':
+      return {
+        type: 'dsa',
+        params: asn1.DSAPrivateKey.decode(data, 'der')
+      }
+    case 'EC PRIVATE KEY':
+      data = asn1.ECPrivateKey.decode(data, 'der')
+      return {
+        curve: data.parameters.value,
+        privateKey: data.privateKey
+      }
+    default: throw new Error('unknown key type ' + type)
+  }
+}
+parseKeys.signature = asn1.signature
+function decrypt (data, password) {
+  var salt = data.algorithm.decrypt.kde.kdeparams.salt
+  var iters = parseInt(data.algorithm.decrypt.kde.kdeparams.iters.toString(), 10)
+  var algo = aesid[data.algorithm.decrypt.cipher.algo.join('.')]
+  var iv = data.algorithm.decrypt.cipher.iv
+  var cipherText = data.subjectPrivateKey
+  var keylen = parseInt(algo.split('-')[1], 10) / 8
+  var key = compat.pbkdf2Sync(password, salt, iters, keylen, 'sha1')
+  var cipher = ciphers.createDecipheriv(algo, key, iv)
+  var out = []
+  out.push(cipher.update(cipherText))
+  out.push(cipher.final())
+  return Buffer.concat(out)
+}
+
+},{"./aesid.json":353,"./asn1":354,"./fixProc":356,"browserify-aes":265,"pbkdf2":358,"safe-buffer":392}],358:[function(require,module,exports){
 arguments[4][142][0].apply(exports,arguments)
 },{"./lib/async":359,"./lib/sync":362,"dup":142}],359:[function(require,module,exports){
 arguments[4][143][0].apply(exports,arguments)
@@ -66624,7 +66820,8 @@ var bootstrap         = require('bootstrap')
 var AppABI         = null;
 var DatasetABI     = null;
 var WorkerpoolABI  = null;
-var IexecInterface = null;
+var IexecClerk     = null;
+var IexecHub       = null;
 var RLC            = null;
 
 const NULLDATASET = {"dataset":"0x0000000000000000000000000000000000000000","datasetprice":0,"volume":0,"tag":"0x0000000000000000000000000000000000000000000000000000000000000000","apprestrict":"0x0000000000000000000000000000000000000000","workerpoolrestrict":"0x0000000000000000000000000000000000000000","requesterrestrict":"0x0000000000000000000000000000000000000000","salt":"0x0000000000000000000000000000000000000000","sign":{"r":"0x0000000000000000000000000000000000000000000000000000000000000000","s":"0x0000000000000000000000000000000000000000000000000000000000000000","v":0}};
@@ -66856,8 +67053,6 @@ function getOrderOwner(order)
 
 function signStruct(typename, message, wallet)
 {
-	console.log(DOMAIN);
-	// console.log(Domain);
 	return new Promise((resolve, reject) => {
 		web3.currentProvider.sendAsync({
 			method: "eth_signTypedData_v3",
@@ -66917,19 +67112,22 @@ async function main()
 	{
 		urlParams = new URLSearchParams(window.location.search);
 		DOMAIN.chainId           = await web3.eth.net.getId();
-		DOMAIN.verifyingContract = web3.utils.isAddress(urlParams.get("interface")) ? urlParams.get("interface") : "0x8BE59dA9Bf70e75Aa56bF29A3e55d22e882F91bA";
+		DOMAIN.verifyingContract = web3.utils.isAddress(urlParams.get("clerk")) ? urlParams.get("clerk") : "0x8BE59dA9Bf70e75Aa56bF29A3e55d22e882F91bA";
 
 		AppABI            = (await $.getJSON("contracts/App.json"           )).abi;
 		DatasetABI        = (await $.getJSON("contracts/Dataset.json"       )).abi;
 		WorkerpoolABI     = (await $.getJSON("contracts/Workerpool.json"    )).abi;
 		RLCABI            = (await $.getJSON("contracts/RLC.json"           )).abi;
-		IexecInterfaceABI = (await $.getJSON("contracts/IexecInterface.json")).abi;
+		IexecClerkABI     = (await $.getJSON("contracts/IexecClerk.json"    )).abi;
+		IexecHubABI       = (await $.getJSON("contracts/IexecHub.json"      )).abi;
 
-		IexecInterface = new web3.eth.Contract(IexecInterfaceABI, DOMAIN.verifyingContract);
-		RLC            = new web3.eth.Contract(RLCABI,            await IexecInterface.methods.token().call());
+		IexecClerk = new web3.eth.Contract(IexecClerkABI, DOMAIN.verifyingContract);
+		IexecHub   = new web3.eth.Contract(IexecHubABI,   await IexecClerk.methods.iexechub().call());
+		RLC        = new web3.eth.Contract(RLCABI,        await IexecClerk.methods.token().call());
 
-		console.log("using web3:", web3.version);
-		console.log("using interface:", DOMAIN.verifyingContract);
+		console.log("using web3:",  web3.version);
+		console.log("using clerk:", IexecClerk._address);
+		console.log("using hub:  ",   IexecHub._address);
 		console.log("-- let's dance! --");
 	}
 	catch (e)
@@ -66991,7 +67189,7 @@ $("#addRLC").click(() => {
 	}, console.log);
 });
 
-async function RequestOrderProgress(requesthash, requestorder)
+async function RequestOrderProgress(hash, volume)
 {
 	$("#view-progress").show();
 
@@ -67004,19 +67202,17 @@ async function RequestOrderProgress(requesthash, requestorder)
 	deals = {};
 	tasks = {};
 
-	for (var idx = 0; idx < requestorder.volume;)
+	for (var idx = 0; idx < volume;)
 	{
-		var dealid = web3.utils.soliditySha3({ type: "bytes32", value: requesthash }, { type: "uint256", value: idx });
-		console.log(dealid)
-		var deal   = await IexecInterface.methods.viewDeal(dealid).call();
-		console.log(deal)
+		var dealid = web3.utils.soliditySha3({ type: "bytes32", value: hash }, { type: "uint256", value: idx });
+		var deal   = await IexecClerk.methods.viewDeal(dealid).call();
 		if (deal.botSize == 0) break;
 		deals[idx] = deal;
 
 		first     = parseInt(deal.botFirst);
 		last      = first + parseInt(deal.botSize);
 		var style = [ "bg-primary", "bg-info "][$("#view-progress-deals").children().length % 2];
-		var width = (parseInt(deal.botSize)*100/requestorder.volume) + "%";
+		var width = (parseInt(deal.botSize)*100/volume) + "%";
 		var title = "Deal " + dealid;
 
 		var descr = [];
@@ -67044,13 +67240,13 @@ async function RequestOrderProgress(requesthash, requestorder)
 		for (var _ = 0; _ < parseInt(deal.botSize); ++idx, ++_)
 		{
 			var taskid = web3.utils.soliditySha3({ type: "bytes32", value: dealid }, { type: "uint256", value: idx });
-			var task   = await IexecInterfaceABI.methods.viewTask(taskid).call();
+			var task   = await IexecHub.methods.viewTask(taskid).call();
 			tasks[idx] = { deal: deal, task: task };
 
 			var status = parseInt(task.status);
 			var style  = ["bg-secondary", "bg-primary progress-bar-striped progress-bar-animated", "bg-warning progress-bar-striped progress-bar-animated", "bg-success", "bg-danger"][status];
-			var width  = (100 / requestorder.volume) + "%";
-			var title  = "Task " + (idx+1) + "/" + requestorder.volume + ": " + ["Unset", "Active", "Revealing", "Completed", "Failed"][status];
+			var width  = (100 / volume) + "%";
+			var title  = "Task " + (idx+1) + "/" + volume + ": " + ["Unset", "Active", "Revealing", "Completed", "Failed"][status];
 
 			var descr = []
 			if (status == 0) descr.push("Task waiting initialization");
@@ -67077,11 +67273,11 @@ async function RequestOrderProgress(requesthash, requestorder)
 		}
 	}
 
-	IexecInterface.methods.viewConsumed(requesthash).call().then(consumed => {
+	IexecClerk.methods.viewConsumed(hash).call().then(consumed => {
 		first = last;
 		last  = consumed;
 		var style = "bg-danger progress-bar-striped";
-		var width = ((parseInt(last) - first)*100/requestorder.volume) + "%";
+		var width = ((parseInt(last) - first)*100/volume) + "%";
 		var title = "Cancelled";
 		var descr = [ "Task " + (first+1) + " → " + last ];
 
@@ -67118,18 +67314,34 @@ async function RequestOrderProgress(requesthash, requestorder)
 }
 
 $("#view-submit").click(() => {
-	__order = JSON.parse($("#view-input").val());
-	if      (isValidOrder("AppOrder",        __order)) { __hash = AppOrderStructHash       (__order); }
-	else if (isValidOrder("DatasetOrder",    __order)) { __hash = DatasetOrderStructHash   (__order); }
-	else if (isValidOrder("WorkerpoolOrder", __order)) { __hash = WorkerpoolOrderStructHash(__order); }
-	else if (isValidOrder("RequestOrder",    __order)) { __hash = RequestOrderStructHash   (__order); }
-	IexecInterface.methods.viewConsumed(__hash).call().then(value => {
-		notify(" status: " + value + " / " + __order.volume);
-		if (isValidOrder("RequestOrder", __order))
+	try
+	{
+		__order = JSON.parse($("#view-input").val());
+		if      (isValidOrder("AppOrder",        __order)) { __expand = false; __hash = AppOrderStructHash       (__order); }
+		else if (isValidOrder("DatasetOrder",    __order)) { __expand = false; __hash = DatasetOrderStructHash   (__order); }
+		else if (isValidOrder("WorkerpoolOrder", __order)) { __expand = false; __hash = WorkerpoolOrderStructHash(__order); }
+		else if (isValidOrder("RequestOrder",    __order)) { __expand = true;  __hash = RequestOrderStructHash   (__order); }
+		else throw "Invalid order";
+	}
+	catch (_)
+	{
+		__hash   = $("#view-input-hash").val();
+		__expand = true;
+	}
+	finally
+	{
+		if (__hash != "")
 		{
-			RequestOrderProgress(__hash, __order);
+			IexecClerk.methods.viewConsumed(__hash).call().then(value => {
+				__volume = typeof __order == "undefined" ? value : __order.volume;
+				notify(" status: " + value + " / " + __volume);
+				if (__expand)
+				{
+					RequestOrderProgress(__hash, __volume);
+				}
+			});
 		}
-	});
+	}
 });
 
 $("#match-submit").click(() => {
@@ -67142,7 +67354,7 @@ $("#match-submit").click(() => {
 	if (!isValidOrder("PoolOrder", __workerpoolorder)) { alert("Invalid WorkerpoolOrder"); return; }
 	if (!isValidOrder("UserOrder", __requestorder   )) { alert("Invalid RequestOrder"   ); return; }
 	web3.eth.getAccounts().then(account => {
-		IexecInterface.methods.matchOrders(__apporder, __datasetorder, __workerpoolorder, __requestorder)
+		IexecClerk.methods.matchOrders(__apporder, __datasetorder, __workerpoolorder, __requestorder)
 		.send({ from: account[0], gas: 800000 })
 		.then(console.log);
 	});
@@ -67305,10 +67517,10 @@ $("#requestorder-sign").click(() => {
 
 $("#cancel-submit").click(() => {
 	__order = JSON.parse($("#cancel-input").val());
-	if      (isValidOrder("AppOrder",        __order)) { __method = IexecInterface.methods.cancelAppOrder       (__order); }
-	else if (isValidOrder("DatasetOrder",    __order)) { __method = IexecInterface.methods.cancelDatasetOrder   (__order); }
-	else if (isValidOrder("WorkerpoolOrder", __order)) { __method = IexecInterface.methods.cancelWorkerpoolOrder(__order); }
-	else if (isValidOrder("RequestOrder",    __order)) { __method = IexecInterface.methods.cancelRequestOrder   (__order); }
+	if      (isValidOrder("AppOrder",        __order)) { __method = IexecClerk.methods.cancelAppOrder       (__order); }
+	else if (isValidOrder("DatasetOrder",    __order)) { __method = IexecClerk.methods.cancelDatasetOrder   (__order); }
+	else if (isValidOrder("WorkerpoolOrder", __order)) { __method = IexecClerk.methods.cancelWorkerpoolOrder(__order); }
+	else if (isValidOrder("RequestOrder",    __order)) { __method = IexecClerk.methods.cancelRequestOrder   (__order); }
 	getOrderOwner(__order).then(owner => {
 		__method
 		.send({ from: owner, gas: 80000 })
