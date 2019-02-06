@@ -67209,9 +67209,13 @@ async function RequestOrderProgress(hash, volume)
 		if (deal.botSize == 0) break;
 		deals[idx] = deal;
 
+		console.log(deal);
+		var deadline = parseInt(deal.startTime) + 10 * (await IexecHub.methods.viewCategory(deal.category).call()).workClockTimeRef;
+		var finished = deadline <  Date.now() / 1000;
+
 		first     = parseInt(deal.botFirst);
 		last      = first + parseInt(deal.botSize);
-		var style = [ "bg-primary", "bg-info "][$("#view-progress-deals").children().length % 2];
+		var style = finished ? "bg-info" : "bg-success";
 		var width = (parseInt(deal.botSize)*100/volume) + "%";
 		var title = "Deal " + dealid;
 
@@ -67222,6 +67226,8 @@ async function RequestOrderProgress(hash, volume)
 		descr.push("Trust: " + deal.trust);
 		descr.push("Parameters: " + $('<div/>').text(deal.params).html());
 		descr.push("Beneficiary: " + deal.beneficiary);
+		descr.push("Deadline: " + deadline);
+		descr.push("Deadline reached: " + finished);
 
 		$("#view-progress-deals").append(
 			$("<a>")
@@ -67236,6 +67242,7 @@ async function RequestOrderProgress(hash, volume)
 			.text((first+1) + " → " + last)
 			.popover({ html: true })
 		);
+		// $("#view-progress-deals a:last").click(() => console.log(deal));
 
 		for (var _ = 0; _ < parseInt(deal.botSize); ++idx, ++_)
 		{
@@ -67250,10 +67257,15 @@ async function RequestOrderProgress(hash, volume)
 
 			var descr = []
 			if (status == 0) descr.push("Task waiting initialization");
-			if (status >= 1) descr.push("Deadline: " + task.consensusDeadline);
-			if (status >= 1) descr.push(task.contributors.length + " contributions recieved");
+			if (status >= 1) descr.push(task.contributors.length + " contributions received");
 			if (status >= 2) descr.push("Consensus: " + task.consensusValue);
 			if (status >= 2) descr.push("Reveal: " + task.revealCounter + "/" + task.winnerCounter);
+			if (status >= 1) descr.push("Deadline: " + task.finalDeadline);
+			if (status  < 3 && task.finalDeadline < Date.now() / 1000) // equiv finished
+			{
+				descr.push("Deadline reached, task should be claimed");
+				style = "bg-danger progress-bar-striped progress-bar-animated";
+			}
 			if (status >= 3) descr.push("Task has been finalized");
 
 			$("#view-progress-tasks").append(
