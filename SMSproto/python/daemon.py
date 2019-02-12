@@ -79,7 +79,7 @@ class SecretAPI(Resource):
 		args = self.reqparse.parse_args()
 		if len(args.secret) > MAXSIZE:
 			return jsonify({ 'error': 'secret is to large.' }) # TODO: add error code?
-		elif self.__check(address, self.__getsigner(args.secret, args.sign)):
+		elif self.__checkIdentity(address, self.__getsigner(args.secret, args.sign)):
 			db.session.merge(Secret(address=address, secret=args.secret))
 			db.session.commit()
 			return jsonify({                                                  \
@@ -89,21 +89,34 @@ class SecretAPI(Resource):
 		else:
 			return jsonify({ 'error': 'invalid signature' }) # TODO: add error code?
 
+	# recover signer of message / signature
 	def __getsigner(self, text, signature):
 		return blockchaininterface.w3.eth.account.recoverHash(                \
 			message_hash=defunct_hash_message(text=text),                     \
 			signature=signature                                               \
 		)
 
-	def __check(self, address, signer):
+	# Checks the signer belongs to an identity
+	def __checkSignature(self, identity, signer):
 		try:
-			# Signed by address
-			if signer.lower() == address.lower():
+			if identity.lower() == signer.lower():
 				return True
-			# Signed by owner of address (address points to Ownable SC)
-			elif signer.lower() == blockchaininterface.getContract(address=address, abiname='Ownable').functions.m_owner().call().lower():
+			elif blockchaininterface.getContract(address=identity, abiname='IERC725').functions.keyHasPurpose(signer, 4).call():
 				return True
-			# Other cases ?
+			else:
+				return False
+		except:
+			return False
+
+	# Checks the possible identities:
+	# - address
+	# - owner of address
+	def __checkIdentity(self, address, signer):
+		try:
+			if self.__checkSignature(address, signer):
+				return True
+			elif self.__checkSignature(blockchaininterface.getContract(address=address, abiname='Ownable').functions.m_owner().call(), signer):
+				return True
 			else:
 				return False
 		except:
@@ -164,6 +177,7 @@ class BlockchainInterface(object):
 			'App':        json.load(open(f'{config.contracts}/App.json'             ))['abi'], \
 			'IexecClerk': json.load(open(f'{config.contracts}/IexecClerk.json'      ))['abi'], \
 			'IexecHub':   json.load(open(f'{config.contracts}/IexecHub.json'        ))['abi'], \
+			'IERC725':    json.load(open(f'{config.contracts}/IERC725.json'         ))['abi'], \
 		}
 		self.IexecClerk = self.getContract(address=config.clerk, abiname='IexecClerk')
 		self.IexecHub   = self.getContract(address=config.hub,   abiname='IexecHub'  )
