@@ -197,6 +197,7 @@ class BlockchainInterface(object):
 		scheduler   = deal[7]
 		tag         = deal[10]
 		beneficiary = deal[12]
+		params      = deal[14]
 
 		# CHECK 2: Authorisation to contribute must be authentic
 		# web3 v4.8.2 → soliditySha3
@@ -223,12 +224,15 @@ class BlockchainInterface(object):
 			# print(f'MREnclave: {MREnclave}')
 			raise NotImplementedError('MREnclave verification not implemented')
 
-		keys = {}
-		keys[dataset]         = Secret.query.filter_by (address=dataset                 ).first() # Kd
-		keys[beneficiary]     = Secret.query.filter_by (address=beneficiary             ).first() # Kb
-		keys[auth['enclave']] = KeyPair.query.filter_by(address=auth['enclave'], app=app).first() # Ke
+		secrets = {}
+		secrets[dataset]         = Secret.query.filter_by (address=dataset                 ).first() # Kd
+		secrets[beneficiary]     = Secret.query.filter_by (address=beneficiary             ).first() # Kb
+		secrets[auth['enclave']] = KeyPair.query.filter_by(address=auth['enclave'], app=app).first() # Ke
 
-		return { key: value.jsonify() if value else None for key, value in keys.items() }
+		return {
+			'secrets': { key: value.jsonify() if value else None for key, value in secrets.items() },
+			'params':  params,
+		}
 
 
 

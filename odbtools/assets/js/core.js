@@ -398,9 +398,8 @@ async function RequestOrderProgress(hash, volume)
 		if (deal.botSize == 0) break;
 		deals[idx] = deal;
 
-		console.log(deal);
-		var deadline = parseInt(deal.startTime) + 10 * (await IexecHub.methods.viewCategory(deal.category).call()).workClockTimeRef;
-		var finished = deadline <  Date.now() / 1000;
+		var deadline = new Date((parseInt(deal.startTime) + 10 * (await IexecHub.methods.viewCategory(deal.category).call()).workClockTimeRef) * 1000);
+		var finished = deadline <  Date.now();
 
 		first     = parseInt(deal.botFirst);
 		last      = first + parseInt(deal.botSize);
@@ -448,8 +447,11 @@ async function RequestOrderProgress(hash, volume)
 			if (status >= 1) descr.push(task.contributors.length + " contributions received");
 			if (status >= 2) descr.push("Consensus: " + task.consensusValue);
 			if (status >= 2) descr.push("Reveal: " + task.revealCounter + "/" + task.winnerCounter);
-			if (status >= 1) descr.push("Deadline: " + task.finalDeadline);
-			if (status  < 3 && task.finalDeadline < Date.now() / 1000) // equiv finished
+			if (status == 1) descr.push("Contribution deadline: " + new Date(parseInt(task.contributionDeadline) * 1000));
+			if (status == 2) descr.push("Reveal deadline: "       + new Date(parseInt(task.revealDeadline      ) * 1000));
+			// if (status >= 1) descr.push("Final Deadline: "        + new Date(parseInt(task.finalDeadline       ) * 1000));
+			if (status  < 3) descr.push("Final Deadline: "        + deadline);
+			if (status  < 3 && finished)
 			{
 				descr.push("Deadline reached, task should be claimed");
 				style = "bg-danger progress-bar-striped progress-bar-animated";
