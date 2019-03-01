@@ -4,6 +4,7 @@ all: daemon
 
 daemon: python/daemon.py
 	pyinstaller $< --onefile \
+		--distpath ./bin \
 		--workpath ./compile/build \
 		--specpath ./compile \
 		--hiddenimport packaging.specifiers \
