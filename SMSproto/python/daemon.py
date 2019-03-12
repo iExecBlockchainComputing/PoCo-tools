@@ -79,7 +79,7 @@ class SecretAPI(Resource):
 		args = self.reqparse.parse_args()
 		if len(args.secret) > MAXSIZE:
 			return jsonify({ 'error': 'secret is to large.' }) # TODO: add error code?
-		elif self.__checkIdentity(address, self.__getsigner(args.secret, args.sign)):
+		elif blockchaininterface.checkIdentity(address, defunct_hash_message(text=args.secret), args.sign):
 			db.session.merge(Secret(address=address, secret=args.secret))
 			db.session.commit()
 			return jsonify({                                                  \
@@ -88,39 +88,6 @@ class SecretAPI(Resource):
 			})
 		else:
 			return jsonify({ 'error': 'invalid signature' }) # TODO: add error code?
-
-	# recover signer of message / signature
-	def __getsigner(self, text, signature):
-		return blockchaininterface.w3.eth.account.recoverHash(                \
-			message_hash=defunct_hash_message(text=text),                     \
-			signature=signature                                               \
-		)
-
-	# Checks the signer belongs to an identity
-	def __checkSignature(self, identity, signer):
-		try:
-			if identity.lower() == signer.lower():
-				return True
-			elif blockchaininterface.getContract(address=identity, abiname='IERC725').functions.keyHasPurpose(signer, 4).call():
-				return True
-			else:
-				return False
-		except:
-			return False
-
-	# Checks the possible identities:
-	# - address
-	# - owner of address
-	def __checkIdentity(self, address, signer):
-		try:
-			if self.__checkSignature(address, signer):
-				return True
-			elif self.__checkSignature(blockchaininterface.getContract(address=address, abiname='Ownable').functions.m_owner().call(), signer):
-				return True
-			else:
-				return False
-		except:
-			return False
 
 ### APP ENDPOINT: enclave attestation provisionning
 class GenerateAPI(Resource):
@@ -172,12 +139,12 @@ class BlockchainInterface(object):
 	def __init__(self, config):
 		super(BlockchainInterface, self).__init__()
 		self.w3 = Web3(HTTPProvider(config.gateway))
-		self.ABIs = {                                                                          \
-			'Ownable':    json.load(open(f'{config.contracts}/OwnableImmutable.json'))['abi'], \
-			'App':        json.load(open(f'{config.contracts}/App.json'             ))['abi'], \
-			'IexecClerk': json.load(open(f'{config.contracts}/IexecClerk.json'      ))['abi'], \
-			'IexecHub':   json.load(open(f'{config.contracts}/IexecHub.json'        ))['abi'], \
-			'IERC725':    json.load(open(f'{config.contracts}/IERC725.json'         ))['abi'], \
+		self.ABIs = {                                                                    \
+			'Ownable':    json.load(open(f'{config.contracts}/Ownable.json'   ))['abi'], \
+			'App':        json.load(open(f'{config.contracts}/App.json'       ))['abi'], \
+			'IexecClerk': json.load(open(f'{config.contracts}/IexecClerk.json'))['abi'], \
+			'IexecHub':   json.load(open(f'{config.contracts}/IexecHub.json'  ))['abi'], \
+			'IERC1271':   json.load(open(f'{config.contracts}/IERC1271.json'  ))['abi'], \
 		}
 		self.IexecClerk = self.getContract(address=config.clerk, abiname='IexecClerk')
 		self.IexecHub   = self.getContract(address=config.hub,   abiname='IexecHub'  )
@@ -188,6 +155,30 @@ class BlockchainInterface(object):
 			abi=self.ABIs[abiname],                                           \
 			ContractFactoryClass=Contract,                                    \
 		)
+
+
+	def verifySignature(self, identity, hash, signature):
+		try:
+			if identity.lower() == self.w3.eth.account.recoverHash(message_hash=hash, signature=signature).lower():
+				return True
+			elif self.getContract(address=identity, abiname='IERC1271').functions.isValidSignature(hash, signature).call():
+				return True
+			else:
+				return False
+		except:
+			return True
+
+	def checkIdentity(self, identity, hash, signature):
+		try:
+			if self.verifySignature(identity, hash, signature):
+				return True
+			elif self.verifySignature(self.getContract(address=identity, abiname='Ownable').functions.owner().call(), hash, signature):
+				return True
+			else:
+				return False
+		except:
+			return False
+
 
 	def validateAndGetKeys(self, auth):
 		# Get task details
@@ -216,7 +207,7 @@ class BlockchainInterface(object):
 		# CHECK 2: Authorisation to contribute must be authentic
 		# web3 v4.8.2 → soliditySha3
 		# web3 v5.0.0 → solidityKeccak
-		hash = self.w3.solidityKeccak([                                       \
+		hash = defunct_hash_message(self.w3.solidityKeccak([                  \
 			'address',                                                        \
 			'bytes32',                                                        \
 			'address'                                                         \
@@ -224,12 +215,9 @@ class BlockchainInterface(object):
 			auth['worker'],                                                   \
 			auth['taskid'],                                                   \
 			auth['enclave']                                                   \
-		])
-		signer = self.w3.eth.account.recoverHash(                             \
-			message_hash=defunct_hash_message(hash),                          \
-			vrs=(auth['sign']['v'], auth['sign']['r'], auth['sign']['s'])     \
-		)
-		assert(signer == scheduler)
+		]))
+		assert(scheduler      == self.w3.eth.account.recoverHash(message_hash=hash, signature=auth['sign']))
+		assert(auth['worker'] == self.w3.eth.account.recoverHash(message_hash=hash, signature=auth['workersign']))
 
 		# CHECK 3: MREnclave verification (only if part of the deal)
 		if tag[31] & 0x01:
