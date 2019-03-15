@@ -166,7 +166,7 @@ class BlockchainInterface(object):
 			else:
 				return False
 		except:
-			return True
+			return False
 
 	def checkIdentity(self, identity, hash, signature):
 		try:
