@@ -10,10 +10,8 @@ function encryptFile()
 		return
 	fi
 
-	dd if=/dev/urandom of=$1.tmpkey bs=512 count=1
-	openssl enc -aes-256-cbc -pbkdf2 -in $1 -out $1.encrypted -kfile $1.tmpkey
-	base64 $1.tmpkey > $1.key
-	rm $1.tmpkey
+	openssl rand -base64 -out $1.keybin 256
+	openssl enc -aes-256-cbc -pbkdf2 -in $1 -out $1.enc -kfile $1.keybin
 }
 
 function decryptFile()
@@ -25,12 +23,11 @@ function decryptFile()
 		echo "Cannot find '$1.encrypt' or '$1.key'. Skipping."
 	fi
 
-	base64 -d $1.key > $1.tmpkey
-	openssl enc -aes-256-cbc -pbkdf2 -d -in $1.encrypted -out $1.recovered -kfile $1.tmpkey
-	rm $1.tmpkey
+	openssl enc -aes-256-cbc -pbkdf2 -d -in $1.enc -out $1.recovered -kfile $1.keybin
 }
 
 while test $# -gt 0; do
 	encryptFile $1
+	# decryptFile $1
 	shift
 done
