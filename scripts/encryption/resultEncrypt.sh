@@ -17,26 +17,26 @@
 # 	shred -u $1.enc $1.keybin $1.keybin.enc
 # }
 
+INPUT="result.zip"
 RSA_KEY=".tee-secrets/beneficiary/0x4d65930f53da6C277F1769170Df69d772a492008_key"
+
+if [ $# -ge 1 ]; then INPUT=$1; fi
+if [ $# -ge 2 ]; then RSA_KEY=$2; fi
+
+if [ ! -f "$INPUT" ]; then echo "missing input file '$INPUT'"; exit 255; fi
+if [ ! -f "$RSA_KEY" ]; then echo "missing key file '$RSA_KEY'"; exit 255; fi
 
 ROOT_FOLDER="iexec_out"
 ENC_RESULT_FILE="result.zip.aes"
 ENC_KEY_FILE="encrypted_key"
-TMP_KEY_FILE=".tmp-key"
+TMP_KEY_FILE=".iexec-tee-temporary-key"
 
-function encrypt()
-{
-	mkdir ${ROOT_FOLDER}
-	openssl rand -out ${TMP_KEY_FILE} 16
-	openssl enc -aes-128-cbc -pbkdf2 -kfile ${TMP_KEY_FILE} -in $1 -out ${ROOT_FOLDER}/${ENC_RESULT_FILE}
-	openssl rsautl -encrypt -oaep -inkey ${RSA_KEY}.pub -pubin -in ${TMP_KEY_FILE} -out ${ROOT_FOLDER}/${ENC_KEY_FILE}
-	zip -r ${ROOT_FOLDER} ${ROOT_FOLDER}
+mkdir ${ROOT_FOLDER} || exit 1
+openssl rand -out ${TMP_KEY_FILE} 16 || exit 1
+openssl enc -aes-128-cbc -pbkdf2 -kfile ${TMP_KEY_FILE} -in ${INPUT} -out ${ROOT_FOLDER}/${ENC_RESULT_FILE} || exit 1
+openssl rsautl -encrypt -oaep -inkey ${RSA_KEY}.pub -pubin -in ${TMP_KEY_FILE} -out ${ROOT_FOLDER}/${ENC_KEY_FILE} || exit 1
+zip -r ${ROOT_FOLDER} ${ROOT_FOLDER} || exit 1
+shred -u ${TMP_KEY_FILE} || exit 1
+rm -r ${ROOT_FOLDER} || exit 1
 
-	shred -u ${TMP_KEY_FILE}
-	rm -r ${ROOT_FOLDER}
-}
-
-while test $# -gt 0; do
-	encrypt $1
-	shift
-done
+echo "Result succesfully encrypted to '${ROOT_FOLDER}.zip'"
