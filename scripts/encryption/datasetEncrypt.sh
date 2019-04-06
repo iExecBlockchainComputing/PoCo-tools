@@ -10,20 +10,24 @@ function encryptFile()
 		return
 	fi
 
-	openssl rand -base64 -out $1.keybin 256
+	openssl rand -out $1.keybin 32
 	openssl enc -aes-256-cbc -pbkdf2 -in $1 -out $1.enc -kfile $1.keybin
+	openssl base64 -e -in $1.keybin -out $1.secret
+	shred -u $1.keybin
 }
 
 function decryptFile()
 {
-	if [ -e "$1.encrypted" ] && [ -e "$1.key" ]
+	if [ -e "$1.enc" ] && [ -e "$1.secret" ]
 	then
 		echo "Decrypting '$1'"
 	else
 		echo "Cannot find '$1.encrypt' or '$1.key'. Skipping."
 	fi
 
+	openssl base64 -d -in $1.secret -out $1.keybin
 	openssl enc -aes-256-cbc -pbkdf2 -d -in $1.enc -out $1.recovered -kfile $1.keybin
+	shred -u $1.keybin
 }
 
 while test $# -gt 0; do
