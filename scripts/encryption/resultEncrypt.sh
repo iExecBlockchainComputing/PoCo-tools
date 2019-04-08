@@ -18,13 +18,13 @@
 # }
 
 INPUT="result.zip"
-RSA_KEY=".tee-secrets/beneficiary/0x4d65930f53da6C277F1769170Df69d772a492008_key"
+PUB_KEY=".tee-secrets/beneficiary/0x4d65930f53da6C277F1769170Df69d772a492008_key.pub"
 
 if [ $# -ge 1 ]; then INPUT=$1; fi
-if [ $# -ge 2 ]; then RSA_KEY=$2; fi
+if [ $# -ge 2 ]; then PUB_KEY=$2; fi
 
 if [ ! -f "$INPUT" ]; then echo "missing input file '$INPUT'"; exit 255; fi
-if [ ! -f "$RSA_KEY" ]; then echo "missing key file '$RSA_KEY'"; exit 255; fi
+if [ ! -f "$PUB_KEY" ]; then echo "missing key file '$PUB_KEY'"; exit 255; fi
 
 KEY_SIZE="16"
 ROOT_FOLDER="iexec_out"
@@ -48,7 +48,7 @@ IV=$(openssl rand ${KEY_SIZE} | tee ${IV_FILE} | od -An -tx1 | tr -d ' \n')
 ### ENCRYPT RESULT AND AES KEY
 mv ${IV_FILE} ${ROOT_FOLDER}/${ENC_RESULT_FILE}
 openssl enc -aes-128-cbc -K ${KEY} -iv ${IV} -in ${INPUT} >> ${ROOT_FOLDER}/${ENC_RESULT_FILE}
-openssl rsautl -encrypt -oaep -inkey ${RSA_KEY} -pubin -in ${TMP_KEY_FILE} >> ${ROOT_FOLDER}/${ENC_KEY_FILE}
+openssl rsautl -encrypt -oaep -inkey ${PUB_KEY} -pubin -in ${TMP_KEY_FILE} >> ${ROOT_FOLDER}/${ENC_KEY_FILE}
 
 ### ZIP
 zip -r ${ROOT_FOLDER} ${ROOT_FOLDER}/${ENC_RESULT_FILE} ${ROOT_FOLDER}/${ENC_KEY_FILE}
