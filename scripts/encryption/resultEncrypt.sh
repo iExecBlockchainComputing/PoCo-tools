@@ -26,28 +26,36 @@ if [ $# -ge 2 ]; then PUB_KEY=$2; fi
 if [ ! -f "$INPUT" ]; then echo "missing input file '$INPUT'"; exit 255; fi
 if [ ! -f "$PUB_KEY" ]; then echo "missing key file '$PUB_KEY'"; exit 255; fi
 
-KEY_SIZE="16"
+
 ROOT_FOLDER="iexec_out"
 ENC_RESULT_FILE="result.zip.aes"
 ENC_KEY_FILE="encrypted_key"
 TMP_KEY_FILE=".iexec-tee-temporary-key"
 IV_FILE=".iexec-tee-iv-key"
 
+KEY_LENGTH=16 # 16 bytes = 128bits (for 2048 bits RSA keys)
+IV_LENGTH=16
+
+case ${KEY_LENGTH} in
+	16) AES_ALG="-aes-128-cbc";;
+	32) AES_ALG="-aes-256-cbc";;
+	*) exit 1
+esac
 
 ### MAKE ROOT FOLDER IF NOT EXIST
 mkdir -p ${ROOT_FOLDER}
 
 ### GENERATE AES KEY
-KEY=$(openssl rand ${KEY_SIZE} | tee ${TMP_KEY_FILE} | od -An -tx1 | tr -d ' \n')
+KEY=$(openssl rand ${KEY_LENGTH} | tee ${TMP_KEY_FILE} | od -An -tx1 | tr -d ' \n')
 # echo "KEY:" ${KEY}
 
 ### GENERATE IV
-IV=$(openssl rand ${KEY_SIZE} | tee ${IV_FILE} | od -An -tx1 | tr -d ' \n')
+IV=$(openssl rand ${IV_LENGTH} | tee ${IV_FILE} | od -An -tx1 | tr -d ' \n')
 # echo "IV:" ${IV}
 
 ### ENCRYPT RESULT AND AES KEY
 mv ${IV_FILE} ${ROOT_FOLDER}/${ENC_RESULT_FILE}
-openssl enc -aes-128-cbc -K ${KEY} -iv ${IV} -in ${INPUT} >> ${ROOT_FOLDER}/${ENC_RESULT_FILE}
+openssl enc ${AES_ALG} -K ${KEY} -iv ${IV} -in ${INPUT} >> ${ROOT_FOLDER}/${ENC_RESULT_FILE}
 openssl rsautl -encrypt -oaep -inkey ${PUB_KEY} -pubin -in ${TMP_KEY_FILE} >> ${ROOT_FOLDER}/${ENC_KEY_FILE}
 
 ### ZIP
