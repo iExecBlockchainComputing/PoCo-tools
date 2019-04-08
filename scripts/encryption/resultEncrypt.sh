@@ -30,13 +30,35 @@ ROOT_FOLDER="iexec_out"
 ENC_RESULT_FILE="result.zip.aes"
 ENC_KEY_FILE="encrypted_key"
 TMP_KEY_FILE=".iexec-tee-temporary-key"
+IV_FILE=".iexec-tee-iv-key"
 
-mkdir ${ROOT_FOLDER} || exit 1
-openssl rand -out ${TMP_KEY_FILE} 16 || exit 1
-openssl enc -aes-128-cbc -pbkdf2 -kfile ${TMP_KEY_FILE} -in ${INPUT} -out ${ROOT_FOLDER}/${ENC_RESULT_FILE} || exit 1
-openssl rsautl -encrypt -oaep -inkey ${RSA_KEY}.pub -pubin -in ${TMP_KEY_FILE} -out ${ROOT_FOLDER}/${ENC_KEY_FILE} || exit 1
-zip -r ${ROOT_FOLDER} ${ROOT_FOLDER} || exit 1
-shred -u ${TMP_KEY_FILE} || exit 1
-rm -r ${ROOT_FOLDER} || exit 1
+
+### MAKE ROOT FOLDER IF NOT EXIST
+mkdir -p ${ROOT_FOLDER}
+
+### GENERATE AES KEY
+openssl rand -out ${TMP_KEY_FILE} 16
+KEY=`od -An -t x1 ${TMP_KEY_FILE} | sed 's/ //g'`
+# echo "KEY:" ${KEY}
+
+### GENERATE IV
+openssl rand -out ${IV_FILE} 16
+IV=`od -An -t x1 ${IV_FILE} | sed 's/ //g'`
+# echo "IV:" ${IV}
+
+### ENCRYPT RESULT AND AES KEY
+mv ${IV_FILE} ${ROOT_FOLDER}/${ENC_RESULT_FILE}
+openssl enc -aes-128-cbc -K ${KEY} -iv ${IV} -in ${INPUT} >> ${ROOT_FOLDER}/${ENC_RESULT_FILE}
+openssl rsautl -encrypt -oaep -inkey ${RSA_KEY}.pub -pubin -in ${TMP_KEY_FILE} >> ${ROOT_FOLDER}/${ENC_KEY_FILE}
+
+### ZIP
+zip -r ${ROOT_FOLDER} ${ROOT_FOLDER}/${ENC_RESULT_FILE} ${ROOT_FOLDER}/${ENC_KEY_FILE}
+
+### REMOVE TEMPORARY FILES
+rm ${ROOT_FOLDER}/${ENC_RESULT_FILE} ${ROOT_FOLDER}/${ENC_KEY_FILE}
+
+### SHRED KEY
+shred -u ${TMP_KEY_FILE}
+KEY=""
 
 echo "Result succesfully encrypted to '${ROOT_FOLDER}.zip'"
