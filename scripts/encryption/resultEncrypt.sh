@@ -31,7 +31,7 @@ ROOT_FOLDER="iexec_out"
 ENC_RESULT_FILE="result.zip.aes"
 ENC_KEY_FILE="encrypted_key"
 AES_KEY_FILE=".iexec-tee-temporary-key"
-IV_FILE=".iexec-tee-iv-key"
+IV_FILE=".iexec-tee-iv"
 IV_LENGTH=16
 
 PUB_KEY_SIZE=$(openssl rsa -text -noout -pubin -in ${PUB_KEY} | head -n 1 | grep -o '[[:digit:]]*')
@@ -66,7 +66,7 @@ IV=$(openssl rand ${IV_LENGTH} | tee ${IV_FILE} | od -An -tx1 | tr -d ' \n')
 ### ENCRYPT RESULT AND AES KEY
 mv ${IV_FILE} ${ROOT_FOLDER}/${ENC_RESULT_FILE}
 openssl enc ${AES_ALG} -K ${AES_KEY} -iv ${IV} -in ${INPUT} >> ${ROOT_FOLDER}/${ENC_RESULT_FILE}
-openssl rsautl -encrypt -oaep -inkey ${PUB_KEY} -pubin -in ${AES_KEY_FILE} >> ${ROOT_FOLDER}/${ENC_KEY_FILE}
+openssl rsautl -encrypt -oaep -inkey ${PUB_KEY} -pubin -in ${AES_KEY_FILE} > ${ROOT_FOLDER}/${ENC_KEY_FILE}
 
 ### ZIP
 zip -r ${ROOT_FOLDER} ${ROOT_FOLDER}/${ENC_RESULT_FILE} ${ROOT_FOLDER}/${ENC_KEY_FILE}
